@@ -42,8 +42,13 @@ public class CircularlyLinkedList<E> implements List<E> {
 
     @Override
     public E get(int i) {
-        // TODO
-        return null;
+        if (this.isEmpty()) return null;
+        
+        Node<E> curNode = this.tail;
+        for (int j = 0; j < i; j++) {
+        	curNode = curNode.getNext();
+        }
+        return curNode.getData();
     }
 
     /**
