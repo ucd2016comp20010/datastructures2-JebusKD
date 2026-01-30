@@ -140,8 +140,14 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public E removeLast() {
-        // TODO
-        return null;
+        if (this.head == null) return null;
+        Node<E> curNode = this.head;
+        while (curNode.getNext().getNext() != null) {
+        	curNode = curNode.getNext();
+        }
+        Node<E> target = curNode.getNext();
+        curNode.setNext(null);
+        return target.getElement();
     }
 
     //@Override
