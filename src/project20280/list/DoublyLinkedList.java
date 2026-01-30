@@ -74,7 +74,7 @@ public class DoublyLinkedList<E> implements List<E> {
     @Override
     public void add(int i, E e) {
     	if (this.size() < i) return;
-    	else if (i == 0) this.addBetween(e, head, head.getNext());
+    	else if (i == 0) this.addFirst(e);
     	else {
 	        Node<E> curNode = this.head.getNext();
 	        for (int j = 1; j < i; j++) {
@@ -164,7 +164,7 @@ public class DoublyLinkedList<E> implements List<E> {
 
     @Override
     public void addFirst(E e) {
-        // TODO
+    	this.addBetween(e, this.head, this.head.getNext());
     }
 
     public String toString() {
