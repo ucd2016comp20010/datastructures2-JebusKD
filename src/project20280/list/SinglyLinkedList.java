@@ -22,7 +22,8 @@ public class SinglyLinkedList<E> implements List<E> {
          * @param n reference to a node that should follow the new node
          */
         public Node(E e, Node<E> n) {
-            // TODO
+            this.element = e;
+            this.next = n;
         }
 
         // Accessor methods
@@ -33,7 +34,7 @@ public class SinglyLinkedList<E> implements List<E> {
          * @return the element stored at the node
          */
         public E getElement() {
-            return null;
+            return this.element;
         }
 
         /**
@@ -42,8 +43,7 @@ public class SinglyLinkedList<E> implements List<E> {
          * @return the following node
          */
         public Node<E> getNext() {
-            // TODO
-            return null;
+            return this.next;
         }
 
         // Modifier methods
@@ -54,7 +54,7 @@ public class SinglyLinkedList<E> implements List<E> {
          * @param n the node that should follow this one
          */
         public void setNext(Node<E> n) {
-            // TODO
+            this.next = n;
         }
     } //----------- end of nested Node class -----------
 
@@ -74,14 +74,16 @@ public class SinglyLinkedList<E> implements List<E> {
 
     //@Override
     public int size() {
-        // TODO
-        return 0;
+        int i = 0;
+        for (Node<E> curNode = this.head; curNode != null; i++) {
+        	curNode = curNode.getNext();
+        }
+        return i;
     }
 
     //@Override
     public boolean isEmpty() {
-        // TODO
-        return false;
+        return this.head == null;
     }
 
     @Override
