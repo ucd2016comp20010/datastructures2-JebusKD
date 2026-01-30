@@ -125,7 +125,7 @@ public class SinglyLinkedList<E> implements List<E> {
     @Override
     public E remove(int position) {
     	int size = this.size();
-        if (position > size) return null;
+        if (position >= size) return null;
         else if (position == 0) return this.removeFirst();
         else if (position + 1 == size) return this.removeLast();
         else {
