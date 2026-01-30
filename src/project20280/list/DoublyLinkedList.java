@@ -58,8 +58,7 @@ public class DoublyLinkedList<E> implements List<E> {
 
     @Override
     public boolean isEmpty() {
-        // TODO
-        return false;
+        return this.head.getNext() == this.tail;
     }
 
     @Override
