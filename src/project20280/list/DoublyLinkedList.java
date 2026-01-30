@@ -145,14 +145,15 @@ public class DoublyLinkedList<E> implements List<E> {
         }
         return head.next.getData();
     }
-
+    
     public E last() {
-    	if (this.size() == 0) return null;
-    	else return this.tail.getPrev().getData();;
+    	if (this.tail.getPrev() == this.head) return null;
+    	else return this.tail.getPrev().getData();
     }
-
+	
     @Override
     public E removeFirst() {
+    	if (this.head.getNext() == this.tail) return null;
         Node<E> target = this.head.getNext(),
         		postNode = target.getNext();
         this.head.next = postNode;
