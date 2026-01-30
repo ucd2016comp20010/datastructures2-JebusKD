@@ -86,8 +86,25 @@ public class DoublyLinkedList<E> implements List<E> {
 
     @Override
     public E remove(int i) {
-        // TODO
-        return null;
+    	if (this.size() <= i) return null;
+    	else if (i == 0) {
+    		Node<E> target = this.head.getNext(),
+    				prec = target.getNext();
+    		this.head.next = prec;
+    		prec.prev = this.head;
+    		return target.getData();
+    	}
+    	else {
+	        Node<E> curNode = this.head.getNext();
+	        for (int j = 1; j < i; j++) {
+	        	curNode = curNode.getNext();
+	        }
+	        Node<E> target = curNode.getNext(),
+	        		prec = target.getNext();
+	        curNode.next = prec;
+	        prec.prev = curNode;
+	        return target.getData();
+    	}
     }
 
     private class DoublyLinkedListIterator<E> implements Iterator<E> {
