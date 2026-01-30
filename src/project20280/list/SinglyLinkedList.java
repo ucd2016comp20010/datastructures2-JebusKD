@@ -98,7 +98,19 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public void add(int position, E e) {
-        // TODO
+    	int size = this.size();
+        if (position < size) {
+        	if (position == 0) this.addFirst(e);
+        	else if (position+1 == size) this.addLast(e);
+        	else {
+        		Node<E> curNode = this.head;
+        		for (int i = 1; i < position; i++) {
+        			curNode = curNode.getNext();
+        		}
+        		Node<E> postNode = curNode.getNext();
+        		curNode.setNext(new Node<E>(e, postNode));
+        	}
+        }
     }
 
 
