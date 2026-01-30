@@ -63,8 +63,12 @@ public class DoublyLinkedList<E> implements List<E> {
 
     @Override
     public E get(int i) {
-        // TODO
-        return null;
+        if (this.size() <= i) return null;
+        Node<E> curNode = this.head.getNext();
+        for (int j = 0; j < i; j++) {
+        	curNode = curNode.getNext();
+        }
+        return curNode.getData();
     }
 
     @Override
