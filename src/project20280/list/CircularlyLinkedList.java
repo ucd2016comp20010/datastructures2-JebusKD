@@ -137,8 +137,23 @@ public class CircularlyLinkedList<E> implements List<E> {
 
     @Override
     public E removeFirst() {
-        // TODO
-        return null;
+        if (this.isEmpty()) return null;
+        else if (this.size == 1) {
+        	size--;
+        	Node<E> target = this.tail;
+        	this.tail = null;
+        	return target.getData();
+        }
+        else {
+        	Node<E> curNode = this.tail;
+        	while (curNode.getNext() != this.tail) {
+        		curNode = curNode.getNext();
+        	}
+        	Node<E> target = curNode.getNext();
+        	curNode.setNext(target.getNext());
+        	size--;
+        	return target.getData();
+        }
     }
 
     @Override
