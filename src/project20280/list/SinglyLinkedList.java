@@ -88,8 +88,12 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public E get(int position) {
-        // TODO
-        return null;
+    	Node<E> curNode = head;
+        for (int i = 0; i < position; i++) {
+        	if (curNode == null) return null;
+        	curNode = curNode.getNext();
+        }
+        return curNode.getElement();
     }
 
     @Override
