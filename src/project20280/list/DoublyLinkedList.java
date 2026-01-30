@@ -163,8 +163,12 @@ public class DoublyLinkedList<E> implements List<E> {
 
     @Override
     public E removeLast() {
-        // TODO
-        return null;
+        if (this.tail.getPrev() == this.head) return null;
+        Node<E> target = this.tail.getPrev(),
+        		precNode = target.getPrev();
+        this.tail.prev = precNode;
+        precNode.next = this.tail;
+        return target.getData();
     }
 
     @Override
