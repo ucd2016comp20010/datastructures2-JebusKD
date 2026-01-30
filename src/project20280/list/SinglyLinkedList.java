@@ -130,8 +130,12 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public E removeFirst() {
-        // TODO
-        return null;
+        if (this.head == null) return null;
+        Node<E> oldHead = this.head,
+        		newHead = oldHead.getNext();
+        this.head = newHead;
+        return oldHead.getElement();
+        
     }
 
     @Override
