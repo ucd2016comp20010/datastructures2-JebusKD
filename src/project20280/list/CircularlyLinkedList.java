@@ -105,7 +105,7 @@ public class CircularlyLinkedList<E> implements List<E> {
     }
 
     public void rotate() {
-        // TODO
+        if (!this.isEmpty()) this.tail = this.tail.getNext();
     }
 
     private class CircularlyLinkedListIterator<E> implements Iterator<E> {
