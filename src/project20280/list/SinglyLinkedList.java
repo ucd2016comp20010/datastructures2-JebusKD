@@ -165,6 +165,11 @@ public class SinglyLinkedList<E> implements List<E> {
     @Override
     public E removeLast() {
         if (this.head == null) return null;
+        else if (this.head.getNext() == null) {
+        	Node<E> oldHead = this.head;
+        	this.head = null;
+        	return oldHead.getElement();
+        }
         Node<E> curNode = this.head;
         while (curNode.getNext().getNext() != null) {
         	curNode = curNode.getNext();
