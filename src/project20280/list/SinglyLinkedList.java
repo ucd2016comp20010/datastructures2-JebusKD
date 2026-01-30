@@ -124,8 +124,20 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public E remove(int position) {
-        // TODO
-        return null;
+    	int size = this.size();
+        if (position > size) return null;
+        else if (position == 0) return this.removeFirst();
+        else if (position + 1 == size) return this.removeLast();
+        else {
+        	Node<E> curNode = this.head;;
+        	for (int i = 1; i < position; i++) {
+        		curNode = curNode.getNext();
+        	}
+        	Node<E> target = curNode.getNext(),
+        			replacement = target.getNext();
+        	curNode.setNext(replacement);
+        	return target.getElement();
+        }
     }
 
     @Override
