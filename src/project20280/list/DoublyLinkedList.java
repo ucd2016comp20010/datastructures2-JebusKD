@@ -49,8 +49,11 @@ public class DoublyLinkedList<E> implements List<E> {
 
     @Override
     public int size() {
-        // TODO
-        return 0;
+        int size = 0;
+        for (Node<E> curNode = this.head; curNode.getNext() != this.tail; size++) {
+        	curNode = curNode.getNext();
+        }
+        return size;
     }
 
     @Override
