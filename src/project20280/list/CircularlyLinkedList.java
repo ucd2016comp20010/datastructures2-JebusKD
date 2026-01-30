@@ -81,8 +81,27 @@ public class CircularlyLinkedList<E> implements List<E> {
 
     @Override
     public E remove(int i) {
-        // TODO
-        return null;
+    	if (this.isEmpty()) return null;
+    	else if (this.size == 1) {
+    		Node<E> target = this.tail;
+    		this.tail = null;
+    		size--;
+    		return target.getData();
+    	}
+        else {
+        	Node<E> curNode = this.tail;
+        	int targetIndex;
+        	if (i == 0) targetIndex = this.size;
+        	else targetIndex = i % this.size;
+        	for (int j = 1; j < targetIndex; j++) {
+        		curNode = curNode.getNext();
+        	}
+        	Node<E> target = curNode.getNext(),
+        			postNode = target.getNext();
+        	curNode.setNext(postNode);
+        	size--;
+        	return target.getData();
+        }
     }
 
     public void rotate() {
