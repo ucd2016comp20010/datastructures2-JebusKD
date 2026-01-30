@@ -60,7 +60,23 @@ public class CircularlyLinkedList<E> implements List<E> {
      */
     @Override
     public void add(int i, E e) {
-        // TODO
+        if (this.isEmpty()) {
+        	Node<E> selfReferenceNode = new Node<E>(e, null);
+        	selfReferenceNode.setNext(selfReferenceNode);
+        	this.tail = selfReferenceNode;
+        }
+        else {
+        	Node<E> curNode = this.tail;
+        	int targetIndex;
+        	if (i == 0) targetIndex = this.size;
+        	else targetIndex = i % this.size;
+        	for (int j = 1; j < i % this.size; j++) {
+        		curNode = curNode.getNext();
+        	}
+        	Node<E> newNode = new Node<E>(e, curNode.getNext());
+        	curNode.setNext(newNode);
+        	size++;
+        }
     }
 
     @Override
