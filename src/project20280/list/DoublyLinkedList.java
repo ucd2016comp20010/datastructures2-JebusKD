@@ -159,7 +159,7 @@ public class DoublyLinkedList<E> implements List<E> {
 
     @Override
     public void addLast(E e) {
-        // TODO
+        this.addBetween(e, this.tail.getPrev(), this.tail);
     }
 
     @Override
