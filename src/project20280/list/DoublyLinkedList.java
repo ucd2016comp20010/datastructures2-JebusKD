@@ -141,8 +141,8 @@ public class DoublyLinkedList<E> implements List<E> {
     }
 
     public E last() {
-        // TODO
-        return null;
+    	if (this.size() == 0) return null;
+    	else return this.tail.getPrev().getData();;
     }
 
     @Override
