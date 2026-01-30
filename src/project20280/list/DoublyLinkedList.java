@@ -153,8 +153,11 @@ public class DoublyLinkedList<E> implements List<E> {
 
     @Override
     public E removeFirst() {
-        // TODO
-        return null;
+        Node<E> target = this.head.getNext(),
+        		postNode = target.getNext();
+        this.head.next = postNode;
+        postNode.prev = this.head;
+        return target.getData();
     }
 
     @Override
