@@ -73,11 +73,11 @@ public class DoublyLinkedList<E> implements List<E> {
 
     @Override
     public void add(int i, E e) {
-    	if (this.size() <= i) return;
+    	if (this.size() < i) return;
     	else if (i == 0) this.addBetween(e, head, head.getNext());
     	else {
 	        Node<E> curNode = this.head.getNext();
-	        for (int j = 0; j < i; j++) {
+	        for (int j = 1; j < i; j++) {
 	        	curNode = curNode.getNext();
 	        }
 	        this.addBetween(e, curNode, curNode.getNext());
