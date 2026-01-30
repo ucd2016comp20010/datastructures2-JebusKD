@@ -104,7 +104,8 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public void addFirst(E e) {
-        // TODO
+        Node<E> secondNode = this.head;
+        this.head = new Node<E>(e, secondNode);
     }
 
     @Override
