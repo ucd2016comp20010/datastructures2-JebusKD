@@ -110,7 +110,16 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public void addLast(E e) {
-        // TODO
+    	if (this.head == null) {
+    		this.head = new Node<E>(e, null);
+    	}
+    	else {
+    		Node<E> curNode = this.head;
+    		while (curNode.getNext() != null) {
+    			curNode = curNode.getNext();
+    		}
+    		curNode.setNext(new Node<E>(e, null));
+    	}
     }
 
     @Override
