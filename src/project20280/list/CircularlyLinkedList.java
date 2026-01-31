@@ -4,7 +4,7 @@ import project20280.interfaces.List;
 
 import java.util.Iterator;
 
-public class CircularlyLinkedList<E> implements List<E> {
+public class CircularlyLinkedList<E> implements List<E>, Iterable<E> {
 
     private class Node<T> {
         private final T data;
