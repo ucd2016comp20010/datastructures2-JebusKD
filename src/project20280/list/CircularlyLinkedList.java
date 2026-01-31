@@ -145,7 +145,7 @@ public class CircularlyLinkedList<E> implements List<E>, Iterable<E> {
         	return target.getData();
         }
         else {
-        	curNode.setNext(target.getNext());
+        	Node<E> target = this.tail.getNext();
         	this.tail.setNext(target.getNext());
         	size--;
         	return target.getData();
