@@ -188,13 +188,8 @@ public class CircularlyLinkedList<E> implements List<E>, Iterable<E> {
         	this.tail = selfReferentialNode;
         }
         else {
-        	Node<E> curNode = this.tail;
-        	while (curNode.getNext() != this.tail) {
-        		curNode = curNode.getNext();
-        	}
-        	Node<E> newNode = new Node<E>(e, this.tail);
-        	curNode.setNext(newNode);
-        	this.tail = newNode;
+        	Node<E> newNode = new Node<E>(e, this.tail.getNext());
+        	this.tail.setNext(newNode);
         }
         size++;
     }
@@ -207,12 +202,9 @@ public class CircularlyLinkedList<E> implements List<E>, Iterable<E> {
         	this.tail = selfReferentialNode;
         }
         else {
-        	Node<E> curNode = this.tail;
-        	while (curNode.getNext() != this.tail) {
-        		curNode = curNode.getNext();
-        	}
-        	Node<E> newNode = new Node<E>(e, this.tail);
-        	curNode.setNext(newNode);
+        	Node<E> newNode = new Node<E>(e, this.tail.getNext());
+        	this.tail.setNext(newNode);
+        	this.tail = newNode;
         }
         size++;
     }
