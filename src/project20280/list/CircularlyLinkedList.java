@@ -67,10 +67,8 @@ public class CircularlyLinkedList<E> implements List<E>, Iterable<E> {
         }
         else {
         	Node<E> curNode = this.tail;
-        	int targetIndex;
-        	if (i == 0) targetIndex = this.size;
-        	else targetIndex = i % this.size;
-        	for (int j = 1; j < i % this.size; j++) {
+        	int index = i % this.size;
+        	for (int j = 0; j < index; j++) {
         		curNode = curNode.getNext();
         	}
         	Node<E> newNode = new Node<E>(e, curNode.getNext());
