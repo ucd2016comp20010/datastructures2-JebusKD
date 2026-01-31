@@ -201,7 +201,20 @@ public class CircularlyLinkedList<E> implements List<E> {
 
     @Override
     public void addLast(E e) {
-        // TODO
+        if (this.isEmpty()) {
+        	Node<E> selfReferentialNode = new Node<E>(e, null);
+        	selfReferentialNode.setNext(selfReferentialNode);
+        	this.tail = selfReferentialNode;
+        }
+        else {
+        	Node<E> curNode = this.tail;
+        	while (curNode.getNext() != this.tail) {
+        		curNode = curNode.getNext();
+        	}
+        	Node<E> newNode = new Node<E>(e, this.tail);
+        	curNode.setNext(newNode);
+        }
+        size++;
     }
 
 
