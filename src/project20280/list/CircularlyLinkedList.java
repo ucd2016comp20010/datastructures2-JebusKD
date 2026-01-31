@@ -43,9 +43,9 @@ public class CircularlyLinkedList<E> implements List<E>, Iterable<E> {
     @Override
     public E get(int i) {
         if (this.isEmpty()) return null;
-        
+        int index = i % this.size;
         Node<E> curNode = this.tail;
-        for (int j = 0; j < i; j++) {
+        for (int j = -1; j < index; j++) {
         	curNode = curNode.getNext();
         }
         return curNode.getData();
