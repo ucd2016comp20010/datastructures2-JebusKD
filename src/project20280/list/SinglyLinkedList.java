@@ -178,6 +178,19 @@ public class SinglyLinkedList<E> implements List<E>, Iterable<E> {
         curNode.setNext(null);
         return target.getElement();
     }
+    
+    public void reverse() {
+    	Node<E> curNode = this.head,
+    			prevNode = null,
+    			nextNode;
+    	while (curNode != null) {
+    		nextNode = curNode.getNext();
+    		curNode.setNext(prevNode);
+    		prevNode = curNode;
+    		curNode = nextNode;
+    	}
+    	this.head = prevNode;
+    }
 
     //@Override
     public Iterator<E> iterator() {
@@ -230,6 +243,9 @@ public class SinglyLinkedList<E> implements List<E>, Iterable<E> {
         //ll.add(3, 2);
         System.out.println(ll);
         ll.remove(5);
+        System.out.println(ll);
+        
+        ll.reverse();
         System.out.println(ll);
 
     }
