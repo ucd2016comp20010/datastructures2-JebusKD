@@ -4,7 +4,7 @@ import project20280.interfaces.List;
 
 import java.util.Iterator;
 
-public class SinglyLinkedList<E> implements List<E>, Iterable<E> {
+public class SinglyLinkedList<E> implements List<E>, Iterable<E>, Cloneable {
 
     private static class Node<E> {
 
@@ -191,6 +191,32 @@ public class SinglyLinkedList<E> implements List<E>, Iterable<E> {
     	}
     	this.head = prevNode;
     }
+    
+    /* Creates a copy of the list, each element by reference, though */
+    @Override
+    public SinglyLinkedList<E> clone() {
+    	SinglyLinkedList<E> clonedList = new SinglyLinkedList<E>();
+    	
+    	if (this.head != null) {
+    		
+    		clonedList.head = new Node<E>(this.head.getElement(), null);
+    	
+	    	Node<E> originalCurNode = this.head.getNext(),
+	    			newNode,
+	    			prevNode = clonedList.head;
+	    	while (originalCurNode != null) {
+	    		newNode = new Node<E>(originalCurNode.getElement(), null);
+	    		prevNode.setNext(newNode);
+	    		prevNode = newNode;
+	    		originalCurNode = originalCurNode.getNext();
+	    	}
+    	}
+    	else {
+    		clonedList.head = null;
+    	}
+    	
+    	return clonedList;
+    }
 
     //@Override
     public Iterator<E> iterator() {
@@ -247,6 +273,9 @@ public class SinglyLinkedList<E> implements List<E>, Iterable<E> {
         
         ll.reverse();
         System.out.println(ll);
+        
+        SinglyLinkedList<Integer> ll2 = ll.clone();
+        System.out.println(ll2);
 
     }
 }
