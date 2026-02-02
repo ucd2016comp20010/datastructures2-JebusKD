@@ -104,8 +104,8 @@ public class CircularlyLinkedList<E> implements List<E>, Iterable<E> {
         if (!this.isEmpty()) this.tail = this.tail.getNext();
     }
 
-    private class CircularlyLinkedListIterator<E> implements Iterator<E> {
-        Node<E> curr = (Node<E>) tail;
+    private class CircularlyLinkedListIterator implements Iterator<E> {
+        Node<E> curr = tail.getNext();
 
         @Override
         public boolean hasNext() {
@@ -123,7 +123,7 @@ public class CircularlyLinkedList<E> implements List<E>, Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new CircularlyLinkedListIterator<E>();
+        return new CircularlyLinkedListIterator();
     }
 
     @Override
