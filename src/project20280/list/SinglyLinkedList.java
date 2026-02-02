@@ -220,11 +220,11 @@ public class SinglyLinkedList<E> implements List<E>, Iterable<E>, Cloneable {
 
     //@Override
     public Iterator<E> iterator() {
-        return new SinglyLinkedListIterator<E>();
+        return new SinglyLinkedListIterator();
     }
 
-    private class SinglyLinkedListIterator<E> implements Iterator<E> {
-        Node<E> curr = (Node<E>) head;
+    private class SinglyLinkedListIterator implements Iterator<E> {
+        Node<E> curr = head;
 
         @Override
         public boolean hasNext() {
@@ -276,6 +276,10 @@ public class SinglyLinkedList<E> implements List<E>, Iterable<E>, Cloneable {
         
         SinglyLinkedList<Integer> ll2 = ll.clone();
         System.out.println(ll2);
+        
+        for (Integer i : ll) {
+        	System.out.println(i);
+        }
 
     }
 }
