@@ -67,7 +67,7 @@ public class SinglyLinkedList<E> implements List<E>, Iterable<E>, Cloneable {
     /**
      * Number of nodes in the list
      */
-    private int size = 0;                      // number of nodes in the list
+    //private int size = 0;                      // number of nodes in the list
 
     public SinglyLinkedList() {
     }              // constructs an initially empty list
