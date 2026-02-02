@@ -107,8 +107,8 @@ public class DoublyLinkedList<E> implements List<E>, Iterable<E> {
     	}
     }
 
-    private class DoublyLinkedListIterator<E> implements Iterator<E> {
-        Node<E> curr = (Node<E>) head.next;
+    private class DoublyLinkedListIterator implements Iterator<E> {
+        Node<E> curr = head.next;
 
         @Override
         public boolean hasNext() {
@@ -125,7 +125,7 @@ public class DoublyLinkedList<E> implements List<E>, Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new DoublyLinkedListIterator<E>();
+        return new DoublyLinkedListIterator();
     }
 
     private E remove(Node<E> n) {
