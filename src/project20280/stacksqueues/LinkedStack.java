@@ -36,8 +36,7 @@ public class LinkedStack<E> implements Stack<E> {
 
     @Override
     public E pop() {
-        // TODO
-        return null;
+        return ll.removeLast();
     }
 
     public String toString() {
