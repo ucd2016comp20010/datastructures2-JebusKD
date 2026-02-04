@@ -4,7 +4,7 @@ import project20280.interfaces.List;
 
 import java.util.Iterator;
 
-public class SinglyLinkedList<E> implements List<E> {
+public class SinglyLinkedList<E extends Comparable<E>> implements List<E>, Iterable<E>, Cloneable {
 
     private static class Node<E> {
 
@@ -22,7 +22,8 @@ public class SinglyLinkedList<E> implements List<E> {
          * @param n reference to a node that should follow the new node
          */
         public Node(E e, Node<E> n) {
-            // TODO
+            this.element = e;
+            this.next = n;
         }
 
         // Accessor methods
@@ -33,7 +34,7 @@ public class SinglyLinkedList<E> implements List<E> {
          * @return the element stored at the node
          */
         public E getElement() {
-            return null;
+            return this.element;
         }
 
         /**
@@ -42,8 +43,7 @@ public class SinglyLinkedList<E> implements List<E> {
          * @return the following node
          */
         public Node<E> getNext() {
-            // TODO
-            return null;
+            return this.next;
         }
 
         // Modifier methods
@@ -54,7 +54,7 @@ public class SinglyLinkedList<E> implements List<E> {
          * @param n the node that should follow this one
          */
         public void setNext(Node<E> n) {
-            // TODO
+            this.next = n;
         }
     } //----------- end of nested Node class -----------
 
@@ -67,70 +67,209 @@ public class SinglyLinkedList<E> implements List<E> {
     /**
      * Number of nodes in the list
      */
-    private int size = 0;                      // number of nodes in the list
+    //private int size = 0;                      // number of nodes in the list
 
     public SinglyLinkedList() {
     }              // constructs an initially empty list
 
     //@Override
     public int size() {
-        // TODO
-        return 0;
+        int i = 0;
+        for (Node<E> curNode = this.head; curNode != null; i++) {
+        	curNode = curNode.getNext();
+        }
+        return i;
     }
 
     //@Override
     public boolean isEmpty() {
-        // TODO
-        return false;
+        return this.head == null;
     }
 
     @Override
     public E get(int position) {
-        // TODO
-        return null;
+    	Node<E> curNode = head;
+        for (int i = 0; i < position; i++) {
+        	if (curNode == null) return null;
+        	curNode = curNode.getNext();
+        }
+        return curNode.getElement();
     }
 
     @Override
     public void add(int position, E e) {
-        // TODO
+    	int size = this.size();
+        if (position < size) {
+        	if (position == 0) this.addFirst(e);
+        	else if (position+1 == size) this.addLast(e);
+        	else {
+        		Node<E> curNode = this.head;
+        		for (int i = 1; i < position; i++) {
+        			curNode = curNode.getNext();
+        		}
+        		Node<E> postNode = curNode.getNext();
+        		curNode.setNext(new Node<E>(e, postNode));
+        	}
+        }
     }
 
 
     @Override
     public void addFirst(E e) {
-        // TODO
+        Node<E> secondNode = this.head;
+        this.head = new Node<E>(e, secondNode);
     }
 
     @Override
     public void addLast(E e) {
-        // TODO
+    	if (this.head == null) {
+    		this.head = new Node<E>(e, null);
+    	}
+    	else {
+    		Node<E> curNode = this.head;
+    		while (curNode.getNext() != null) {
+    			curNode = curNode.getNext();
+    		}
+    		curNode.setNext(new Node<E>(e, null));
+    	}
     }
 
     @Override
     public E remove(int position) {
-        // TODO
-        return null;
+    	int size = this.size();
+        if (position >= size) return null;
+        else if (position == 0) return this.removeFirst();
+        else if (position + 1 == size) return this.removeLast();
+        else {
+        	Node<E> curNode = this.head;;
+        	for (int i = 1; i < position; i++) {
+        		curNode = curNode.getNext();
+        	}
+        	Node<E> target = curNode.getNext(),
+        			replacement = target.getNext();
+        	curNode.setNext(replacement);
+        	return target.getElement();
+        }
     }
 
     @Override
     public E removeFirst() {
-        // TODO
-        return null;
+        if (this.head == null) return null;
+        Node<E> oldHead = this.head,
+        		newHead = oldHead.getNext();
+        this.head = newHead;
+        return oldHead.getElement();
+        
     }
 
     @Override
     public E removeLast() {
-        // TODO
-        return null;
+        if (this.head == null) return null;
+        else if (this.head.getNext() == null) {
+        	Node<E> oldHead = this.head;
+        	this.head = null;
+        	return oldHead.getElement();
+        }
+        Node<E> curNode = this.head;
+        while (curNode.getNext().getNext() != null) {
+        	curNode = curNode.getNext();
+        }
+        Node<E> target = curNode.getNext();
+        curNode.setNext(null);
+        return target.getElement();
+    }
+    
+    public void reverse() {
+    	Node<E> curNode = this.head,
+    			prevNode = null,
+    			nextNode;
+    	while (curNode != null) {
+    		nextNode = curNode.getNext();
+    		curNode.setNext(prevNode);
+    		prevNode = curNode;
+    		curNode = nextNode;
+    	}
+    	this.head = prevNode;
+    }
+    
+    public SinglyLinkedList<E> sortedMerge(SinglyLinkedList<E> mergee) {
+    	SinglyLinkedList<E> result = new SinglyLinkedList<E>();
+    
+		Node<E> cursor = null,
+				thisCurNode = this.clone().head,
+				mergeeCurNode = mergee.clone().head;
+		while (thisCurNode != null && mergeeCurNode != null) {
+			if (thisCurNode.getElement().compareTo(mergeeCurNode.getElement()) < 0) {
+				if (cursor == null) {
+					result.head = thisCurNode;
+					cursor = result.head;
+					thisCurNode = thisCurNode.getNext();
+				}
+				else {
+					cursor.setNext(thisCurNode);
+					cursor = cursor.getNext();
+					thisCurNode = thisCurNode.getNext();
+				}
+			}
+			else {
+				if (cursor == null) {
+					result.head = mergeeCurNode;
+					cursor = result.head;
+					mergeeCurNode = mergeeCurNode.getNext();
+				}
+				else {
+					cursor.setNext(mergeeCurNode);
+					cursor = cursor.getNext();
+					mergeeCurNode = mergeeCurNode.getNext();
+				}
+			}
+		}
+		
+		if (cursor == null) {
+			if (thisCurNode == null) result.head = mergeeCurNode;
+			else result.head = thisCurNode;
+		}
+		else {
+			if (thisCurNode == null) cursor.setNext(mergeeCurNode);
+			else cursor.setNext(thisCurNode);
+		}
+		
+		return result;
+    }
+    
+    /* Creates a copy of the list, each element by reference, though */
+    @Override
+    public SinglyLinkedList<E> clone() {
+    	SinglyLinkedList<E> clonedList = new SinglyLinkedList<E>();
+    	
+    	if (this.head != null) {
+    		
+    		clonedList.head = new Node<E>(this.head.getElement(), null);
+    	
+	    	Node<E> originalCurNode = this.head.getNext(),
+	    			newNode,
+	    			prevNode = clonedList.head;
+	    	while (originalCurNode != null) {
+	    		newNode = new Node<E>(originalCurNode.getElement(), null);
+	    		prevNode.setNext(newNode);
+	    		prevNode = newNode;
+	    		originalCurNode = originalCurNode.getNext();
+	    	}
+    	}
+    	else {
+    		clonedList.head = null;
+    	}
+    	
+    	return clonedList;
     }
 
     //@Override
     public Iterator<E> iterator() {
-        return new SinglyLinkedListIterator<E>();
+        return new SinglyLinkedListIterator();
     }
 
-    private class SinglyLinkedListIterator<E> implements Iterator<E> {
-        Node<E> curr = (Node<E>) head;
+    private class SinglyLinkedListIterator implements Iterator<E> {
+        Node<E> curr = head;
 
         @Override
         public boolean hasNext() {
@@ -176,6 +315,39 @@ public class SinglyLinkedList<E> implements List<E> {
         System.out.println(ll);
         ll.remove(5);
         System.out.println(ll);
+        
+        ll.reverse();
+        System.out.println(ll);
+        
+        SinglyLinkedList<Integer> ll2 = ll.clone();
+        System.out.println(ll2);
+        
+        for (Integer i : ll) {
+        	System.out.println(i);
+        }
+        
+        SinglyLinkedList<Integer> result = ll.sortedMerge(ll2);
+        System.out.println(result);
+        
+        SinglyLinkedList<Double> ld1 = new SinglyLinkedList<Double>(),
+        						 ld2 = new SinglyLinkedList<Double>();
+        ld2.addLast(0.3);
+        ld1.addLast(0.78);
+        ld1.addLast(0.98);
+        ld1.addLast(1.34);
+        ld2.addLast(1.56);
+        ld2.addLast(1.7);
+        ld1.addLast(2.3);
+        ld1.addLast(3.791);
+        ld1.addLast(6.194);
+        ld2.addLast(10.3);
+        ld1.addLast(12.3);
+        
+        SinglyLinkedList<Double> r;
+        r = ld1.sortedMerge(ld2);
+        System.out.println(r);
+        r = ld2.sortedMerge(ld1);
+        System.out.println(r);
 
     }
 }
