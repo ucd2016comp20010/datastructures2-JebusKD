@@ -19,3 +19,8 @@ A Singly Linked List is one-way and the final node inside points to null as its 
 > In what situations would you prefer to use a linked list to an array?
 
 In cases where the number of elements is unknown, a linked list can resize to fit the needs without taking up excess storage, as an array declares and holds onto a pre-determined block of memory. If an array needs to resize, the machine will have to create a brand new array and copy all prior members into it, which is an O(n) complexity action. For a linked list, appending to the end of the existing list is an O(1) complexity action. If a large continuous block of memory is inacessible in memory, an array may not be able to be declared. Meanwhile, linked lists can exist across many interlinked addresses in the memory heap.
+
+## Question 8
+> Describe 2 possible use-cases for a circularly linked list (2-3 sentences for each).
+
+***(unanswered)***
