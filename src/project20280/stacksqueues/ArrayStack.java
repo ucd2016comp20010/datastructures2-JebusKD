@@ -33,7 +33,7 @@ public class ArrayStack<E> implements Stack<E> {
      */
     @SuppressWarnings({"unchecked"})
     public ArrayStack(int capacity) {        // constructs stack with given capacity
-        // TODO
+        data = (E[]) new Object[capacity];
     }
 
     /**
