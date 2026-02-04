@@ -6,8 +6,8 @@ public class ArrayQueue<E> implements Queue<E> {
 
     private static final int CAPACITY = 1000;
     private E[] data;
-    private final int front = 0;
-    private final int size = 0;
+    private int front = 0;
+    private int size = 0;
 
     public ArrayQueue(int capacity) {
         // TODO
@@ -70,4 +70,5 @@ public class ArrayQueue<E> implements Queue<E> {
         System.out.println(qq);
 
     }
+
 }
