@@ -8,10 +8,12 @@ public class ArrayQueue<E> implements Queue<E> {
     private E[] data;
     private int front = 0;
     private int size = 0;
-
-    public ArrayQueue(int capacity) {
-        // TODO
-
+    
+    @SuppressWarnings("unchecked")
+	public ArrayQueue(int capacity) {
+        
+    	this.data = (E[]) new Object[capacity];
+    	
     }
 
     public ArrayQueue() {
