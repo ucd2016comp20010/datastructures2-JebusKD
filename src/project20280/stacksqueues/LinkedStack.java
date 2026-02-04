@@ -26,7 +26,7 @@ public class LinkedStack<E> implements Stack<E> {
 
     @Override
     public void push(E e) {
-        // TODO
+        ll.addLast(e);
     }
 
     @Override
