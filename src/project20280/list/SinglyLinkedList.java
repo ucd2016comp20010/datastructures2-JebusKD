@@ -192,8 +192,49 @@ public class SinglyLinkedList<E extends Comparable<E>> implements List<E>, Itera
     	this.head = prevNode;
     }
     
-    public void sortedMerge(SinglyLinkedList<E> mergee) {
-
+    public SinglyLinkedList<E> sortedMerge(SinglyLinkedList<E> mergee) {
+    	SinglyLinkedList<E> result = new SinglyLinkedList<E>();
+    
+		Node<E> cursor = null,
+				thisCurNode = this.clone().head,
+				mergeeCurNode = mergee.clone().head;
+		while (thisCurNode != null && mergeeCurNode != null) {
+			if (thisCurNode.getElement().compareTo(mergeeCurNode.getElement()) < 0) {
+				if (cursor == null) {
+					result.head = thisCurNode;
+					cursor = result.head;
+					thisCurNode = thisCurNode.getNext();
+				}
+				else {
+					cursor.setNext(thisCurNode);
+					cursor = cursor.getNext();
+					thisCurNode = thisCurNode.getNext();
+				}
+			}
+			else {
+				if (cursor == null) {
+					result.head = mergeeCurNode;
+					cursor = result.head;
+					mergeeCurNode = mergeeCurNode.getNext();
+				}
+				else {
+					cursor.setNext(mergeeCurNode);
+					cursor = cursor.getNext();
+					mergeeCurNode = mergeeCurNode.getNext();
+				}
+			}
+		}
+		
+		if (cursor == null) {
+			if (thisCurNode == null) result.head = mergeeCurNode;
+			else result.head = thisCurNode;
+		}
+		else {
+			if (thisCurNode == null) cursor.setNext(mergeeCurNode);
+			else cursor.setNext(thisCurNode);
+		}
+		
+		return result;
     }
     
     /* Creates a copy of the list, each element by reference, though */
@@ -284,6 +325,29 @@ public class SinglyLinkedList<E extends Comparable<E>> implements List<E>, Itera
         for (Integer i : ll) {
         	System.out.println(i);
         }
+        
+        SinglyLinkedList<Integer> result = ll.sortedMerge(ll2);
+        System.out.println(result);
+        
+        SinglyLinkedList<Double> ld1 = new SinglyLinkedList<Double>(),
+        						 ld2 = new SinglyLinkedList<Double>();
+        ld2.addLast(0.3);
+        ld1.addLast(0.78);
+        ld1.addLast(0.98);
+        ld1.addLast(1.34);
+        ld2.addLast(1.56);
+        ld2.addLast(1.7);
+        ld1.addLast(2.3);
+        ld1.addLast(3.791);
+        ld1.addLast(6.194);
+        ld2.addLast(10.3);
+        ld1.addLast(12.3);
+        
+        SinglyLinkedList<Double> r;
+        r = ld1.sortedMerge(ld2);
+        System.out.println(r);
+        r = ld2.sortedMerge(ld1);
+        System.out.println(r);
 
     }
 }
