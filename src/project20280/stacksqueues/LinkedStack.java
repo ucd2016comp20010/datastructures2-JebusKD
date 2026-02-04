@@ -31,8 +31,7 @@ public class LinkedStack<E> implements Stack<E> {
 
     @Override
     public E top() {
-        // TODO
-        return null;
+        return ll.last();
     }
 
     @Override
