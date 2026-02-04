@@ -4,7 +4,7 @@ import project20280.interfaces.List;
 
 import java.util.Iterator;
 
-public class SinglyLinkedList<E> implements List<E>, Iterable<E>, Cloneable {
+public class SinglyLinkedList<E extends Comparable<E>> implements List<E>, Iterable<E>, Cloneable {
 
     private static class Node<E> {
 
@@ -190,6 +190,10 @@ public class SinglyLinkedList<E> implements List<E>, Iterable<E>, Cloneable {
     		curNode = nextNode;
     	}
     	this.head = prevNode;
+    }
+    
+    public void sortedMerge(SinglyLinkedList<E> mergee) {
+
     }
     
     /* Creates a copy of the list, each element by reference, though */
