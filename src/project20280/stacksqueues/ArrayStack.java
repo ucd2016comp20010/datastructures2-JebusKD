@@ -76,8 +76,8 @@ public class ArrayStack<E> implements Stack<E> {
      */
     @Override
     public E top() {
-        // TODO
-        return null;
+    	if (t == -1) return null;
+    	else return data[t];
     }
 
     /**
