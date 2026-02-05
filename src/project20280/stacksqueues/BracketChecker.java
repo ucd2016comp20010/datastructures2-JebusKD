@@ -26,7 +26,7 @@ class BracketChecker {
     	case '(':
     		return right == ')';
     	default:
-    		throw new IllegalArgumentException("Non-left bracket passed");
+    		return false;
     	}
     }
 
@@ -54,6 +54,22 @@ class BracketChecker {
     			break;
     		}
     		if (flag != ErrorType.NONE) break;
+    	}
+    	
+    	if (charStack.size() > 0) flag = ErrorType.MISSING_RIGHT_PARENTHESES;
+    	
+    	switch (flag) {
+    	case MATCHING_ERROR:
+    		System.out.println("Matching Error");
+    		break;
+    	case MISSING_LEFT_PARENTHESES:
+    		System.out.println("Missing Left Parentheses");
+    		break;
+    	case MISSING_RIGHT_PARENTHESES:
+    		System.out.println("Missing Right Parentheses");
+    		break;
+    	default:
+    		System.out.println("OK");
     	}
     }
 
