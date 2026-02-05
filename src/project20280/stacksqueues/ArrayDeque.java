@@ -23,18 +23,12 @@ public class ArrayDeque<E> implements Deque<E> {
 	
 	public void addFirst(E e) {
 		if (front == 0) throw new IllegalStateException("Front of array reached.");
-		else {
-			if (front == back) back--;
-			data[front--] = e;
-		}
+		else data[--front] = e;
 	}
 	
 	public void addLast(E e) {
 		if (back == data.length) throw new IllegalStateException("Back of array reached.");
-		else {
-			if (back == front) front++;
-			data[back++] = e;
-		}
+		else data[back++] = e;
 	}
 	
 	public E removeFirst() {
