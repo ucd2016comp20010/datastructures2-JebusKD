@@ -1,14 +1,35 @@
 package project20280.stacksqueues;
 
-class BracketChecker {
-    private final String input;
+import project20280.interfaces.Stack;
 
+class BracketChecker {
+	
+	private enum ErrorType {
+		NONE,
+		MATCHING_ERROR,
+		MISSING_LEFT_PARENTHESES,
+		MISSING_RIGHT_PARENTHESES
+	}
+	
+    private final String input;
+    
     public BracketChecker(String in) {
         input = in;
     }
 
     public void check() {
-        // TODO
+    	Stack<Character> charStack = new LinkedStack<Character>();
+    	char[] charArray = input.toCharArray();
+    	
+    	for (Character c : charArray) {
+    		switch (c) {
+    		case '[':
+    		case '{':
+    		case '(':
+    			charStack.push(c);
+    			break;
+    		case ']':
+    	}
     }
 
     public static void main(String[] args) {
