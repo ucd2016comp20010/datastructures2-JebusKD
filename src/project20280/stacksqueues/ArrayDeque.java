@@ -51,7 +51,7 @@ public class ArrayDeque<E> implements Deque<E> {
 		else return data[back-1];
 	}
 	
-	public E size() {
+	public int size() {
 		return front - back;
 	}
 	
