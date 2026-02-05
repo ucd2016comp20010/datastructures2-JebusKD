@@ -32,11 +32,13 @@ public class ArrayDeque<E> implements Deque<E> {
 	}
 	
 	public E removeFirst() {
-		
+		if (this.isEmpty()) return null;
+		else return data[front++];
 	}
 	
 	public E removeLast() {
-		
+		if (this.isEmpty()) return null;
+		else return data[--back];
 	}
 	
 	public E first() {
