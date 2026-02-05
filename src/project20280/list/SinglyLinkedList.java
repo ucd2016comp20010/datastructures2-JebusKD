@@ -67,18 +67,14 @@ public class SinglyLinkedList<E extends Comparable<E>> implements List<E>, Itera
     /**
      * Number of nodes in the list
      */
-    //private int size = 0;                      // number of nodes in the list
+    private int size = 0;                      // number of nodes in the list
 
     public SinglyLinkedList() {
     }              // constructs an initially empty list
 
     //@Override
     public int size() {
-        int i = 0;
-        for (Node<E> curNode = this.head; curNode != null; i++) {
-        	curNode = curNode.getNext();
-        }
-        return i;
+        return this.size;
     }
 
     //@Override
