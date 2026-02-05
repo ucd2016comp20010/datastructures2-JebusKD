@@ -33,7 +33,7 @@ public class DoublyLinkedList<E> implements List<E>, Iterable<E> {
 
     private final Node<E> head;
     private final Node<E> tail;
-    //private final int size = 0;
+    private final int size = 0;
 
     public DoublyLinkedList() {
         head = new Node<E>(null, null, null);
@@ -49,11 +49,7 @@ public class DoublyLinkedList<E> implements List<E>, Iterable<E> {
 
     @Override
     public int size() {
-        int size = 0;
-        for (Node<E> curNode = this.head; curNode.getNext() != this.tail; size++) {
-        	curNode = curNode.getNext();
-        }
-        return size;
+        return this.size;
     }
 
     @Override
