@@ -59,4 +59,13 @@ public class ArrayDeque<E> implements Deque<E> {
 		return front == back;
 	}
 	
+	public String toString() {
+		String s = "[";
+		for (int i = front; i < back; ) {
+			s = s.concat(data[i].toString());
+			if (++i != back) s = s.concat(", ");
+		}
+		return s.concat("]");
+	}
+	
 }
