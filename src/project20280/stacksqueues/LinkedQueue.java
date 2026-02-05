@@ -36,8 +36,7 @@ public class LinkedQueue<E> implements Queue<E> {
 
     @Override
     public E dequeue() {
-        // TODO
-        return null;
+        return ll.removeFirst();
     }
 
     public String toString() {
