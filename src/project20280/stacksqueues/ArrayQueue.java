@@ -44,8 +44,8 @@ public class ArrayQueue<E> implements Queue<E> {
 
     @Override
     public E dequeue() {
-        // TODO
-        return null;
+        if (front == size) return null;
+        else return data[front++];
     }
 
     public String toString() {
