@@ -26,7 +26,7 @@ public class LinkedQueue<E> implements Queue<E> {
 
     @Override
     public void enqueue(E e) {
-        // TODO
+        ll.addLast(e);
     }
 
     @Override
