@@ -16,10 +16,25 @@ class BracketChecker {
     public BracketChecker(String in) {
         input = in;
     }
+    
+    private static boolean bracketMatch(char left, char right) {
+    	switch(left) {
+    	case '[':
+    		return right == ']';
+    	case '{':
+    		return right == '}';
+    	case '(':
+    		return right == ')';
+    	default:
+    		throw new IllegalArgumentException("Non-left bracket passed");
+    	}
+    }
 
     public void check() {
     	Stack<Character> charStack = new LinkedStack<Character>();
     	char[] charArray = input.toCharArray();
+    	
+    	ErrorType flag = ErrorType.NONE;
     	
     	for (Character c : charArray) {
     		switch (c) {
@@ -29,6 +44,16 @@ class BracketChecker {
     			charStack.push(c);
     			break;
     		case ']':
+    		case '}':
+    		case ')':
+    			Character found = charStack.pop();
+    			if (found == null) flag = ErrorType.MISSING_LEFT_PARENTHESES;
+    			else if (!bracketMatch(c, found)) flag = ErrorType.MATCHING_ERROR;
+    			break;
+    		default:
+    			break;
+    		}
+    		if (flag != ErrorType.NONE) break;
     	}
     }
 
