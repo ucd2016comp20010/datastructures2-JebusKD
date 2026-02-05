@@ -33,12 +33,13 @@ public class DoublyLinkedList<E> implements List<E>, Iterable<E> {
 
     private final Node<E> head;
     private final Node<E> tail;
-    private final int size = 0;
+    private int size;
 
     public DoublyLinkedList() {
         head = new Node<E>(null, null, null);
         tail = new Node<E>(null, head, null);
         head.next = tail;
+        this.size = 0;
     }
 
     private void addBetween(E e, Node<E> pred, Node<E> succ) {
@@ -54,7 +55,7 @@ public class DoublyLinkedList<E> implements List<E>, Iterable<E> {
 
     @Override
     public boolean isEmpty() {
-        return this.head.getNext() == this.tail;
+        return this.size == 0;
     }
 
     @Override
@@ -77,6 +78,7 @@ public class DoublyLinkedList<E> implements List<E>, Iterable<E> {
 	        	curNode = curNode.getNext();
 	        }
 	        this.addBetween(e, curNode, curNode.getNext());
+	        this.size++;
     	}
     }
 
@@ -84,11 +86,7 @@ public class DoublyLinkedList<E> implements List<E>, Iterable<E> {
     public E remove(int i) {
     	if (this.size() <= i) return null;
     	else if (i == 0) {
-    		Node<E> target = this.head.getNext(),
-    				prec = target.getNext();
-    		this.head.next = prec;
-    		prec.prev = this.head;
-    		return target.getData();
+    		return this.removeFirst();
     	}
     	else {
 	        Node<E> curNode = this.head.getNext();
@@ -99,6 +97,7 @@ public class DoublyLinkedList<E> implements List<E>, Iterable<E> {
 	        		prec = target.getNext();
 	        curNode.next = prec;
 	        prec.prev = curNode;
+	        this.size--;
 	        return target.getData();
     	}
     }
@@ -154,6 +153,7 @@ public class DoublyLinkedList<E> implements List<E>, Iterable<E> {
         		postNode = target.getNext();
         this.head.next = postNode;
         postNode.prev = this.head;
+        this.size--;
         return target.getData();
     }
 
@@ -164,17 +164,20 @@ public class DoublyLinkedList<E> implements List<E>, Iterable<E> {
         		precNode = target.getPrev();
         this.tail.prev = precNode;
         precNode.next = this.tail;
+        this.size--;
         return target.getData();
     }
 
     @Override
     public void addLast(E e) {
         this.addBetween(e, this.tail.getPrev(), this.tail);
+        this.size++;
     }
 
     @Override
     public void addFirst(E e) {
     	this.addBetween(e, this.head, this.head.getNext());
+    	this.size++;
     }
 
     public String toString() {
