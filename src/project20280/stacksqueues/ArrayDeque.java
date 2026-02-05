@@ -53,8 +53,8 @@ public class ArrayDeque<E> implements Deque<E> {
 		return front - back;
 	}
 	
-	public E isEmpty() {
-		
+	public boolean isEmpty() {
+		return front == back;
 	}
 	
 }
