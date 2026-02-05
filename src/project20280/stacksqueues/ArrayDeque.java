@@ -42,11 +42,13 @@ public class ArrayDeque<E> implements Deque<E> {
 	}
 	
 	public E first() {
-		
+		if (this.isEmpty()) return null;
+		else return data[front];
 	}
 	
 	public E last() {
-		
+		if (this.isEmpty()) return null;
+		else return data[back-1];
 	}
 	
 	public E size() {
