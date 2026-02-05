@@ -13,6 +13,8 @@ public class ArrayDeque<E> implements Deque<E> {
 	@SuppressWarnings("unchecked")
 	public ArrayDeque(int capacity) {
 		data = (E[]) new Object[capacity];
+		front = capacity/2;
+		back = front;
 	}
 	
 	public ArrayDeque() {
@@ -20,11 +22,19 @@ public class ArrayDeque<E> implements Deque<E> {
 	}
 	
 	public void addFirst(E e) {
-		
+		if (front == 0) throw new IllegalStateException("Front of array reached.");
+		else {
+			if (front == back) back--;
+			data[front--] = e;
+		}
 	}
 	
 	public void addLast(E e) {
-		
+		if (back == data.length) throw new IllegalStateException("Back of array reached.");
+		else {
+			if (back == front) front++;
+			data[back++] = e;
+		}
 	}
 	
 	public E removeFirst() {
