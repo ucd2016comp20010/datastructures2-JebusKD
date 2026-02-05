@@ -52,7 +52,7 @@ public class ArrayDeque<E> implements Deque<E> {
 	}
 	
 	public int size() {
-		return front - back;
+		return back - front;
 	}
 	
 	public boolean isEmpty() {
