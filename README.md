@@ -3,7 +3,7 @@ Fork by <ins>Jamie Kildea</ins>
 
 This README file features answers for the lab sheets which are not directly part of the code.
 
-# Wk. 2
+# Wk. 2, Linked Lists
 Coding questions have been answered by contributing to this repository. Below are a few sentences on each of the non-code questions:
 ## Question 5
 > In my upstream repo, there are some unit test classes SinglyLinkedListTest, DoublyLinkedListTest, etc. These tests require Junit5. Run these tests and make sure they all pass. Are the tests complete?
@@ -13,7 +13,7 @@ All provided tests pass. However, many tests are dependent on several other unte
 ## Question 6
 > What is the difference between a singly linked list and a circularly linked list?
 
-A Singly Linked List is one-way and the final node inside points to null as its succeeding node. If given any node within a Singly Linked List, there is no way to find out the size of the entire list, or the identities of members placed before that node within the list. To be able to access all elements in the list, you have to begin at the 'head' node of the list. While a Circularly Linked List is also one-way, the final node of the list instead of pointing to the first node in the list. This means that any given node within the Circularly Linked List is able to calculate the size of the entire list, and obtain all members within. Any node is an access point to the entire list.
+A Singly Linked List is one-way and the final node inside points to `null` as its succeeding node. If given any node within a Singly Linked List, there is no way to find out the size of the entire list, or the identities of members placed before that node within the list. To be able to access all elements in the list, you have to begin at the 'head' node of the list. While a Circularly Linked List is also one-way, the final node of the list instead of pointing to the first node in the list. This means that any given node within the Circularly Linked List is able to calculate the size of the entire list, and obtain all members within. Any node is an access point to the entire list.
 
 ## Question 7
 > In what situations would you prefer to use a linked list to an array?
@@ -23,4 +23,4 @@ In cases where the number of elements is unknown, a linked list can resize to fi
 ## Question 8
 > Describe 2 possible use-cases for a circularly linked list (2-3 sentences for each).
 
-***(unanswered)***
+A Circularly Linked List is excellent at implementing a Stack. If the top element of the stack is the node directly after the reference point of the list (the first/bottom element of the stack) it's possible to add or remove this first element with an O(1) time complexity.
