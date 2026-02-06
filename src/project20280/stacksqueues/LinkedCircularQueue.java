@@ -32,8 +32,7 @@ public class LinkedCircularQueue<E> implements Queue<E> {
 
     @Override
     public void enqueue(E e) {
-        // TODO Auto-generated method stub
-
+        ll.addLast(e);
     }
 
     @Override
