@@ -105,6 +105,7 @@ public class SinglyLinkedList<E extends Comparable<E>> implements List<E>, Itera
         		}
         		Node<E> postNode = curNode.getNext();
         		curNode.setNext(new Node<E>(e, postNode));
+        		this.size++;
         	}
         }
     }
@@ -114,6 +115,7 @@ public class SinglyLinkedList<E extends Comparable<E>> implements List<E>, Itera
     public void addFirst(E e) {
         Node<E> secondNode = this.head;
         this.head = new Node<E>(e, secondNode);
+        this.size++;
     }
 
     @Override
@@ -128,6 +130,7 @@ public class SinglyLinkedList<E extends Comparable<E>> implements List<E>, Itera
     		}
     		curNode.setNext(new Node<E>(e, null));
     	}
+    	this.size++;
     }
 
     @Override
@@ -144,6 +147,7 @@ public class SinglyLinkedList<E extends Comparable<E>> implements List<E>, Itera
         	Node<E> target = curNode.getNext(),
         			replacement = target.getNext();
         	curNode.setNext(replacement);
+        	this.size--;
         	return target.getElement();
         }
     }
@@ -154,6 +158,7 @@ public class SinglyLinkedList<E extends Comparable<E>> implements List<E>, Itera
         Node<E> oldHead = this.head,
         		newHead = oldHead.getNext();
         this.head = newHead;
+        this.size--;
         return oldHead.getElement();
         
     }
@@ -164,6 +169,7 @@ public class SinglyLinkedList<E extends Comparable<E>> implements List<E>, Itera
         else if (this.head.getNext() == null) {
         	Node<E> oldHead = this.head;
         	this.head = null;
+        	this.size--;
         	return oldHead.getElement();
         }
         Node<E> curNode = this.head;
@@ -172,6 +178,7 @@ public class SinglyLinkedList<E extends Comparable<E>> implements List<E>, Itera
         }
         Node<E> target = curNode.getNext();
         curNode.setNext(null);
+        this.size--;
         return target.getElement();
     }
     
@@ -229,7 +236,7 @@ public class SinglyLinkedList<E extends Comparable<E>> implements List<E>, Itera
 			if (thisCurNode == null) cursor.setNext(mergeeCurNode);
 			else cursor.setNext(thisCurNode);
 		}
-		
+		result.size = this.size() + mergee.size();
 		return result;
     }
     
