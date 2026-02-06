@@ -26,17 +26,17 @@ public class LinkedStack<E> implements Stack<E> {
 
     @Override
     public void push(E e) {
-        ll.addLast(e);
+        ll.addFirst(e);
     }
 
     @Override
     public E top() {
-        return ll.last();
+        return ll.first();
     }
 
     @Override
     public E pop() {
-        return ll.removeLast();
+        return ll.removeFirst();
     }
 
     public String toString() {
