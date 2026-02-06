@@ -37,7 +37,7 @@ public class LinkedCircularQueue<E> implements Queue<E> {
 
     @Override
     public E first() {
-        return ll.get(0);
+        return ll.first();
     }
 
     @Override
