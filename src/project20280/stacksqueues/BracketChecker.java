@@ -17,7 +17,7 @@ class BracketChecker {
         input = in;
     }
     
-    private static boolean bracketMatch(char left, char right) {
+    private static boolean bracketMatch(Character left, Character right) {
     	switch(left) {
     	case '[':
     		return right == ']';
@@ -48,7 +48,7 @@ class BracketChecker {
     		case ')':
     			Character found = charStack.pop();
     			if (found == null) flag = ErrorType.MISSING_LEFT_PARENTHESES;
-    			else if (!bracketMatch(c, found)) flag = ErrorType.MATCHING_ERROR;
+    			else if (!bracketMatch(found, c)) flag = ErrorType.MATCHING_ERROR;
     			break;
     		default:
     			break;
@@ -56,7 +56,7 @@ class BracketChecker {
     		if (flag != ErrorType.NONE) break;
     	}
     	
-    	if (charStack.size() > 0) flag = ErrorType.MISSING_RIGHT_PARENTHESES;
+    	if (charStack.size() > 0 && flag == ErrorType.NONE) flag = ErrorType.MISSING_RIGHT_PARENTHESES;
     	
     	switch (flag) {
     	case MATCHING_ERROR:
@@ -81,6 +81,7 @@ class BracketChecker {
                 "a{b(c]d}e", // not correct; ] doesn't match (\n" +
                 "a[b{c}d]e}", // not correct; nothing matches final }\n" +
                 "a{b(c) ", // // not correct; Nothing matches opening {
+                "[]",
         };
 
         for (String input : inputs) {

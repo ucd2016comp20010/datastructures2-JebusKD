@@ -50,6 +50,11 @@ public class CircularlyLinkedList<E> implements List<E>, Iterable<E> {
         }
         return curNode.getData();
     }
+    
+    public E first() {
+    	if (this.isEmpty()) return null;
+    	else return this.tail.getNext().getData();
+    }
 
     /**
      * Inserts the given element at the specified index of the list, shifting all
