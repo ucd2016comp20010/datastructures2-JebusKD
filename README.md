@@ -28,3 +28,20 @@ A Circularly Linked List is excellent at implementing a Stack. If the top elemen
 A Circularly Linked List could also be used to produce an infinitely-repeating pattern of elements. This can be done with an iterator and a `for` loop.
 
 # Wk. 3, Stacks, Queues, Deques
+Coding questions have been answered by contributing to this repository. Below are a few sentences on each of the non-code questions:
+## Question 4
+
+This is the operation performed for the binary implementation on every iteration:
+```java
+while (dec_num > 0) {
+  remainders.push((int) (dec_num % 2));
+  dec_num /= 2;
+}
+```
+Note the modulo `%` and division `/=` performed on the number `2`, where binary is a base-2 number system. We can change this `2` to anything, replacing `2` with `10` for instance will cause our method to simply convert the incoming long number to a string (albiet, in an extraordinarily unoptimised manner), and any base between 2 and 10 (inclusive) will be converted in these conditions.
+For bases above this, we will have to first define single characters to represent a number outside of our standard digits 0 through 9. Take base-16, also known as Hexadecimal, for instance. Under hexadecimal numbers 0 through 9 are represented the same as they are in decimal (base-10), but beyond that, the letters of the alphabet A through F are used to denote a number in a single character. We would have to parse an integer into the corresponding character before concatenating it to our running string. We can replace the standard `.toString()` method with a helper function to attain this.
+```java
+while (!remainders.isEmpty()) {
+  binaryString = binaryString.concat(remainders.pop().intToHex());
+}
+```
