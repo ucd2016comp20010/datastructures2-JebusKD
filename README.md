@@ -29,13 +29,33 @@ A Circularly Linked List could also be used to produce an infinitely-repeating p
 
 # Wk. 3, Stacks, Queues, Deques
 Coding questions have been answered by contributing to this repository. Below are a few sentences on each of the non-code questions:
+## Question 2
+> Write the pseudocode for an algorithm which implements a Queue using two stacks. Provide implementations for the enqueue() and dequeue() methods.
+
+```
+let 'mainStack' and 'helperStack' be stacks
+
+define enqueue( new element 'i' ) :
+  while there is an element in 'mainStack' do
+    pop the top element from 'mainStack' and push it onto 'helperStack'
+
+  push 'i' onto 'helperStack'
+
+  while there is an element in 'helperStack' do
+    pop the top element from 'helperStack' and push it onto 'mainStack'
+
+define dequeue() :
+  pop the top element from 'mainStack' and return it
+```
+
 ## Question 3
 > Write the pseudocode algorithm which reverses the elements on a Stack using two additional Stack's (no other data structures are allowed).
 
 ```
 algorithm reverse-stack is
   input : stack 'target' which needs to be reversed
-          stacks 's1' and 's2' will be used to help
+
+  let 's1' and 's2' be stacks
 
   while there is an element in 'target' do
     pop the top element from 'target' and push it onto 's1'
