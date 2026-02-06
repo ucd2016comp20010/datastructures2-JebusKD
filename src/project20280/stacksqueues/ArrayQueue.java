@@ -6,12 +6,14 @@ public class ArrayQueue<E> implements Queue<E> {
 
     private static final int CAPACITY = 1000;
     private E[] data;
-    private final int front = 0;
-    private final int size = 0;
-
-    public ArrayQueue(int capacity) {
-        // TODO
-
+    private int front = 0;
+    private int size = 0;
+    
+    @SuppressWarnings("unchecked")
+	public ArrayQueue(int capacity) {
+        
+    	this.data = (E[]) new Object[capacity];
+    	
     }
 
     public ArrayQueue() {
@@ -26,12 +28,13 @@ public class ArrayQueue<E> implements Queue<E> {
 
     @Override
     public boolean isEmpty() {
-        return size == 0;
+        return front == size;
     }
 
     @Override
     public void enqueue(E e) {
-        // TODO
+    	if (size == data.length) throw new IllegalStateException("Queue maximum capacity reached");
+    	else data[size++] = e;
     }
 
     @Override
@@ -41,8 +44,8 @@ public class ArrayQueue<E> implements Queue<E> {
 
     @Override
     public E dequeue() {
-        // TODO
-        return null;
+        if (front == size) return null;
+        else return data[front++];
     }
 
     public String toString() {
@@ -70,4 +73,5 @@ public class ArrayQueue<E> implements Queue<E> {
         System.out.println(qq);
 
     }
+
 }

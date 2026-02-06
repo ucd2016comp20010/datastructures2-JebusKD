@@ -1,14 +1,76 @@
 package project20280.stacksqueues;
 
-class BracketChecker {
-    private final String input;
+import project20280.interfaces.Stack;
 
+class BracketChecker {
+	
+	private enum ErrorType {
+		NONE,
+		MATCHING_ERROR,
+		MISSING_LEFT_PARENTHESES,
+		MISSING_RIGHT_PARENTHESES
+	}
+	
+    private final String input;
+    
     public BracketChecker(String in) {
         input = in;
     }
+    
+    private static boolean bracketMatch(char left, char right) {
+    	switch(left) {
+    	case '[':
+    		return right == ']';
+    	case '{':
+    		return right == '}';
+    	case '(':
+    		return right == ')';
+    	default:
+    		return false;
+    	}
+    }
 
     public void check() {
-        // TODO
+    	Stack<Character> charStack = new LinkedStack<Character>();
+    	char[] charArray = input.toCharArray();
+    	
+    	ErrorType flag = ErrorType.NONE;
+    	
+    	for (Character c : charArray) {
+    		switch (c) {
+    		case '[':
+    		case '{':
+    		case '(':
+    			charStack.push(c);
+    			break;
+    		case ']':
+    		case '}':
+    		case ')':
+    			Character found = charStack.pop();
+    			if (found == null) flag = ErrorType.MISSING_LEFT_PARENTHESES;
+    			else if (!bracketMatch(c, found)) flag = ErrorType.MATCHING_ERROR;
+    			break;
+    		default:
+    			break;
+    		}
+    		if (flag != ErrorType.NONE) break;
+    	}
+    	
+    	if (charStack.size() > 0) flag = ErrorType.MISSING_RIGHT_PARENTHESES;
+    	
+    	switch (flag) {
+    	case MATCHING_ERROR:
+    		System.out.println("Matching Error");
+    		break;
+    	case MISSING_LEFT_PARENTHESES:
+    		System.out.println("Missing Left Parentheses");
+    		break;
+    	case MISSING_RIGHT_PARENTHESES:
+    		System.out.println("Missing Right Parentheses");
+    		break;
+    	default:
+    		System.out.println("OK");
+    	}
     }
 
     public static void main(String[] args) {
