@@ -33,7 +33,7 @@ Coding questions have been answered by contributing to this repository. Below ar
 > Write the pseudocode for an algorithm which implements a Queue using two stacks. Provide implementations for the enqueue() and dequeue() methods.
 
 ```
-let 'mainStack' and 'helperStack' be stacks
+let 'mainStack' and 'helperStack' be empty stacks
 
 define enqueue( new element 'i' ) :
   while there is an element in 'mainStack' do
@@ -55,7 +55,7 @@ define dequeue() :
 algorithm reverse-stack is
   input : stack 'target' which needs to be reversed
 
-  let 's1' and 's2' be stacks
+  let 's1' and 's2' be empty stacks
 
   while there is an element in 'target' do
     pop the top element from 'target' and push it onto 's1'
