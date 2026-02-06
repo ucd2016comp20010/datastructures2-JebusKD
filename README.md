@@ -29,7 +29,26 @@ A Circularly Linked List could also be used to produce an infinitely-repeating p
 
 # Wk. 3, Stacks, Queues, Deques
 Coding questions have been answered by contributing to this repository. Below are a few sentences on each of the non-code questions:
+## Question 3
+> Write the pseudocode algorithm which reverses the elements on a Stack using two additional Stack's (no other data structures are allowed).
+
+```
+algorithm reverse-stack is
+  input : stack 'target' which needs to be reversed
+          stacks 's1' and 's2' will be used to help
+
+  while there is an element in 'target' do
+    pop the top element from 'target' and push it onto 's1'
+
+  while there is an element in 's1' do
+    pop the top element from 'target' and push it onto 's2'
+
+  while there is an element in 's2' do
+    pop the top element from 's2' and push it onto 'target'
+```
+
 ## Question 4
+> How would you extend \[the method made for question 4\] to handle different bases? and bases greater than 9?
 
 This is the operation performed for the binary implementation on every iteration:
 ```java
