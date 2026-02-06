@@ -24,3 +24,5 @@ In cases where the number of elements is unknown, a linked list can resize to fi
 > Describe 2 possible use-cases for a circularly linked list (2-3 sentences for each).
 
 A Circularly Linked List is excellent at implementing a Stack. If the top element of the stack is the node directly after the reference point of the list (the first/bottom element of the stack) it's possible to add or remove this first element with an O(1) time complexity.
+
+A Circularly Linked List could also be used to produce an infinitely-repeating pattern of elements. This can be done with an iterator and a `for` loop.
