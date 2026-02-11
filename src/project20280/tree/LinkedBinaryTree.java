@@ -26,6 +26,18 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 		public E getElement() throws IllegalStateException {
 			return this.element;
 		}
+		
+		public Node<E> getLeft() {
+			return this.left;
+		}
+		
+		public Node<E> getRight() {
+			return this.right;
+		}
+		
+		public Node<E> getParent() {
+			return this.parent;
+		}
 	}
 
     static java.util.Random rnd = new java.util.Random();
