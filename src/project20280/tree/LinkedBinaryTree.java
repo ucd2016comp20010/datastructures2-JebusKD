@@ -257,8 +257,8 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         	child = this.right(p);
         }
         
-        
-        if (this.left(parent) == p) parent.setLeft((Node<E>)child);
+        if (this.root == n) this.root = ((Node<E>)child);
+        else if (this.left(parent) == p) parent.setLeft((Node<E>)child);
         else parent.setRight((Node<E>)child);
         
         this.size--;
