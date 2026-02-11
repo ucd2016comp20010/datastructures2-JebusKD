@@ -50,8 +50,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
      */
     @Override
     public boolean isRoot(Position<E> p) {
-        // TODO
-        return false;
+        return parent(p) == null;
     }
 
     /**
