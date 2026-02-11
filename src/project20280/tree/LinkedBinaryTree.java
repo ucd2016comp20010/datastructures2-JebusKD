@@ -220,6 +220,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     public Position<E> addLeft(Position<E> p, E e) throws IllegalArgumentException {
         Node<E> n = ((Node<E>)p);
         if (n.getLeft() != null) throw new IllegalStateException("Node already has a left child.");
+        Node<E> child = createNode(e, n, null, null);
         n.setLeft(child);
         this.size++;
         return child;
