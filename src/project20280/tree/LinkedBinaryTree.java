@@ -23,6 +23,9 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 			this.right = r;
 		}
 		
+		public E getElement() throws IllegalStateException {
+			return this.element;
+		}
 	}
 
     static java.util.Random rnd = new java.util.Random();
