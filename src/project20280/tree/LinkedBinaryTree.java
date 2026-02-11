@@ -245,8 +245,25 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * @throws IllegalArgumentException if p has two children.
      */
     public E remove(Position<E> p) throws IllegalArgumentException {
-        // TODO
-        return null;
+    	Node<E> n = ((Node<E>)p),
+        		parent = n.getParent();
+        Position<E> child;
+        if (this.left(p) != null) {
+        	if (this.right(p) != null) throw new IllegalArgumentException("Removed node has two children.");
+        	child = this.left(p);
+        }
+        else {
+        	/* this.right is either null or the only child, both are adequate */
+        	child = this.right(p);
+        }
+        
+        
+        if (this.left(parent) == p) parent.setLeft((Node<E>)child);
+        else parent.setRight((Node<E>)child);
+        
+        this.size--;
+        
+        return n.getElement();
     }
 
     public String toString() {
