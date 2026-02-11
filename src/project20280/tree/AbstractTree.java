@@ -65,8 +65,11 @@ public abstract class AbstractTree<E> implements Tree<E> {
      */
     @Override
     public int numChildren(Position<E> p) {
-        // TODO
-        return 0;
+    	int count = 0;
+    	for (Position<E> c : children(p)) {
+    		count++;
+    	}
+        return count;
     }
 
     /**
