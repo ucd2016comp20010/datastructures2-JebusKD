@@ -100,9 +100,9 @@ public abstract class AbstractTree<E> implements Tree<E> {
      * @throws IllegalArgumentException if p is not a valid Position for this tree.
      */
     public int depth(Position<E> p) throws IllegalArgumentException {
-        // TODO
-        return 0;
-    }
+        if (this.isRoot(p)) return 0;
+        else return 1 + this.depth(parent(p));
+     }
 
     /**
      * Returns the height of the tree.
