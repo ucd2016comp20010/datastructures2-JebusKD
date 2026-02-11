@@ -11,7 +11,7 @@ import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
  */
 public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 	
-	private static class Node<E> implements Position<E> {
+	protected static class Node<E> implements Position<E> {
 		
 		private E element;
 		private Node<E> left, right, parent;
@@ -170,8 +170,10 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * @throws IllegalStateException if the tree is not empty
      */
     public Position<E> addRoot(E e) throws IllegalStateException {
-        // TODO
-        return null;
+        if (!isEmpty()) throw new IllegalStateException("Tree is not empty.");
+        this.root = createNode(e, null, null, null);
+        this.size = 1;
+        return this.root;
     }
 
     public void insert(E e) {
@@ -196,8 +198,11 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * @throws IllegalArgumentException if p already has a left child
      */
     public Position<E> addLeft(Position<E> p, E e) throws IllegalArgumentException {
-        // TODO
-        return null;
+        Node<E> n = ((Node<E>)p);
+        if (n.getLeft() != null) throw new IllegalStateException("Node already has a left child.");
+        n.setLeft(child);
+        this.size++;
+        return child;
     }
 
     /**
