@@ -10,43 +10,6 @@ import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
  * structure.
  */
 public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
-	
-	protected static class Node<E> implements Position<E> {
-		
-		private E element;
-		private Node<E> left, right, parent;
-		
-		public Node(E e, Node<E> p, Node<E> l, Node<E> r) {
-			this.element = e;
-			this.parent = p;
-			this.left = l;
-			this.right = r;
-		}
-		
-		public E getElement() throws IllegalStateException {
-			return this.element;
-		}
-		
-		public Node<E> getLeft() {
-			return this.left;
-		}
-		
-		public Node<E> getRight() {
-			return this.right;
-		}
-		
-		public Node<E> getParent() {
-			return this.parent;
-		}
-		
-		public void setLeft(Node<E> l) {
-			this.left = l;
-		}
-		
-		public void setRight(Node<E> r) {
-			this.right = r;
-		}
-	}
 
     static java.util.Random rnd = new java.util.Random();
     /**
@@ -316,49 +279,49 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     /**
      * Nested static class for a binary tree node.
      */
-    public static class Node<E> implements Position<E> {
-        private E element;
-        private Node<E> left, right, parent;
-
-        public Node(E e, Node<E> p, Node<E> l, Node<E> r) {
-            element = e;
-            left = l;
-            right = r;
-            parent = p;
-        }
+    protected static class Node<E> implements Position<E> {
+    	private E element;
+		private Node<E> left, right, parent;
+		
+		public Node(E e, Node<E> p, Node<E> l, Node<E> r) {
+			this.element = e;
+			this.parent = p;
+			this.left = l;
+			this.right = r;
+		}
 
         // accessor
         public E getElement() {
-            return element;
+            return this.element;
         }
 
         // modifiers
         public void setElement(E e) {
-            element = e;
+            this.element = e;
         }
 
         public Node<E> getLeft() {
-            return left;
+            return this.left;
         }
 
         public void setLeft(Node<E> n) {
-            left = n;
+            this.left = n;
         }
 
         public Node<E> getRight() {
-            return right;
+            return this.right;
         }
 
         public void setRight(Node<E> n) {
-            right = n;
+            this.right = n;
         }
 
         public Node<E> getParent() {
-            return parent;
+            return this.parent;
         }
 
         public void setParent(Node<E> n) {
-            parent = n;
+            this.parent = n;
         }
 
         public String toString() {
