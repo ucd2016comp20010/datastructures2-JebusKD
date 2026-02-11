@@ -237,8 +237,12 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * @throws IllegalArgumentException if p already has a right child
      */
     public Position<E> addRight(Position<E> p, E e) throws IllegalArgumentException {
-        // TODO
-        return null;
+        Node<E> n = ((Node<E>)p);
+        if (n.getRight() != null) throw new IllegalStateException("Node already has a right child.");
+        Node<E> child = createNode(e, n, null, null);
+        n.setRight(child);
+        this.size++;
+        return child;
     }
 
     /**
