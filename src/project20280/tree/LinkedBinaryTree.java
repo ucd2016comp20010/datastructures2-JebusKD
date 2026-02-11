@@ -38,6 +38,14 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 		public Node<E> getParent() {
 			return this.parent;
 		}
+		
+		public void setLeft(Node<E> l) {
+			this.left = l;
+		}
+		
+		public void setRight(Node<E> r) {
+			this.right = r;
+		}
 	}
 
     static java.util.Random rnd = new java.util.Random();
