@@ -304,6 +304,17 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         n.right = createLevelOrderHelper(arr, n.right, 2*i + 2);
         return n;
     }
+    
+    private int diameterHelper(Node<E> p) {
+    	return Math.max(diameterHelper(p.getLeft()), diameterHelper(p.getRight()), );
+    }
+    
+    /* The diameter of a binary
+	tree is the length of the longest path between any two nodes in a tree. This path
+	may or may not pass through the root. */
+    public int diameter() {
+    	return diameterHelper(this.root);
+    }
 
     public String toBinaryTreeString() {
         BinaryTreePrinter<E> btp = new BinaryTreePrinter<>(this);
