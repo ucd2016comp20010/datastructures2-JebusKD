@@ -211,7 +211,10 @@ public abstract class AbstractTree<E> implements Tree<E> {
      * @param snapshot a list to which results are appended
      */
     private void postorderSubtree(Position<E> p, List<Position<E>> snapshot) {
-        // TODO
+    	for (Position<E> c : children(p)) {
+    		postorderSubtree(c, snapshot);
+    	}
+    	snapshot.addLast(p);
     }
 
     /**
