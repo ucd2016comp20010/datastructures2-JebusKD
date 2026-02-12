@@ -65,7 +65,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * Factory function to create a new node storing element e.
      */
     protected Node<E> createNode(E e, Node<E> parent, Node<E> left, Node<E> right) {
-        return new Node<E>(e, parent, left, right);
+    	return new Node<E>(e, parent, left, right);
     }
 
     /**
@@ -94,6 +94,11 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     @Override
     public int size() {
         return size;
+    }
+    
+    @Override
+    public boolean isEmpty() {
+    	return size == 0;
     }
 
     /**
@@ -271,6 +276,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     public void createLevelOrder(ArrayList<E> l) {
         root = createLevelOrderHelper(l, root, 0);
+        this.size = l.size();
     }
 
     private Node<E> createLevelOrderHelper(ArrayList<E> l, Node<E> p, int i) {
@@ -285,6 +291,8 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     public void createLevelOrder(E[] arr) {
         root = createLevelOrderHelper(arr, root, 0);
+        this.size = arr.length;
+        
     }
 
     private Node<E> createLevelOrderHelper(E[] arr, Node<E> p, int i) {
