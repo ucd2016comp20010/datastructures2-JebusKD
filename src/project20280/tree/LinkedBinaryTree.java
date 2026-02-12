@@ -306,7 +306,25 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     }
     
     private int diameterHelper(Node<E> p) {
-    	return Math.max(diameterHelper(p.getLeft()), diameterHelper(p.getRight()), );
+    	int leftDiam = -1;
+    	int rightDiam = -1;
+    	int diamHere = 0;
+    	if (left(p) != null) leftDiam = diameterHelper(p.getLeft());
+    	if (right(p) != null) rightDiam = diameterHelper(p.getRight());
+    	if (leftDiam >= 0 && rightDiam >= 0) diamHere = nodeHeight(p.getLeft()) + nodeHeight(p.getRight()) + 1;
+    	
+    	return Math.max(diamHere, Math.max(leftDiam, rightDiam));
+    }
+    
+    private int nodeHeight(Node<E> p) {
+    	if (isExternal(p)) return 0;
+    	
+    	int val = -1;
+    	
+    	if (left(p) != null) val = nodeHeight(p.getLeft());
+    	if (right(p) != null) val = Math.max(val, nodeHeight(p.getRight()));
+    	
+    	return val;
     }
     
     /* The diameter of a binary
