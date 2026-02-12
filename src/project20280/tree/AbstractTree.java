@@ -2,6 +2,7 @@ package project20280.tree;
 
 import project20280.interfaces.Position;
 import project20280.interfaces.Tree;
+import project20280.list.CircularlyLinkedList;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -183,7 +184,10 @@ public abstract class AbstractTree<E> implements Tree<E> {
      * @param snapshot a list to which results are appended
      */
     private void preorderSubtree(Position<E> p, List<Position<E>> snapshot) {
-        // TODO
+    	snapshot.addLast(p);
+    	for (Position<E> c : children(p)) {
+    		preorderSubtree(c, snapshot);
+    	}
     }
 
     /**
@@ -192,8 +196,11 @@ public abstract class AbstractTree<E> implements Tree<E> {
      * @return iterable collection of the tree's positions in preorder
      */
     public Iterable<Position<E>> preorder() {
-        // TODO
-        return null;
+    	List<Position<E>> collection = new CircularlyLinkedList<Position<E>>();
+        if (!isEmpty()) preorderSubtree(this.root(), collection);
+        
+        return collection;
+        	
     }
 
     /**
