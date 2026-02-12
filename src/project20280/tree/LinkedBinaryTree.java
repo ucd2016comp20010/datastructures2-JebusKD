@@ -297,7 +297,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     private Node<E> createLevelOrderHelper(E[] arr, Node<E> p, int i) {
     	Node<E> n;
-        if (i >= arr.length) return p;
+        if (i >= arr.length || arr[i] == null) return p;
         else if (i == 0) n = createNode(arr[i], null, null, null);
         else n = createNode(arr[i], p, null, null);
         n.left = createLevelOrderHelper(arr, n.left, 2*i + 1);
@@ -306,14 +306,26 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     }
     
     private int diameterHelper(Node<E> p) {
-    	int leftDiam = -1;
-    	int rightDiam = -1;
-    	int diamHere = 0;
-    	if (left(p) != null) leftDiam = diameterHelper(p.getLeft());
-    	if (right(p) != null) rightDiam = diameterHelper(p.getRight());
-    	if (leftDiam >= 0 && rightDiam >= 0) diamHere = nodeHeight(p.getLeft()) + nodeHeight(p.getRight()) + 1;
+    	if (isExternal(p)) return 0;
     	
-    	return Math.max(diamHere, Math.max(leftDiam, rightDiam));
+    	int curMax = 0;
+    	int thisDiam = 0;
+    	
+    	/* If left node exists, it has a diameter of its own in its subtree. */
+    	if (left(p) != null) {
+    		curMax = Math.max(curMax, diameterHelper(p.getLeft()));
+    		/* Add the height of the left child + 1 to the diameter of this tree,
+    		 	presuming it travels through the root.
+    		 */
+    		thisDiam += nodeHeight(p.getLeft()) +1;
+    	}
+    	if (right(p) != null) {
+    		curMax = Math.max(curMax, diameterHelper(p.getRight()));
+    		thisDiam += nodeHeight(p.getRight()) +1;
+    	}
+    	
+    	curMax = Math.max(curMax, thisDiam);
+    	return thisDiam;
     }
     
     private int nodeHeight(Node<E> p) {
@@ -321,8 +333,10 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     	
     	int val = -1;
     	
-    	if (left(p) != null) val = 1 + nodeHeight(p.getLeft());
-    	if (right(p) != null) val = Math.max(val, 1 + nodeHeight(p.getRight()));
+    	if (left(p) != null) val = nodeHeight(p.getLeft());
+    	if (right(p) != null) val = 1 + Math.max(val, nodeHeight(p.getRight()));
+    	
+    	System.out.println(p.getElement() + " : height " + val);
     	
     	return val;
     }
