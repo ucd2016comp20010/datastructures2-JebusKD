@@ -106,6 +106,10 @@ And this structure would be given to `toString()`, yielding the structure.
 
 As an example, take a binary tree with 7 elements, numbered 1 through 7. Element 1 is the root node, with children 2 and 3, 2 has children 4 and 5, and 3 has children 6 and 7. Calling `toString()` as it stands using `inorder()` will give `[4, 2, 5, 1, 6, 3, 7]`, corresponding to this left-to-right traversal, while modifying it to use `preorder()` will instead give us `[1, 2, 4, 5, 3, 6, 7]`.
 
+### Subquestion (h)
+
+The tree's height is 5. As a recursive function that traverses the entire tree from top to bottom, visiting each child once, you'd expect 32 function calls due to the 32 non-null entries in the input array. The code of `height()` and `height_recursive()` were modified and now keep track of `heightRecursiveCalls`. Running this test case, we can verify this is true.
+
 ## Question 2
 >Write a recursive function (pseudo-code) to count the number of external nodes in a binary tree. Your solution should only use the methods in the Binary Tree ADT. Sketch out the algorithm in pseudocode first, and then in Java after you write the LinkedBinaryTree.
 
