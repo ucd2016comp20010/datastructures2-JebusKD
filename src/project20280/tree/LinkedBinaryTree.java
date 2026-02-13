@@ -239,7 +239,16 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * @throws IllegalArgumentException if p is not a leaf
      */
     public void attach(Position<E> p, LinkedBinaryTree<E> t1, LinkedBinaryTree<E> t2) throws IllegalArgumentException {
-        // TODO
+    	if (!isExternal(p)) throw new IllegalArgumentException("Node is not a leaf.");
+    	if (this == t1 || t1 == t2 || t2 == this) throw new IllegalArgumentException("Trees not independent");
+    	
+    	Node<E> leaf = ((Node<E>)p);
+    	
+    	leaf.setLeft(t1.root);
+    	leaf.setRight(t2.root);
+    	
+    	t1.root = null;
+    	t2.root = null;
     }
 
     /**
