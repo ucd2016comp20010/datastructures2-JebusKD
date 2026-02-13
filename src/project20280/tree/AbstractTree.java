@@ -141,6 +141,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
     }
     
     public int getHeightRecursiveCalls() {
+    	this.height(); // calls height to refresh current recursive calls count
     	return this.heightRecursiveCalls;
     }
     
