@@ -117,8 +117,11 @@ public abstract class AbstractTree<E> implements Tree<E> {
                 h = Math.max(h, depth(p));
         return h;
     }
+    
+    private int heightRecursiveCalls;
 
     public int height_recursive(Position<E> p) {
+    	heightRecursiveCalls++;
     	int h = 0;
     	for (Position<E> c : children(p)) {
     		h = Math.max(h, 1 + height_recursive(c));
@@ -133,9 +136,14 @@ public abstract class AbstractTree<E> implements Tree<E> {
      * @throws IllegalArgumentException if p is not a valid Position for this tree.
      */
     public int height() throws IllegalArgumentException {
-        return height_recursive(root());
+        heightRecursiveCalls = 0;
+    	return height_recursive(root());
     }
-
+    
+    public int getHeightRecursiveCalls() {
+    	return this.heightRecursiveCalls;
+    }
+    
     //---------- support for various iterations of a tree ----------
 
     //---------------- nested ElementIterator class ----------------
