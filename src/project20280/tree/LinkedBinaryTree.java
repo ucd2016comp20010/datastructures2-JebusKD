@@ -347,11 +347,22 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     public int diameter() {
     	return diameterHelper(this.root);
     }
+    
+    /**
+     * Returns the number of external nodes in a binary tree.
+     * 
+     * @return number of external nodes in binary tree
+     */
+    public int externalNodeCount() {
+    	if (this.root == null)
+    	return externalNodeCountHelper((Position<E>)this.root);
+    }
 
     public String toBinaryTreeString() {
         BinaryTreePrinter<E> btp = new BinaryTreePrinter<>(this);
         return btp.print();
     }
+    
 
     /**
      * Nested static class for a binary tree node.

@@ -98,5 +98,15 @@ public abstract class AbstractBinaryTree<E> extends AbstractTree<E>
     public Iterable<Position<E>> positions() {
         return inorder();
     }
+    
+    protected int externalNodeCountHelper(Position<E> n) {
+    	if (isExternal(n)) return 1;
+    	
+    	int foundExternalNodes = 0;
+    	if (left(n) != null) foundExternalNodes += externalNodeCountHelper(left(n));
+    	if (right(n) != null) foundExternalNodes += externalNodeCountHelper(right(n));
+    	
+    	return foundExternalNodes;
+    }
 }
 
