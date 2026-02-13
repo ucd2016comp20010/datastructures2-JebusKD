@@ -106,4 +106,20 @@ And this structure would be given to `toString()`, yielding the structure.
 
 As an example, take a binary tree with 7 elements, numbered 1 through 7. Element 1 is the root node, with children 2 and 3, 2 has children 4 and 5, and 3 has children 6 and 7. Calling `toString()` as it stands using `inorder()` will give `[4, 2, 5, 1, 6, 3, 7]`, corresponding to this left-to-right traversal, while modifying it to use `preorder()` will instead give us `[1, 2, 4, 5, 3, 6, 7]`.
 
-###
+## Question 2
+
+Sketch in psuedocode:
+```
+define externalNodes( node 'n' ) :
+  if n is external :
+    return 1
+
+  else :
+    let foundExternalNodes = 0
+    if n has a left child :
+      foundExternalNodes += externalNodes(n's left child)
+    if n has a right child :
+      foundExternalNodes += externalNodes(n's right child)
+
+    return foundExternalNodes
+```
