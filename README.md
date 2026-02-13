@@ -146,3 +146,15 @@ define leftExternalNodes( node 'n', boolean `isLeft` ) :
 
 result = leftExternalNodes( root node of tree, false )
 ```
+
+## Question 4
+> Consider a binary tree, where each node holds a single character. The nodes, in no particular order are \['A', 'E', 'F', 'M', 'N', 'U', 'X'\].
+
+> Draw a representation of this binary tree such that a <ins>preorder</ins> traversal of the tree gives the result: "EXAMFUN".
+<img width="1524" height="1023" alt="preorder" src="https://github.com/user-attachments/assets/f39adda0-7f65-4e3c-9ae4-dbabe35d396a" />
+
+> Draw a representation of this binary tree such that an <ins>inorder</ins> traversal of the tree gives the result: "EXAMFUN".
+<img width="1524" height="1023" alt="inorder" src="https://github.com/user-attachments/assets/c3a83764-c85e-46bf-898f-c5436d6a0f72" />
+
+> Draw a representation of this binary tree such that an postorder traversal of the tree gives the result: "EXAMFUN".
+<img width="1524" height="1023" alt="postorder" src="https://github.com/user-attachments/assets/7614c233-bd2e-4920-95e2-5f42f03fd3a2" />
