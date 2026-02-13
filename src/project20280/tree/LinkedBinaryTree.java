@@ -354,7 +354,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * @return number of external nodes in binary tree
      */
     public int externalNodeCount() {
-    	if (this.root == null)
+    	if (this.root == null) return 0;
     	return externalNodeCountHelper((Position<E>)this.root);
     }
 
