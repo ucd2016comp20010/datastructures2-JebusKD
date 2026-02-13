@@ -84,3 +84,16 @@ while (!remainders.isEmpty()) {
   binaryString = binaryString.concat(remainders.pop().intToHex());
 }
 ```
+# Wk. 4, Binary Trees
+
+## Question 1
+
+### Subquestion (g)
+
+> What happens if you change positions() to call preorder()?
+
+`positions()` by default obtains its values from `inorder()`. Inorder traversal begins with the 'left-most' side of the tree and traverses rightwards until the end of the end of the tree is reached. It can be described recursively for any beginning node as follows;
+```
+inorder(node) := [ (inorder(node's left child), node, inorder(node's right child) ]
+```
+As this will be the iterable collection passed to `toString()`, `toString()` will return a string following this order. Meanwhile, changing `inorder()` for `postorder()` yields a very diffent organisation of members. `postorder()` starts at the root node, and recursively executes `postorder()`
