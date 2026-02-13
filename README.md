@@ -96,4 +96,14 @@ while (!remainders.isEmpty()) {
 ```
 inorder(node) := [ (inorder(node's left child), node, inorder(node's right child) ]
 ```
-As this will be the iterable collection passed to `toString()`, `toString()` will return a string following this order. Meanwhile, changing `inorder()` for `postorder()` yields a very diffent organisation of members. `postorder()` starts at the root node, and recursively executes `postorder()`
+As this will be the iterable collection passed to `toString()`, `toString()` will return a string following this order.
+
+Meanwhile, changing `inorder()` for `preorder()` yields a very diffent organisation of members. `preorder()` starts at the root node instead of the left child, and recursively executes `preorder()` on the left child followed by the right child, giving an array of values as such;
+```
+preorder(node) = [ node, preorder(node's left child), preorder(node's right child) ]
+```
+And this structure would be given to `toString()`, yielding the structure.
+
+As an example, take a binary tree with 7 elements, numbered 1 through 7. Element 1 is the root node, with children 2 and 3, 2 has children 4 and 5, and 3 has children 6 and 7. Calling `toString()` as it stands using `inorder()` will give `[4, 2, 5, 1, 6, 3, 7]`, corresponding to this left-to-right traversal, while modifying it to use `preorder()` will instead give us `[1, 2, 4, 5, 3, 6, 7]`.
+
+###
