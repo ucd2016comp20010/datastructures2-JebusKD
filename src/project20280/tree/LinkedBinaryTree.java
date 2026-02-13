@@ -348,8 +348,6 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     	if (left(p) != null) val = nodeHeight(p.getLeft());
     	if (right(p) != null) val = 1 + Math.max(val, nodeHeight(p.getRight()));
     	
-    	System.out.println(p.getElement() + " : height " + val);
-    	
     	return val;
     }
     
