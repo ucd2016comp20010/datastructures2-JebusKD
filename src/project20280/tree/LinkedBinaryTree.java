@@ -337,7 +337,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     	}
     	
     	curMax = Math.max(curMax, thisDiam);
-    	return thisDiam;
+    	return curMax;
     }
     
     private int nodeHeight(Node<E> p) {
