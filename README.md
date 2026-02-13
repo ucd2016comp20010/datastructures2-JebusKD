@@ -124,6 +124,8 @@ define externalNodes( node 'n' ) :
 
     return foundExternalNodes
 ```
+Implemented as `externalNodeCount()` in `LinkedBinaryTree.java` and `externalNodeCountHelper()` in `AbstractBinaryTree.java`
+
 ## Question 3
 
 > Describe, with a figure or pseudocode, an algorithm which counts only the left external nodes in a binary tree. Your algorithm should use only the methods of the Binary Tree ADT.
