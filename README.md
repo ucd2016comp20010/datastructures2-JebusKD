@@ -158,3 +158,17 @@ result = leftExternalNodes( root node of tree, false )
 
 > Draw a representation of this binary tree such that an postorder traversal of the tree gives the result: "EXAMFUN".
 <img width="1524" height="1023" alt="postorder" src="https://github.com/user-attachments/assets/7614c233-bd2e-4920-95e2-5f42f03fd3a2" />
+
+## Question 5
+> Write the pseudocode for an algorithm which counts the total number of descendants of a node in a binary tree.
+```
+define descendants( node 'n' ) :
+  if n is external :
+    return 0
+
+  let descendantCount = 0
+  if n has left child :
+    descendantCount += descendants( n's left child ) + 1
+  if n has right child :
+    descendantCount += descendants( n's right child ) + 1
+```
