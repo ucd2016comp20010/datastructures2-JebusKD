@@ -222,8 +222,10 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * @throws IllegalArgumentException if p is not a valid Position for this tree.
      */
     public E set(Position<E> p, E e) throws IllegalArgumentException {
-        // TODO
-        return null;
+        Node<E> target = ((Node<E>)p);
+        E element = target.getElement();
+        target.setElement(e);
+        return element;
     }
 
     /**
