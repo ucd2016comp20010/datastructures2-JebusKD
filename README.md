@@ -124,3 +124,25 @@ define externalNodes( node 'n' ) :
 
     return foundExternalNodes
 ```
+## Question 3
+
+> Describe, with a figure or pseudocode, an algorithm which counts only the left external nodes in a binary tree. Your algorithm should use only the methods of the Binary Tree ADT.
+```
+define leftExternalNodes( node 'n', boolean `isLeft` ) :
+  if n is external :
+    if isLeft :
+      return 1
+    else :
+      return 0
+
+  else :
+    let foundExternalNodes = 0
+    if n has a left child :
+      foundExternalNodes += externalNodes(n's left child, true)
+    if n has a right child :
+      foundExternalNodes += externalNodes(n's right child, false)
+
+    return foundExternalNodes
+
+result = leftExternalNodes( root node of tree, false )
+```
