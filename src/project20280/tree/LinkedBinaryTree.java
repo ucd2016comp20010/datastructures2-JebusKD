@@ -162,7 +162,8 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         this.size = 1;
         return this.root;
     }
-
+    
+    /* Can be ignored.
     public void insert(E e) {
         // TODO
 
@@ -172,7 +173,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     private Node<E> addRecursive(Node<E> p, E e) {
         // TODO
         return null;
-    }
+    }*/
 
     /**
      * Creates a new left child of Position p storing element e and returns its
