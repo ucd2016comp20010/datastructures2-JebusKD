@@ -178,3 +178,26 @@ define descendants( node 'n' ) :
   if n has right child :
     descendantCount += descendants( n's right child ) + 1
 ```
+
+# Wk 5, Trees II
+
+## Question 5
+
+```
+define diameter( node 'n' ) :
+  if n is external :
+    return 0
+
+  let currentMaximum = 0
+  let diameterThroughThis = 0
+  if n has left child :
+    currentMaximum = max(currentMaximum, diameter( n's left child ))
+    diameterThroughThis = diamThroughThis + height( n's left child ) + 1
+  if n has right child :
+    currentMaximum = max(currentMaximum, diameter( n's right child))
+    diameterThroughThis = diamThroughThis + height( n's right child ) + 1
+
+  return max(currentMaximum, diamThroughThis)
+
+result = diameter( root node of tree )
+```
