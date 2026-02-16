@@ -59,6 +59,29 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         String[] arr = { "A", "B", "C", "D", "E", null, "F", null, null, "G", "H", null, null, null, null };
         bt.createLevelOrder(arr);
         System.out.println(bt.toBinaryTreeString());
+        
+        
+        Integer[] inorder = {7, 6, 8, 4, 2, 5, 1, 13, 10, 9, 12, 15, 14, 16, 11, 3, 18, 20, 17, 19},
+        		preorder = {1, 2, 4, 6, 7, 8, 5, 3, 9, 10, 13, 11, 12, 14, 15, 16, 17, 18, 20, 19};
+        /*
+       Integer[] inorder = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+    		   18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30},
+    		   	preorder = {18, 2, 1, 14, 13, 12, 4, 3, 9, 6, 5, 8, 7, 10, 11, 15, 16,
+    		   			17, 28, 23, 19, 22, 20, 21, 24, 27, 26, 25, 29, 30};
+       	*/
+        /*
+        Integer[] inorder = {4, 2, 5, 1, 6, 3, 7};
+        Integer[] preorder = {1, 2, 4, 5, 3, 6, 7};
+        */
+        /*
+        Integer[] inorder = {2, 1, 4, 3},
+        			preorder = {1, 2, 3, 4};
+        */
+       LinkedBinaryTree<Integer> bt2 = new LinkedBinaryTree<>();
+       bt2.construct(inorder, preorder);
+       System.out.println(bt2.toBinaryTreeString());
+
+      
     }
 
 
@@ -242,6 +265,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     public void attach(Position<E> p, LinkedBinaryTree<E> t1, LinkedBinaryTree<E> t2) throws IllegalArgumentException {
     	if (!isExternal(p)) throw new IllegalArgumentException("Node is not a leaf.");
+    	if (null == t1 && null == t2) return;
     	if (this == t1 || t1 == t2 || t2 == this) throw new IllegalArgumentException("Trees not independent");
     	
     	Node<E> leaf = ((Node<E>)p);
@@ -389,7 +413,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     		rightInorder = Arrays.copyOfRange(inorder, i_s+1, len);
     		
     		if (i_s == 0) {
-    			leftPreorder = Arrays.copyOf(leftInorder, 0);
+    			leftPreorder = Arrays.copyOf(preorder, 0);
     			rightPreorder = Arrays.copyOfRange(preorder, 1, len);
     		}
     		else {
@@ -420,11 +444,13 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     
     private LinkedBinaryTree<E> construct_helper(E[] inorder_representation, E[] preorder_representation) {
     	
+    	System.out.println("construct_helper call:\n\tinorder: " + Arrays.toString(inorder_representation) + "\n\tpreorder: " + Arrays.toString(preorder_representation));
+    	
     	if (inorder_representation.length != preorder_representation.length) throw new IllegalArgumentException("inorder and preorder must be of same length");
     	if (inorder_representation.length == 0) return null;
     	
     	LinkedBinaryTree<E> newTree = new LinkedBinaryTree<E>();
-    	newTree.root = newTree.createNode(inorder_representation[0], null, null, null);
+    	newTree.root = newTree.createNode(preorder_representation[0], null, null, null);
     	
     	TraversalHolder<E> t = new TraversalHolder<E>(inorder_representation, preorder_representation);
     	
@@ -443,7 +469,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     	
     	TraversalHolder<E> t = new TraversalHolder<E>(inorder_representation, preorder_representation);
     	
-    	
+    	System.out.println("Passing to right - " + Arrays.toString(t.getRightInorder()) + " : " + Arrays.toString(t.getRightPreorder()));
     	this.attach(root(), construct_helper(t.getLeftInorder(), t.getLeftPreorder()), construct_helper(t.getRightInorder(), t.getRightPreorder()));
     }
     
