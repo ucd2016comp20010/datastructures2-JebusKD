@@ -244,14 +244,22 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     	if (this == t1 || t1 == t2 || t2 == this) throw new IllegalArgumentException("Trees not independent");
     	
     	Node<E> leaf = ((Node<E>)p);
+    	int treesSize = 0;
     	
-    	this.size += t1.size() + t2.size();    	
-    	
-    	leaf.setLeft(t1.root);
-    	leaf.setRight(t2.root);
-    	
-    	t1.root = null;
-    	t2.root = null;
+    	if (t1 != null) {
+    		treesSize += t1.size();
+    		leaf.setLeft(t1.root);
+    		t1.root = null;
+    		t1.size = 0;
+    	}
+    	if (t2 != null) {
+    		treesSize += t2.size();
+    		leaf.setRight(t2.root);
+    		t2.root = null;
+    		t2.size = 0;
+    	}
+    		
+    	this.size += treesSize;	
     }
 
     /**
@@ -378,7 +386,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     	this.size = 1;
     	
     	
-    	this.attach(construct_helper(), construct_helper());
+    	this.attach(root, construct_helper(), construct_helper());
     }
     
     /**
