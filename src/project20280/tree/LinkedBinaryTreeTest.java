@@ -2,9 +2,14 @@ package project20280.tree;
 
 import org.junit.jupiter.api.Test;
 import project20280.interfaces.Position;
+import project20280.tree.LinkedBinaryTree.TraversalHolder;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Arrays;
+
+import org.junit.Ignore;
 import org.junit.jupiter.api.Nested;
 
 class LinkedBinaryTreeTest {
@@ -199,5 +204,94 @@ class LinkedBinaryTreeTest {
         
         assertEquals(5, bt.height());
         assertEquals(32, bt.getHeightRecursiveCalls());
+    }
+    
+    //@Ignore
+    @Nested
+    class testTraversalHolder {
+    	
+    	@Test
+    	void testTraversalHolder1() {
+    		TraversalHolder<Integer> t = new TraversalHolder<Integer>(
+    				new Integer[]{1},
+    				new Integer[]{1}
+    				);
+    		
+    		assertEquals(Arrays.toString(t.getLeftInorder()), Arrays.toString(new Integer[0]));
+    		assertEquals(Arrays.toString(t.getLeftPreorder()), Arrays.toString(new Integer[0]));
+    		assertEquals(Arrays.toString(t.getRightInorder()), Arrays.toString(new Integer[0]));
+    		assertEquals(Arrays.toString(t.getRightPreorder()), Arrays.toString(new Integer[0]));
+    		
+    	}
+    	
+    	@Test
+    	void testTraversalHolder2() {
+    		TraversalHolder<Integer> t = new TraversalHolder<Integer>(
+    				new Integer[]{1, 2},
+    				new Integer[]{1, 2}
+    				);
+    		
+    		assertEquals(Arrays.toString(t.getLeftInorder()), Arrays.toString(new Integer[0]));
+    		assertEquals(Arrays.toString(t.getLeftPreorder()), Arrays.toString(new Integer[0]));
+    		assertEquals(Arrays.toString(t.getRightInorder()), Arrays.toString(new Integer[] {2}));
+    		assertEquals(Arrays.toString(t.getRightPreorder()), Arrays.toString(new Integer[] {2}));
+    		
+    	}
+    	
+    	@Test
+    	void testTraversalHolder3() {
+    		TraversalHolder<Integer> t = new TraversalHolder<Integer>(
+    				new Integer[]{1, 2, 3},
+    				new Integer[]{1, 2, 3}
+    				);
+    		
+    		assertEquals(Arrays.toString(t.getLeftInorder()), Arrays.toString(new Integer[0]));
+    		assertEquals(Arrays.toString(t.getLeftPreorder()), Arrays.toString(new Integer[0]));
+    		assertEquals(Arrays.toString(t.getRightInorder()), Arrays.toString(new Integer[] {2, 3}));
+    		assertEquals(Arrays.toString(t.getRightPreorder()), Arrays.toString(new Integer[] {2, 3}));
+    		
+    	}
+    	
+    	@Test
+    	void testTraversalHolder4() {
+    		TraversalHolder<Integer> t = new TraversalHolder<Integer>(
+    				new Integer[]{4, 1, 2, 3},
+    				new Integer[]{1, 4, 2, 3}
+    				);
+    		
+    		assertEquals(Arrays.toString(t.getLeftInorder()), Arrays.toString(new Integer[] {4}));
+    		assertEquals(Arrays.toString(t.getLeftPreorder()), Arrays.toString(new Integer[] {4}));
+    		assertEquals(Arrays.toString(t.getRightInorder()), Arrays.toString(new Integer[] {2, 3}));
+    		assertEquals(Arrays.toString(t.getRightPreorder()), Arrays.toString(new Integer[] {2, 3}));
+    		
+    	}
+    	
+    	@Test
+    	void testTraversalHolder5() {
+    		TraversalHolder<Integer> t = new TraversalHolder<Integer>(
+    				new Integer[]{4, 1, 2, 5, 3, 6},
+    				new Integer[]{1, 4, 2, 3, 5, 6}
+    				);
+    		
+    		assertEquals(Arrays.toString(t.getLeftInorder()), Arrays.toString(new Integer[] {4}));
+    		assertEquals(Arrays.toString(t.getLeftPreorder()), Arrays.toString(new Integer[] {4}));
+    		assertEquals(Arrays.toString(t.getRightInorder()), Arrays.toString(new Integer[] {2, 5, 3, 6}));
+    		assertEquals(Arrays.toString(t.getRightPreorder()), Arrays.toString(new Integer[] {2, 3, 5, 6}));
+    		
+    	}
+    	
+    	@Test
+    	void testTraversalHolder6() {
+    		TraversalHolder<Integer> t = new TraversalHolder<Integer>(
+    				new Integer[]{7, 6, 8, 4, 2, 5},
+    				new Integer[]{2, 4, 6, 7, 8, 5}
+    				);
+    		
+    		assertEquals(Arrays.toString(t.getLeftInorder()), Arrays.toString(new Integer[] {7, 6, 8, 4}));
+    		assertEquals(Arrays.toString(t.getLeftPreorder()), Arrays.toString(new Integer[] {4, 6, 7, 8}));
+    		assertEquals(Arrays.toString(t.getRightInorder()), Arrays.toString(new Integer[] {5}));
+    		assertEquals(Arrays.toString(t.getRightPreorder()), Arrays.toString(new Integer[] {5}));
+    		
+    	}
     }
 }

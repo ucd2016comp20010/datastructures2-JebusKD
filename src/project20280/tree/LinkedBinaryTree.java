@@ -393,7 +393,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     	return diameterHelper(this.root);
     }
     
-    private static class TraversalHolder<T> {
+    /*private*/static class TraversalHolder<T> {
     	
     	private final T[] leftInorder;
     	private final T[] rightInorder;
