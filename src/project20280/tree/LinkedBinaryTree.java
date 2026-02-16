@@ -245,6 +245,8 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     	
     	Node<E> leaf = ((Node<E>)p);
     	
+    	this.size += t1.size() + t2.size();    	
+    	
     	leaf.setLeft(t1.root);
     	leaf.setRight(t2.root);
     	
@@ -356,6 +358,27 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 	may or may not pass through the root. */
     public int diameter() {
     	return diameterHelper(this.root);
+    }
+    
+    private static LinkedBinaryTree<E> construct_helper(E[] inorder_representation, E[] preorder_representation) {
+    	
+    	
+    	
+    }
+    
+    
+    
+    /* Construct a binary tree of UNIQUE elements given
+     	the inorder and preorder representation of the tree
+     */
+    public void construct(E[] inorder_representation, E[] preorder_representation) {
+    	if (inorder_representation.length != preorder_representation.length) throw new IllegalArgumentException("inorder and preorder must be of same length");
+    	
+    	this.root = createNode(preorder_representation[0], null, null, null);
+    	this.size = 1;
+    	
+    	
+    	this.attach(construct_helper(), construct_helper());
     }
     
     /**
