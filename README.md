@@ -183,6 +183,8 @@ define descendants( node 'n' ) :
 
 ## Question 5
 
+> Write the pseudocode for an algorithm which finds the diameter of a binary tree.
+
 ```
 define diameter( node 'n' ) :
   if n is external :
