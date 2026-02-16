@@ -5,6 +5,8 @@ import project20280.interfaces.Position;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Nested;
+
 class LinkedBinaryTreeTest {
 
     @Test
@@ -109,5 +111,93 @@ class LinkedBinaryTreeTest {
 
         assertEquals(3, bt.height());
     }
-
+    
+    @Nested
+    class testDiameter {
+	    @Test
+	    void testDiameter1() {
+	    	
+	    	LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+	
+	        Integer[] arr = new Integer[]{1,
+	        							   2, 3,
+	        							   4, 5, null, null
+	        							   };
+	        bt.createLevelOrder(arr);
+	
+	        assertEquals(3, bt.diameter());
+	    }
+	      
+	    @Test
+	    void testDiameter2() {
+	        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+	        
+	        Integer[] arr = new Integer[] {1,
+	        								2, 3,
+	        								4, 5, 6, 7,
+	        								8, 9, 10, 11, 12, 13, 14, 15,
+	        								16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+	        								null, null, null, 35
+	        								};
+	        
+	        bt.createLevelOrder(arr);
+	        
+	        assertEquals(9, bt.diameter());
+	    }
+	    
+	    @Test
+	    void testDiameter3() {
+	        
+	        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+	        
+	        Integer[] arr = new Integer[]{1,
+					   					   2, null,
+					   					   4, 5, null, null,
+					   					   8, 9, null, null, null, null, null, null
+					   };
+	        bt.createLevelOrder(arr);
+	
+	        assertEquals(3, bt.diameter());
+	        
+	    }
+	    
+	    @Test
+	    void testDiameter4() {
+	        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+	
+	        Integer[] arr = new Integer[]{1};
+	        bt.createLevelOrder(arr);
+	
+	        assertEquals(0, bt.diameter());
+	    }
+	    
+	    @Test
+	    void testDiameter5() {
+	        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+	
+	        Integer[] arr = new Integer[]{1,
+	        							   2, 3};
+	        bt.createLevelOrder(arr);
+	
+	        assertEquals(2, bt.diameter());
+	    }
+    }
+    
+    @Test
+    void testHeightRecursive() {
+    	LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+        
+        Integer[] arr = new Integer[] {1,
+        								2, 3,
+        								4, 5, 6, 7,
+        								8, 9, 10, 11, 12, 13, 14, 15,
+        								16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+        								null, null, null, 35
+        								};
+        
+        bt.createLevelOrder(arr);
+        
+        assertEquals(5, bt.height());
+        assertEquals(32, bt.getHeightRecursiveCalls());
+    }
 }

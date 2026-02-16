@@ -24,8 +24,12 @@ public abstract class AbstractBinaryTree<E> extends AbstractTree<E>
      */
     @Override
     public Position<E> sibling(Position<E> p) {
-        // TODO
-        return null;
+        if (isRoot(p)) return null;
+        else {
+        	Position<E> par = parent(p);
+        	if (left(par) == p) return right(par);
+        	else return left(par);
+        }
     }
 
     /**
@@ -37,8 +41,10 @@ public abstract class AbstractBinaryTree<E> extends AbstractTree<E>
      */
     @Override
     public int numChildren(Position<E> p) {
-        // TODO
-        return 0;
+        int count = 0;
+        if (left(p) != null) count++;
+        if (right(p) != null) count++;
+        return count;
     }
 
     /**
@@ -66,7 +72,9 @@ public abstract class AbstractBinaryTree<E> extends AbstractTree<E>
      * @param snapshot a list to which results are appended
      */
     private void inorderSubtree(Position<E> p, List<Position<E>> snapshot) {
-        // TODO
+    	if (left(p) != null) inorderSubtree(left(p), snapshot);
+        snapshot.addLast(p);
+        if (right(p) != null) inorderSubtree(right(p), snapshot);
     }
 
     /**
@@ -89,6 +97,16 @@ public abstract class AbstractBinaryTree<E> extends AbstractTree<E>
     @Override
     public Iterable<Position<E>> positions() {
         return inorder();
+    }
+    
+    protected int externalNodeCountHelper(Position<E> n) {
+    	if (isExternal(n)) return 1;
+    	
+    	int foundExternalNodes = 0;
+    	if (left(n) != null) foundExternalNodes += externalNodeCountHelper(left(n));
+    	if (right(n) != null) foundExternalNodes += externalNodeCountHelper(right(n));
+    	
+    	return foundExternalNodes;
     }
 }
 

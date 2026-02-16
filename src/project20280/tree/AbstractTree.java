@@ -2,10 +2,11 @@ package project20280.tree;
 
 import project20280.interfaces.Position;
 import project20280.interfaces.Tree;
+import project20280.list.CircularlyLinkedList;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 
 /**
@@ -27,8 +28,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
      */
     @Override
     public boolean isInternal(Position<E> p) {
-        // TODO
-        return false;
+    	return numChildren(p) != 0;
     }
 
     /**
@@ -40,8 +40,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
      */
     @Override
     public boolean isExternal(Position<E> p) {
-        // TODO
-        return false;
+        return numChildren(p) == 0;
     }
 
     /**
@@ -52,8 +51,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
      */
     @Override
     public boolean isRoot(Position<E> p) {
-        // TODO
-        return false;
+        return parent(p) == null;
     }
 
     /**
@@ -65,8 +63,11 @@ public abstract class AbstractTree<E> implements Tree<E> {
      */
     @Override
     public int numChildren(Position<E> p) {
-        // TODO
-        return 0;
+    	int count = 0;
+    	for (Position<E> c : children(p)) {
+    		count++;
+    	}
+        return count;
     }
 
     /**
@@ -100,9 +101,9 @@ public abstract class AbstractTree<E> implements Tree<E> {
      * @throws IllegalArgumentException if p is not a valid Position for this tree.
      */
     public int depth(Position<E> p) throws IllegalArgumentException {
-        // TODO
-        return 0;
-    }
+        if (this.isRoot(p)) return 0;
+        else return 1 + this.depth(parent(p));
+     }
 
     /**
      * Returns the height of the tree.
@@ -116,10 +117,16 @@ public abstract class AbstractTree<E> implements Tree<E> {
                 h = Math.max(h, depth(p));
         return h;
     }
+    
+    private int heightRecursiveCalls;
 
     public int height_recursive(Position<E> p) {
-        // TODO
-        return 0;
+    	heightRecursiveCalls++;
+    	int h = 0;
+    	for (Position<E> c : children(p)) {
+    		h = Math.max(h, 1 + height_recursive(c));
+    	}
+    	return h;
     }
 
     /**
@@ -129,9 +136,15 @@ public abstract class AbstractTree<E> implements Tree<E> {
      * @throws IllegalArgumentException if p is not a valid Position for this tree.
      */
     public int height() throws IllegalArgumentException {
-        return height_recursive(root());
+        heightRecursiveCalls = 0;
+    	return height_recursive(root());
     }
-
+    
+    public int getHeightRecursiveCalls() {
+    	this.height(); // calls height to refresh current recursive calls count
+    	return this.heightRecursiveCalls;
+    }
+    
     //---------- support for various iterations of a tree ----------
 
     //---------------- nested ElementIterator class ----------------
@@ -180,7 +193,10 @@ public abstract class AbstractTree<E> implements Tree<E> {
      * @param snapshot a list to which results are appended
      */
     private void preorderSubtree(Position<E> p, List<Position<E>> snapshot) {
-        // TODO
+    	snapshot.addLast(p);
+    	for (Position<E> c : children(p)) {
+    		preorderSubtree(c, snapshot);
+    	}
     }
 
     /**
@@ -189,8 +205,11 @@ public abstract class AbstractTree<E> implements Tree<E> {
      * @return iterable collection of the tree's positions in preorder
      */
     public Iterable<Position<E>> preorder() {
-        // TODO
-        return null;
+    	List<Position<E>> collection = new ArrayList<Position<E>>();
+        if (!isEmpty()) preorderSubtree(this.root(), collection);
+        
+        return collection;
+        	
     }
 
     /**
@@ -201,7 +220,10 @@ public abstract class AbstractTree<E> implements Tree<E> {
      * @param snapshot a list to which results are appended
      */
     private void postorderSubtree(Position<E> p, List<Position<E>> snapshot) {
-        // TODO
+    	for (Position<E> c : children(p)) {
+    		postorderSubtree(c, snapshot);
+    	}
+    	snapshot.addLast(p);
     }
 
     /**

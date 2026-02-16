@@ -84,3 +84,97 @@ while (!remainders.isEmpty()) {
   binaryString = binaryString.concat(remainders.pop().intToHex());
 }
 ```
+# Wk. 4, Binary Trees
+
+## Question 1
+
+### Subquestion (g)
+
+> What happens if you change positions() to call preorder()?
+
+`positions()` by default obtains its values from `inorder()`. Inorder traversal begins with the 'left-most' side of the tree and traverses rightwards until the end of the end of the tree is reached. It can be described recursively for any beginning node as follows;
+```
+inorder(node) := [ (inorder(node's left child), node, inorder(node's right child) ]
+```
+As this will be the iterable collection passed to `toString()`, `toString()` will return a string following this order.
+
+Meanwhile, changing `inorder()` for `preorder()` yields a very diffent organisation of members. `preorder()` starts at the root node instead of the left child, and recursively executes `preorder()` on the left child followed by the right child, giving an array of values as such;
+```
+preorder(node) = [ node, preorder(node's left child), preorder(node's right child) ]
+```
+And this structure would be given to `toString()`, yielding the structure.
+
+As an example, take a binary tree with 7 elements, numbered 1 through 7. Element 1 is the root node, with children 2 and 3, 2 has children 4 and 5, and 3 has children 6 and 7. Calling `toString()` as it stands using `inorder()` will give `[4, 2, 5, 1, 6, 3, 7]`, corresponding to this left-to-right traversal, while modifying it to use `preorder()` will instead give us `[1, 2, 4, 5, 3, 6, 7]`.
+
+### Subquestion (h)
+
+The tree's height is 5. As a recursive function that traverses the entire tree from top to bottom, visiting each child once, you'd expect 32 function calls due to the 32 non-null entries in the input array. The code of `height()` and `height_recursive()` were modified and now keep track of `heightRecursiveCalls`. Running this test case, we can verify this is true.
+
+## Question 2
+>Write a recursive function (pseudo-code) to count the number of external nodes in a binary tree. Your solution should only use the methods in the Binary Tree ADT. Sketch out the algorithm in pseudocode first, and then in Java after you write the LinkedBinaryTree.
+
+Sketch in psuedocode:
+```
+define externalNodes( node 'n' ) :
+  if n is external :
+    return 1
+
+  else :
+    let foundExternalNodes = 0
+    if n has a left child :
+      foundExternalNodes += externalNodes(n's left child)
+    if n has a right child :
+      foundExternalNodes += externalNodes(n's right child)
+
+    return foundExternalNodes
+```
+Implemented as `externalNodeCount()` in `LinkedBinaryTree.java` and `externalNodeCountHelper()` in `AbstractBinaryTree.java`
+
+## Question 3
+
+> Describe, with a figure or pseudocode, an algorithm which counts only the left external nodes in a binary tree. Your algorithm should use only the methods of the Binary Tree ADT.
+```
+define leftExternalNodes( node 'n', boolean `isLeft` ) :
+  if n is external :
+    if isLeft :
+      return 1
+    else :
+      return 0
+
+  else :
+    let foundExternalNodes = 0
+    if n has a left child :
+      foundExternalNodes += externalNodes(n's left child, true)
+    if n has a right child :
+      foundExternalNodes += externalNodes(n's right child, false)
+
+    return foundExternalNodes
+
+result = leftExternalNodes( root node of tree, false )
+```
+
+## Question 4
+> Consider a binary tree, where each node holds a single character. The nodes, in no particular order are \['A', 'E', 'F', 'M', 'N', 'U', 'X'\].
+
+> Draw a representation of this binary tree such that a <ins>preorder</ins> traversal of the tree gives the result: "EXAMFUN".
+<img width="1524" height="1023" alt="preorder" src="https://github.com/user-attachments/assets/f39adda0-7f65-4e3c-9ae4-dbabe35d396a" />
+
+> Draw a representation of this binary tree such that an <ins>inorder</ins> traversal of the tree gives the result: "EXAMFUN".
+<img width="1524" height="1023" alt="inorder" src="https://github.com/user-attachments/assets/c3a83764-c85e-46bf-898f-c5436d6a0f72" />
+
+> Draw a representation of this binary tree such that an postorder traversal of the tree gives the result: "EXAMFUN".
+<img width="1524" height="1023" alt="postorder" src="https://github.com/user-attachments/assets/7614c233-bd2e-4920-95e2-5f42f03fd3a2" />
+
+## Question 5
+> Write the pseudocode for an algorithm which counts the total number of descendants of a node in a binary tree.
+```
+define descendants( node 'n' ) :
+  if n is external :
+    return 0
+
+  let descendantCount = 0
+  if n has left child :
+    descendantCount += descendants( n's left child ) + 1
+  if n has right child :
+    descendantCount += descendants( n's right child ) + 1
+```
