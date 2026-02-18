@@ -393,85 +393,22 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     	return diameterHelper(this.root);
     }
     
-    /*private*/static class TraversalHolder<T> {
+    private LinkedBinaryTree<E> construct_helper(E[] inorder, E[] preorder) {
     	
-    	private final T[] leftInorder;
-    	private final T[] rightInorder;
-    	private final T[] leftPreorder;
-    	private final T[] rightPreorder;
     	
-    	public TraversalHolder(T[] inorder, T[] preorder) {
-    		
-    		int len = inorder.length;
-    		if (len != preorder.length) throw new IllegalArgumentException("inorder and preorder must be of same length");
-    		
-    		T rootElement = preorder[0];
-    		
-    		int i_s;
-    		for (i_s = 0; !(inorder[i_s].equals(rootElement)); i_s++);
-    		leftInorder = Arrays.copyOfRange(inorder, 0, i_s);
-    		rightInorder = Arrays.copyOfRange(inorder, i_s+1, len);
-    		
-    		if (i_s == 0) {
-    			leftPreorder = Arrays.copyOf(preorder, 0);
-    			rightPreorder = Arrays.copyOfRange(preorder, 1, len);
-    		}
-    		else {
-    			T final_left_i = inorder[i_s-1];
-    			System.out.println("final_left_i = " + final_left_i);
-    			int p_s;
-    			
-    			for (p_s = 1; !(preorder[p_s].equals(final_left_i)); p_s++);
-    			p_s++;
-    			
-    			leftPreorder = Arrays.copyOfRange(preorder, 1, p_s);
-    			rightPreorder = Arrays.copyOfRange(preorder, p_s, len);
-    		}
-    	}
-    	
-    	public T[] getLeftInorder() {
-    		return this.leftInorder;
-    	}
-    	public T[] getRightInorder() {
-    		return this.rightInorder;
-    	}
-    	public T[] getLeftPreorder() {
-    		return this.leftPreorder;
-    	}
-    	public T[] getRightPreorder() {
-    		return this.rightPreorder;
-    	}
-    }
-    
-    private LinkedBinaryTree<E> construct_helper(E[] inorder_representation, E[] preorder_representation) {
-    	
-    	System.out.println("construct_helper call:\n\tinorder: " + Arrays.toString(inorder_representation) + "\n\tpreorder: " + Arrays.toString(preorder_representation));
-    	
-    	if (inorder_representation.length != preorder_representation.length) throw new IllegalArgumentException("inorder and preorder must be of same length");
-    	if (inorder_representation.length == 0) return null;
-    	
-    	LinkedBinaryTree<E> newTree = new LinkedBinaryTree<E>();
-    	newTree.root = newTree.createNode(preorder_representation[0], null, null, null);
-    	
-    	TraversalHolder<E> t = new TraversalHolder<E>(inorder_representation, preorder_representation);
-    	
-    	newTree.attach(newTree.root(), construct_helper(t.getLeftInorder(), t.getLeftPreorder()), construct_helper(t.getRightInorder(), t.getRightPreorder()));
-    	return newTree;
     }
     
     /* Construct a binary tree of UNIQUE elements given
      	the inorder and preorder representation of the tree
      */
-    public void construct(E[] inorder_representation, E[] preorder_representation) {
-    	if (inorder_representation.length != preorder_representation.length) throw new IllegalArgumentException("inorder and preorder must be of same length");
+    public void construct(E[] inorder, E[] preorder) {
+    	if (inorder.length != preorder.length) throw new IllegalArgumentException("inorder and preorder must be of same length");
     	
-    	this.root = createNode(preorder_representation[0], null, null, null);
+    	this.root = createNode(preorder[0], null, null, null);
     	this.size = 1;
     	
-    	TraversalHolder<E> t = new TraversalHolder<E>(inorder_representation, preorder_representation);
+    	this.attach(root(), , );
     	
-    	System.out.println("Passing to right - " + Arrays.toString(t.getRightInorder()) + " : " + Arrays.toString(t.getRightPreorder()));
-    	this.attach(root(), construct_helper(t.getLeftInorder(), t.getLeftPreorder()), construct_helper(t.getRightInorder(), t.getRightPreorder()));
     }
     
     /**
