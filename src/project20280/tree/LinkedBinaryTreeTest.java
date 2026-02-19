@@ -2,7 +2,6 @@ package project20280.tree;
 
 import org.junit.jupiter.api.Test;
 import project20280.interfaces.Position;
-import project20280.tree.LinkedBinaryTree.TraversalHolder;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;

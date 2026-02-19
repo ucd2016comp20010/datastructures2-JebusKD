@@ -393,9 +393,26 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     	return diameterHelper(this.root);
     }
     
-    private LinkedBinaryTree<E> construct_helper(E[] inorder, E[] preorder) {
+    private static <T> int indexOf(T e, T[] arr) {
+    	int i;
+    	for (i = 0; arr[i] != e; i++);
+    	return i;
+    }
+    
+    private static <T> LinkedBinaryTree<T> construct_helper(T[] inorder, T[] preorder, int in_s, int in_e, int p_cur) {
     	
+    	if (in_s >= in_e) return null;
     	
+    	System.out.println("in_s = " + in_s + ", in_e = " + in_e + ", p_cur = " + p_cur);
+    	
+    	LinkedBinaryTree<T> bt = new LinkedBinaryTree<T>();
+    	T pivot = preorder[p_cur];
+    	bt.root = bt.createNode(preorder[p_cur], null, null, null);
+    	
+    	int i = indexOf(pivot, inorder);
+    	
+    	bt.attach(bt.root(), construct_helper(inorder, preorder, in_s, i, p_cur + 1), construct_helper(inorder, preorder, i + 1, in_e, p_cur + 1 + (i - in_s)));
+    	return bt;
     }
     
     /* Construct a binary tree of UNIQUE elements given
@@ -407,7 +424,9 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     	this.root = createNode(preorder[0], null, null, null);
     	this.size = 1;
     	
-    	this.attach(root(), , );
+    	int i = indexOf(preorder[0], inorder);
+    	
+    	this.attach(root, construct_helper(inorder, preorder, 0, i, 1), construct_helper(inorder, preorder, i + 1, inorder.length, i + 1));
     	
     }
     
