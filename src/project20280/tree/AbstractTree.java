@@ -4,6 +4,7 @@ import project20280.interfaces.Position;
 import project20280.interfaces.Tree;
 
 import java.util.List;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -244,8 +245,22 @@ public abstract class AbstractTree<E> implements Tree<E> {
      * @return iterable collection of the tree's positions in breadth-first order
      */
     public Iterable<Position<E>> breadthfirst() {
-        // TODO
-        return null;
+    	int size = this.size();
+        ArrayList<Position<E>> members = new ArrayList<Position<E>>(size);
+        ArrayDeque<Position<E>> queue = new ArrayDeque<Position<E>>(size);
+        
+        queue.add(root());
+        
+        Position<E> working;
+        while (queue.peek() != null) {
+        	working = queue.remove();
+        	members.addLast(working);
+        	for (Position<E> c : children(working)) {
+        		queue.add(c);
+        	}
+        }
+        
+        return members;
     }
     
     private LinkedList<LinkedList<Position<E>>> rootToLeafPathsHelper(final Position<E> p, final LinkedList<Position<E>> curPath) {
