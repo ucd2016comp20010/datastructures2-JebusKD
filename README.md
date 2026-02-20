@@ -203,3 +203,17 @@ define diameter( node 'n' ) :
 
 result = diameter( root node of tree )
 ```
+
+> Create random binary trees for size n = \[50, 5000\] in steps of 50. For each size n generate 100 different random binary trees of size n and compute their width. Again, plot the average diameter as a function of n and use a spreadsheet (or other method) to fit a trendline and explain how the width depends on the number of nodes n.
+<img width="1992" height="1120" alt="widthPlot" src="https://github.com/user-attachments/assets/bc722e20-dbf8-45af-baab-21e8aced4e4d" />
+
+It appears that there exists a logarithmic correlation between the number of nodes (N) and the height, following the trendline.
+
+## Question 6
+> Write a function which creates random binary trees for size n = \[50, 5000\] in steps of 50. For each size n, generate 100 different random binary trees of size n and compute the average of their height. Plot the average height as a function n. Use Google Sheets or Excel, and try fitting a trendline to check if the scaling is O(log n)
+
+<img width="1961" height="1103" alt="heightPlot" src="https://github.com/user-attachments/assets/68a524e7-e706-4598-ba21-9b49a21d0e56" />
+
+The plotted trendline follows a logarithmic path across the data - demonstrating the logarithmic scaling O(log n).
+
+The class used to calculate the values for both Question 5 and Question 6 is `LinkedBinaryTreeStatistics`, located in the `.exercises` package.
