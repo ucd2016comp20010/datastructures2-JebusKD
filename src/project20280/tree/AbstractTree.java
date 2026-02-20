@@ -2,11 +2,11 @@ package project20280.tree;
 
 import project20280.interfaces.Position;
 import project20280.interfaces.Tree;
-import project20280.list.CircularlyLinkedList;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 
 /**
@@ -246,5 +246,26 @@ public abstract class AbstractTree<E> implements Tree<E> {
     public Iterable<Position<E>> breadthfirst() {
         // TODO
         return null;
+    }
+    
+    private LinkedList<LinkedList<Position<E>>> rootToLeafPathsHelper(final Position<E> p, final LinkedList<Position<E>> curPath) {
+    	LinkedList<LinkedList<Position<E>>> returnList = new LinkedList<LinkedList<Position<E>>>();
+    	LinkedList<Position<E>> updatedCurPath = new LinkedList<Position<E>>(curPath);
+		updatedCurPath.addLast(p);
+    	if (isExternal(p)) {
+    		returnList.addLast(updatedCurPath);
+    	}
+    	else {
+	    	LinkedList<LinkedList<Position<E>>> childList;
+	    	for (Position<E> c : children(p)) {
+	    		childList = rootToLeafPathsHelper(c, updatedCurPath);
+	    		returnList.addAll(childList);
+	    	}
+    	}
+		return returnList;
+    }
+    
+    public LinkedList<LinkedList<Position<E>>> rootToLeafPaths() {
+    	return rootToLeafPathsHelper(root(), new LinkedList<Position<E>>());
     }
 }

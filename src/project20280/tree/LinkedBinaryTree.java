@@ -4,6 +4,8 @@ import project20280.interfaces.Position;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Concrete implementation of a binary tree using a node-based, linked
@@ -71,6 +73,13 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
        
        LinkedBinaryTree<Integer> btr = makeRandom(100);
        System.out.println(btr.toBinaryTreeString());
+       
+       LinkedBinaryTree<Integer> bt3 = new LinkedBinaryTree<>();
+       Integer[] inorder3 = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+       Integer[] preorder3 = {5, 1, 0, 4, 2, 3, 7, 6, 8};
+       bt3.construct(inorder3, preorder3);
+       
+       System.out.println(bt3.rootToLeafPaths().toString());
     }
 
 
