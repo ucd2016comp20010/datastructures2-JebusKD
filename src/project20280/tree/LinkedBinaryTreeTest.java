@@ -3,8 +3,12 @@ package project20280.tree;
 import org.junit.jupiter.api.Test;
 import project20280.interfaces.Position;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Arrays;
+
+import org.junit.Ignore;
 import org.junit.jupiter.api.Nested;
 
 class LinkedBinaryTreeTest {
@@ -200,4 +204,5 @@ class LinkedBinaryTreeTest {
         assertEquals(5, bt.height());
         assertEquals(32, bt.getHeightRecursiveCalls());
     }
+    
 }

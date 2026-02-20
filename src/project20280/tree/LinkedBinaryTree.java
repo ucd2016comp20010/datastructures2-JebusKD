@@ -3,6 +3,9 @@ package project20280.tree;
 import project20280.interfaces.Position;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Concrete implementation of a binary tree using a node-based, linked
@@ -58,6 +61,28 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         String[] arr = { "A", "B", "C", "D", "E", null, "F", null, null, "G", "H", null, null, null, null };
         bt.createLevelOrder(arr);
         System.out.println(bt.toBinaryTreeString());
+        System.out.println(bt.breadthfirst().toString());
+        
+        
+       Integer[] inorder = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+    		   18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30},
+    		   	preorder = {18, 2, 1, 14, 13, 12, 4, 3, 9, 6, 5, 8, 7, 10, 11, 15, 16,
+    		   			17, 28, 23, 19, 22, 20, 21, 24, 27, 26, 25, 29, 30};
+       	
+       LinkedBinaryTree<Integer> bt2 = new LinkedBinaryTree<>();
+       bt2.construct(inorder, preorder);
+       System.out.println(bt2.toBinaryTreeString());
+       System.out.println(bt2.breadthfirst().toString());
+       
+       LinkedBinaryTree<Integer> btr = makeRandom(100);
+       System.out.println(btr.toBinaryTreeString());
+       
+       LinkedBinaryTree<Integer> bt3 = new LinkedBinaryTree<>();
+       Integer[] inorder3 = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+       Integer[] preorder3 = {5, 1, 0, 4, 2, 3, 7, 6, 8};
+       bt3.construct(inorder3, preorder3);
+       
+       System.out.println(bt3.rootToLeafPaths().toString());
     }
 
 
@@ -241,15 +266,26 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     public void attach(Position<E> p, LinkedBinaryTree<E> t1, LinkedBinaryTree<E> t2) throws IllegalArgumentException {
     	if (!isExternal(p)) throw new IllegalArgumentException("Node is not a leaf.");
+    	if (null == t1 && null == t2) return;
     	if (this == t1 || t1 == t2 || t2 == this) throw new IllegalArgumentException("Trees not independent");
     	
     	Node<E> leaf = ((Node<E>)p);
+    	int treesSize = 0;
     	
-    	leaf.setLeft(t1.root);
-    	leaf.setRight(t2.root);
-    	
-    	t1.root = null;
-    	t2.root = null;
+    	if (t1 != null) {
+    		treesSize += t1.size();
+    		leaf.setLeft(t1.root);
+    		t1.root = null;
+    		t1.size = 0;
+    	}
+    	if (t2 != null) {
+    		treesSize += t2.size();
+    		leaf.setRight(t2.root);
+    		t2.root = null;
+    		t2.size = 0;
+    	}
+    		
+    	this.size += treesSize;	
     }
 
     /**
@@ -356,6 +392,41 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 	may or may not pass through the root. */
     public int diameter() {
     	return diameterHelper(this.root);
+    }
+    
+    private static <T> int indexOf(T e, T[] arr) {
+    	int i;
+    	for (i = 0; arr[i] != e; i++);
+    	return i;
+    }
+    
+    private static <T> LinkedBinaryTree<T> construct_helper(T[] inorder, T[] preorder, int in_s, int in_e, int p_cur) {
+    	
+    	if (in_s >= in_e) return null;
+
+    	LinkedBinaryTree<T> bt = new LinkedBinaryTree<T>();
+    	T pivot = preorder[p_cur];
+    	bt.root = bt.createNode(preorder[p_cur], null, null, null);
+    	
+    	int i = indexOf(pivot, inorder);
+    	
+    	bt.attach(bt.root(), construct_helper(inorder, preorder, in_s, i, p_cur + 1), construct_helper(inorder, preorder, i + 1, in_e, p_cur + 1 + (i - in_s)));
+    	return bt;
+    }
+    
+    /* Construct a binary tree of UNIQUE elements given
+     	the inorder and preorder representation of the tree
+     */
+    public void construct(E[] inorder, E[] preorder) {
+    	if (inorder.length != preorder.length) throw new IllegalArgumentException("inorder and preorder must be of same length");
+    	
+    	this.root = createNode(preorder[0], null, null, null);
+    	this.size = 1;
+    	
+    	int i = indexOf(preorder[0], inorder);
+    	
+    	this.attach(root, construct_helper(inorder, preorder, 0, i, 1), construct_helper(inorder, preorder, i + 1, inorder.length, i + 1));
+    	
     }
     
     /**
