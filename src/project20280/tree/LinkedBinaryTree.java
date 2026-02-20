@@ -400,9 +400,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     private static <T> LinkedBinaryTree<T> construct_helper(T[] inorder, T[] preorder, int in_s, int in_e, int p_cur) {
     	
     	if (in_s >= in_e) return null;
-    	
-    	System.out.println("in_s = " + in_s + ", in_e = " + in_e + ", p_cur = " + p_cur);
-    	
+
     	LinkedBinaryTree<T> bt = new LinkedBinaryTree<T>();
     	T pivot = preorder[p_cur];
     	bt.root = bt.createNode(preorder[p_cur], null, null, null);
