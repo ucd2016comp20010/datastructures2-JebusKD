@@ -45,7 +45,7 @@ public class FibonacciTimer {
 		System.out.println(String.format(topFormat, "n", "Memoisation ", "No Memoisation "));
 		System.out.println(bar);
 		
-		// n = 45 for 1+ minute time no memo (n = 44 ~ 45 seconds)
+		// n = 45 for 1 minute time no memo (n = 44 : 45 seconds)
 		/* With memoisation, causes a stack overflow error at around n = 17700,
 		 	taking ~4 ms.
 		 */
