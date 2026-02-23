@@ -32,8 +32,8 @@ public class FibonacciTimer {
 		return this.durationAverage;
 	}
 	
-	public static void main(String[] args) {
-		int iterations = 10;
+	public static void main_timetest() {
+		int iterations = 100;
 		
 		String topFormat = "%-5s|%16s|%16s";
 		String bar = "";
@@ -45,13 +45,33 @@ public class FibonacciTimer {
 		System.out.println(String.format(topFormat, "n", "Memoisation ", "No Memoisation "));
 		System.out.println(bar);
 		
+		// n = 45 for 1+ minute time no memo (n = 44 ~ 45 seconds)
+		/* With memoisation, causes a stack overflow error at around n = 17700,
+		 	taking ~4 ms.
+		 */
 		FibonacciTimer ftm;
 		FibonacciTimer ftn;
-		for (int i = 44; i < 47; i++) {
+		for (int i = 1; i < 2000000; i+=100) {
 			ftm = new FibonacciTimer(i, true, iterations);
-			ftn = new FibonacciTimer(i, false, iterations);
+			//ftn = new FibonacciTimer(i, false, iterations);
 			
-			System.out.println(String.format(standardFormat, i, ftm.getAvgDuration(), ftn.getAvgDuration()));
+			System.out.println(String.format(standardFormat, i, ftm.getAvgDuration(), null/*ftn.getAvgDuration()*/));
 		}
+	}
+	
+	public static void main_recursive_calls() {
+		int n = 45;
+		
+		// n = 45
+		// Memo : 88 recursive calls
+		// No memo : 3672623804 recursive calls
+		Fibonacci f = new Fibonacci(n, false);
+		System.out.println("Calls: " + f.getRecursiveCalls());
+	}
+	
+	public static void main(String[] args) {
+		main_recursive_calls();
+		
+		//main_timetest();
 	}
 }
