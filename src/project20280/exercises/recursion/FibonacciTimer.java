@@ -60,13 +60,14 @@ public class FibonacciTimer {
 	}
 	
 	public static void main_recursive_calls() {
-		int n = 45;
+		int n = 17700;
 		
 		// n = 45
 		// Memo : 88 recursive calls
 		// No memo : 3672623804 recursive calls
-		Fibonacci f = new Fibonacci(n, false);
+		Fibonacci f = new Fibonacci(n, true);
 		System.out.println("Calls: " + f.getRecursiveCalls());
+		System.out.println("Result: " + f.result());
 	}
 	
 	public static void main(String[] args) {
