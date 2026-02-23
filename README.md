@@ -211,9 +211,28 @@ It appears that there exists a logarithmic correlation between the number of nod
 
 ## Question 6
 > Write a function which creates random binary trees for size n = \[50, 5000\] in steps of 50. For each size n, generate 100 different random binary trees of size n and compute the average of their height. Plot the average height as a function n. Use Google Sheets or Excel, and try fitting a trendline to check if the scaling is O(log n)
-
 <img width="1961" height="1103" alt="heightPlot" src="https://github.com/user-attachments/assets/68a524e7-e706-4598-ba21-9b49a21d0e56" />
 
 The plotted trendline follows a logarithmic path across the data - demonstrating the logarithmic scaling O(log n).
 
 The class used to calculate the values for both Question 5 and Question 6 is `LinkedBinaryTreeStatistics`, located in the `.exercises` package.
+
+# Wk 6, Recursion
+
+## Question 1
+> Draw the recursion trace for ReverseArray(A, 0, len(A) − 1) where A={12, 5, 19, 6, 11, 3, 9, 34, 2, 1, 15};
+
+## Question 2
+> Using the binary recursive version of Fibonacci, write out the recursive trace of the function for the 5th fibonacci number: Fibonacci(5).
+
+> Implement this function in Java.
+See [project20280.exercises.recursion](/src/project20280/exercises/recursion)
+
+> What is the largest fibonacci number you can compute in under 1 minute?
+`n = 45`, `F(n) = 1134903170`
+
+> For this number, how many recursive calls are made?
+`3672623804` recursive calls.
+
+> If you use memoisation, what is the largest fibonacci number you can compute in under 1 minute?
+It's possible for my machine to compute up to around `n = 17700` before causing a `StackOverflowError`, taking about 4 milliseconds to compute.
