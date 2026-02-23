@@ -269,6 +269,15 @@ It appears to accept an integer `x` and will print out the binary string of `n` 
 ## Question 6
 > Write the psuedocode for a recursive function which prints the elements of a linked list in reverse.
 
+```
+let 'n' be a node in the linked list that has an element and a reference to the next node
+define reverse(node 'n') :
+  if n has a next node :
+    reverse(n's next node)
+  print(n's element)
+
+reverse(root node of binary tree)
+```
 ## Question 7
 > Write the pseudo-code for a fully recursive function which copies a linked list.
 
