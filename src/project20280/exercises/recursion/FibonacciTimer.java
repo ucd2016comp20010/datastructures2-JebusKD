@@ -33,6 +33,25 @@ public class FibonacciTimer {
 	}
 	
 	public static void main(String[] args) {
+		int iterations = 10;
 		
+		String topFormat = "%-5s|%16s|%16s";
+		String bar = "";
+		for (int i = 0; i < 39; i++) {
+			bar = bar.concat("-");
+		}
+		String standardFormat = "%-5s|%16.3f|%16.3f";
+		
+		System.out.println(String.format(topFormat, "n", "Memoisation ", "No Memoisation "));
+		System.out.println(bar);
+		
+		FibonacciTimer ftm;
+		FibonacciTimer ftn;
+		for (int i = 44; i < 47; i++) {
+			ftm = new FibonacciTimer(i, true, iterations);
+			ftn = new FibonacciTimer(i, false, iterations);
+			
+			System.out.println(String.format(standardFormat, i, ftm.getAvgDuration(), ftn.getAvgDuration()));
+		}
 	}
 }
