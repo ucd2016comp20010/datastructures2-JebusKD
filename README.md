@@ -242,6 +242,9 @@ See [project20280.exercises.recursion](/src/project20280/exercises/recursion)
 It's possible for my machine to compute up to around `n = 17700` before causing a `StackOverflowError`, taking about 4 milliseconds to compute.
 
 ## Question 3
+> What is the ninth term in the \[Tribonacci\] sequence?
+
+`T(9) = 44`
 > Draw the recursion trace for Tribonnaci(9).
 
 ## Question 4
