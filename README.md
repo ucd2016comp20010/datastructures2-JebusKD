@@ -254,6 +254,7 @@ See [project20280.exercises.recursion](/src/project20280/exercises/recursion/Tri
 ## Question 4
 > John McCarthy and others studied the 91 function in the 1970s. What kind of recursive function is this?
 
+This is an example of a nested recursion function, as a recursive call is a parameter inside another recursive call
 > Implement the process in Java.
 
 See [project20280.exercises.recursion](/src/project20280/exercises/recursion/Function91.java)
