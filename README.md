@@ -296,7 +296,7 @@ define copy( linked list 'll' ) :
 ## Question 8
 > Draw the recursive trace for `mystery(2,4,4)`.
 
-## Question 9
+## Question 10
 > What do you expect the complexity `T(n)` of the `inorder` method of the `LinkedBinaryTree` to be?
 
 > Do an experimental analysis, creating random binary trees from `10 ≤ n ≤ 10000`. Use the `Timer` from the lectures, or some method of your own, to measure the execution time `t` of your `inorder` method and plot the results of `t` against `n`, including a trendline (use Excel or Google Sheets). Does the trendline match your expectations?
