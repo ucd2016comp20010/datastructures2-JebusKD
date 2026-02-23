@@ -182,7 +182,21 @@ public class SinglyLinkedList<E extends Comparable<E>> implements List<E>, Itera
         return target.getElement();
     }
     
+    private Node<E> reverseHelper(Node<E> curr, Node<E> succ) {
+    	Node<E> n = succ.next;
+    	succ.next = curr;
+    	if (n == null)
+    		return succ;
+    	return reverseHelper(succ, n);
+    }
+    
     public void reverse() {
+    	/* New recursive definition (Week 6 Q6b) */
+    	if (this.head != null)
+    			this.head = reverseHelper(null, this.head);
+    	
+    	
+    	/* Old iterative definition
     	Node<E> curNode = this.head,
     			prevNode = null,
     			nextNode;
@@ -192,7 +206,7 @@ public class SinglyLinkedList<E extends Comparable<E>> implements List<E>, Itera
     		prevNode = curNode;
     		curNode = nextNode;
     	}
-    	this.head = prevNode;
+    	this.head = prevNode; */
     }
     
     public SinglyLinkedList<E> sortedMerge(SinglyLinkedList<E> mergee) {
