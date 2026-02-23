@@ -227,7 +227,7 @@ The class used to calculate the values for both Question 5 and Question 6 is `Li
 
 > Implement this function in Java.
 
-See [project20280.exercises.recursion](/src/project20280/exercises/recursion)
+See [project20280.exercises.recursion](/src/project20280/exercises/recursion/Fibonacci.java)
 
 > What is the largest fibonacci number you can compute in under 1 minute?
 
@@ -242,7 +242,11 @@ See [project20280.exercises.recursion](/src/project20280/exercises/recursion)
 It's possible for my machine to compute up to around `n = 17700` before causing a `StackOverflowError`, taking about 4 milliseconds to compute.
 
 ## Question 3
-> What is the ninth term in the \[Tribonacci\] sequence?
+> Implement a Java function to compute the Tribonnaci sequence.
+
+
+See [project20280.exercises.recursion](/src/project20280/exercises/recursion/Tribonacci.java)
+> What is the ninth term in the sequence?
 
 `T(9) = 44`
 > Draw the recursion trace for Tribonnaci(9).
