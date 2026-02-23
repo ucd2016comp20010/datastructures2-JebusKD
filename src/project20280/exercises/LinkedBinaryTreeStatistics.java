@@ -1,5 +1,7 @@
 package project20280.exercises;
 
+import java.util.ArrayList;
+
 import project20280.tree.LinkedBinaryTree;
 
 public class LinkedBinaryTreeStatistics {
@@ -43,6 +45,40 @@ public class LinkedBinaryTreeStatistics {
 		
 		int N_START = 10;
 		int N_END = 10000;
+		int N_STEP = 10;
+		int ITERATIONS_PER_STEP = 100000;
+		
+		double result;
+		double total;
+		
+		String csvString = "%d,%f";
+		
+		ArrayList<LinkedBinaryTree<Integer>> trees = new ArrayList<LinkedBinaryTree<Integer>>(ITERATIONS_PER_STEP);
+		
+		System.out.println("n,t");
+		
+		for (int n = N_START; n <= N_END; n += N_STEP) {
+		
+			for (int i = 0; i < ITERATIONS_PER_STEP; i++) {
+				trees.addFirst(LinkedBinaryTree.makeRandom(n));
+			}
+			
+			total = 0;
+			
+			for (int i = 0; i < ITERATIONS_PER_STEP; i++) {
+				int j = i;
+				Runnable worker = () -> {
+					trees.get(j).inorder();	
+				};
+				
+				result = Timer.measure(worker);
+				total += result;
+			}
+			
+			System.out.println(String.format(csvString, n, total));
+
+			trees.clear();
+		}
 		
 	}
 	
@@ -50,38 +86,34 @@ public class LinkedBinaryTreeStatistics {
 		mainInorder();
 	}
 	
-	private static class Stopwatch {
-		
-		private long startTime;
-		private long endTime;
-		private long duration;
-		
-		public Stopwatch() {
-			this.reset();
+	class Timer {
+		/*
+		* This is a class for timing the execution of a function.
+		* Runs the function at least MIN_REPEATS times, never more
+		* than MAX_REPEATS times and stops when the execution time
+		* exceeds MIN_SECONDS.
+		*/
+		public static int MIN_REPEATS = 10; // repeat the execution at least this number of times
+		public static int MAX_REPEATS = 10000; // repeat the execution at least this number of times
+		public static long MIN_SECONDS = (long) (3 * 1e9); // repeat execution of the work
+		// until at least this amount of time
+		public static double measure(Runnable worker) {
+		long n_repeats = 0;
+		long start = System.nanoTime();
+		while (true) {
+		worker.run(); // do work
+		++n_repeats;
+		if ( (n_repeats > Timer.MIN_REPEATS && // has to run a minimum number of times
+		n_repeats <= Timer.MAX_REPEATS) ||
+		(n_repeats % Timer.MIN_REPEATS == 0 && // check the time every min_repeat times because this is expensive
+		(System.nanoTime() - start) > Timer.MIN_SECONDS) ) {
+		break;
 		}
-		
-		public void reset() {
-			this.startTime = -1;
-			this.endTime = -1;
-			this.duration = -1;
 		}
-		
-		public void start() {
-			this.startTime = System.currentTimeMillis();
+		long elapsed = System.nanoTime() - start;
+		// System.out.println("# elapsed: " + elapsed + ", " + elapsed/1e9 + " -> " + "n_repeats:" + " " + n_repeats);
+		return 1e-9 * elapsed / n_repeats;
 		}
-		
-		public void stop() {
-			this.endTime = System.currentTimeMillis();
-			this.calculateDuration();
-		}
-		
-		public void calculateDuration() {
-			this.duration = this.endTime - this.startTime;
-		}
-		
-		public long duration() {
-			return this.duration;
-		}
-		
 	}
+
 }
