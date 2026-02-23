@@ -226,12 +226,15 @@ The class used to calculate the values for both Question 5 and Question 6 is `Li
 > Using the binary recursive version of Fibonacci, write out the recursive trace of the function for the 5th fibonacci number: Fibonacci(5).
 
 > Implement this function in Java.
+
 See [project20280.exercises.recursion](/src/project20280/exercises/recursion)
 
 > What is the largest fibonacci number you can compute in under 1 minute?
+
 `n = 45`, `F(n) = 1134903170`
 
 > For this number, how many recursive calls are made?
+
 `3672623804` recursive calls.
 
 > If you use memoisation, what is the largest fibonacci number you can compute in under 1 minute?
