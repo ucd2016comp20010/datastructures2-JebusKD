@@ -41,9 +41,47 @@ public class LinkedBinaryTreeStatistics {
 	
 	public static void mainInorder() {
 		
+		int N_START = 10;
+		int N_END = 10000;
+		
 	}
 	
 	public static void main(String[] args) {
+		mainInorder();
+	}
+	
+	private static class Stopwatch {
+		
+		private long startTime;
+		private long endTime;
+		private long duration;
+		
+		public Stopwatch() {
+			this.reset();
+		}
+		
+		public void reset() {
+			this.startTime = -1;
+			this.endTime = -1;
+			this.duration = -1;
+		}
+		
+		public void start() {
+			this.startTime = System.currentTimeMillis();
+		}
+		
+		public void stop() {
+			this.endTime = System.currentTimeMillis();
+			this.calculateDuration();
+		}
+		
+		public void calculateDuration() {
+			this.duration = this.endTime - this.startTime;
+		}
+		
+		public long duration() {
+			return this.duration;
+		}
 		
 	}
 }
