@@ -238,4 +238,32 @@ See [project20280.exercises.recursion](/src/project20280/exercises/recursion)
 `3672623804` recursive calls.
 
 > If you use memoisation, what is the largest fibonacci number you can compute in under 1 minute?
+
 It's possible for my machine to compute up to around `n = 17700` before causing a `StackOverflowError`, taking about 4 milliseconds to compute.
+
+## Question 3
+> Draw the recursion trace for Tribonnaci(9).
+
+## Question 4
+> John McCarthy and others studied the 91 function in the 1970s. What kind of recursive function is this?
+
+> Write the recursion trace for M(87).
+
+## Question 5
+> What does the function `Foo` do?
+
+> What is the output of `Foo(2468)`?
+
+## Question 6
+> Write the psuedocode for a recursive function which prints the elements of a linked list in reverse.
+
+## Question 7
+> Write the pseudo-code for a fully recursive function which copies a linked list.
+
+## Question 8
+> Draw the recursive trace for `mystery(2,4,4)`.
+
+## Question 9
+> What do you expect the complexity `T(n)` of the `inorder` method of the `LinkedBinaryTree` to be?
+
+> Do an experimental analysis, creating random binary trees from `10 ≤ n ≤ 10000`. Use the `Timer` from the lectures, or some method of your own, to measure the execution time `t` of your `inorder` method and plot the results of `t` against `n`, including a trendline (use Excel or Google Sheets). Does the trendline match your expectations?
