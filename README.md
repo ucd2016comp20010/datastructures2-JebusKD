@@ -281,6 +281,18 @@ reverse(root node of binary tree)
 ## Question 7
 > Write the pseudo-code for a fully recursive function which copies a linked list.
 
+```
+define copyHelper( node 'n' in linked list ) :
+  let c = a new node with a copy of n's element
+  if (n has a next element) :
+    setNextElement(c, copyHelper(n's next child))
+  return c
+
+define copy( linked list 'll' ) :
+  if ll is an empty list :
+    return an empty list
+  else return new linked list whose head node is copyHelper( head node of ll )
+```
 ## Question 8
 > Draw the recursive trace for `mystery(2,4,4)`.
 
