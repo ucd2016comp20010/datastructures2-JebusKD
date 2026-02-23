@@ -4,13 +4,15 @@ import project20280.tree.LinkedBinaryTree;
 
 public class LinkedBinaryTreeStatistics {
 	
-	private static final int N_START = 50;
-	private static final int N_END = 5000;
-	private static final int N_STEP = 50;
-	private static final int ITERATIONS_PER_STEP = 100;
 	
 	
-	public static void main(String[] args) {
+	
+	public static void mainDiamHeight() {
+		
+		int N_START = 50;
+		int N_END = 5000;
+		int N_STEP = 50;
+		int ITERATIONS_PER_STEP = 100;
 	
 		LinkedBinaryTree<Integer> bt;
 		double diameter, height;
@@ -34,6 +36,14 @@ public class LinkedBinaryTreeStatistics {
 			//System.out.println("n = " + n + ", diameter = " + diameter + ", height = " + height);
 			System.out.println(n + "," + diameter + "," + height);
 		}
+		
+	}
+	
+	public static void mainInorder() {
+		
+	}
+	
+	public static void main(String[] args) {
 		
 	}
 }
