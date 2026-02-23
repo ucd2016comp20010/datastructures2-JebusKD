@@ -254,6 +254,9 @@ See [project20280.exercises.recursion](/src/project20280/exercises/recursion/Tri
 ## Question 4
 > John McCarthy and others studied the 91 function in the 1970s. What kind of recursive function is this?
 
+> Implement the process in Java.
+
+See [project20280.exercises.recursion](/src/project20280/exercises/recursion/Function91.java)
 > Write the recursion trace for M(87).
 
 ## Question 5
