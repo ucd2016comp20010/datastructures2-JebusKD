@@ -40,6 +40,7 @@ public class Fibonacci {
 		if (memoisation) {
 			memo = new ConcurrentHashMap<Integer, Long>();
 			this.result = compute(n);
+			memo.clear();
 		}
 		else {
 			this.result = computeNoMemo(n);
