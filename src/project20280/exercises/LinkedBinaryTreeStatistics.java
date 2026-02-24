@@ -2,6 +2,7 @@ package project20280.exercises;
 
 import java.util.ArrayList;
 
+import project20280.interfaces.Position;
 import project20280.tree.LinkedBinaryTree;
 
 public class LinkedBinaryTreeStatistics {
@@ -44,14 +45,13 @@ public class LinkedBinaryTreeStatistics {
 	public static void mainInorder() {
 		
 		int N_START = 10;
-		int N_END = 10000;
-		int N_STEP = 10;
-		int ITERATIONS_PER_STEP = 100000;
+		int N_END = 1000;
+		int N_STEP = 1;
+		int ITERATIONS_PER_STEP = 100;
 		
 		double result;
 		double total;
 		
-		String csvString = "%d,%f";
 		
 		ArrayList<LinkedBinaryTree<Integer>> trees = new ArrayList<LinkedBinaryTree<Integer>>(ITERATIONS_PER_STEP);
 		
@@ -68,14 +68,14 @@ public class LinkedBinaryTreeStatistics {
 			for (int i = 0; i < ITERATIONS_PER_STEP; i++) {
 				int j = i;
 				Runnable worker = () -> {
-					trees.get(j).inorder();	
+					Iterable<Position<Integer>> holder = trees.get(j).inorder();
 				};
 				
 				result = Timer.measure(worker);
 				total += result;
 			}
 			
-			System.out.println(String.format(csvString, n, total));
+			System.out.println(n + "," + total);
 
 			trees.clear();
 		}
