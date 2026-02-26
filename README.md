@@ -263,7 +263,7 @@ See [project20280.exercises.recursion](/src/project20280/exercises/recursion/Fun
 ## Question 5
 > What does the function `Foo` do?
 
-It appears to accept an integer `x` and will print out the binary string of `n` to console, e.g. `8 = 1000`, `9 = 1001`.
+It appears to accept an integer `x` and will print out the binary string of `x` to console, e.g. `8 = 1000`, `9 = 1001`.
 > What is the output of `Foo(2468)`?
 
 `100110100100`
