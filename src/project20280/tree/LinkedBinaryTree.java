@@ -83,6 +83,10 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
        bt3.construct(inorder3, preorder3);
        
        System.out.println(bt3.rootToLeafPaths().toString());
+       
+       LinkedBinaryTree<Integer> rtree = makeRandom(10);
+       System.out.println(rtree.toBinaryTreeString());
+       System.out.println(rtree.inorder().toString());
     }
 
 

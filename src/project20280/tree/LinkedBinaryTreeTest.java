@@ -3,6 +3,7 @@ package project20280.tree;
 import org.junit.jupiter.api.Test;
 import project20280.interfaces.Position;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -94,6 +95,26 @@ class LinkedBinaryTreeTest {
         bt.createLevelOrder(arr);
         //System.out.println(bt.toString());
         assertEquals("[8, 4, 9, 2, 10, 5, 11, 1, 12, 6, 3, 7]", bt.inorder().toString());
+    }
+    
+    @Test
+    void testInorder2() {
+        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
+
+        Integer[] inorder = new Integer[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        Integer[] preorder = new Integer[] {4, 3, 1, 2, 9, 7, 5, 6, 8, 10};
+        
+        bt.construct(inorder, preorder);
+        assertEquals("[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]", bt.inorder().toString());
+    }
+    
+    @Test
+    void testInorderRand() {
+        LinkedBinaryTree<Integer> bt = LinkedBinaryTree.makeRandom(10);
+
+        
+        System.out.println(bt.inorder().toString());
+        assertNotEquals("[]", bt.inorder().toString());
     }
 
     @Test
