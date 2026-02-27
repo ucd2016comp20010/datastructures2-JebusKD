@@ -45,8 +45,8 @@ public class LinkedBinaryTreeStatistics {
 	public static void mainInorder() {
 		
 		int N_START = 10;
-		int N_END = 1000;
-		int N_STEP = 1;
+		int N_END = 10000;
+		int N_STEP = 10;
 		int ITERATIONS_PER_STEP = 100;
 		
 		double result;
@@ -63,14 +63,14 @@ public class LinkedBinaryTreeStatistics {
 
 				LinkedBinaryTree<Integer> rTree = LinkedBinaryTree.makeRandom(n);
 				Runnable worker = () -> {
-					System.out.println(rTree.inorder());
+					rTree.inorder();
 				};
 				
 				result = Timer.measure(worker);
 				total += result;
 			}
 			
-			System.out.println(n + "," + total);
+			System.out.println(n + "," + total / ITERATIONS_PER_STEP);
 		}
 		
 	}
