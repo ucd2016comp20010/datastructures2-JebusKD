@@ -222,8 +222,12 @@ The class used to calculate the values for both Question 5 and Question 6 is `Li
 ## Question 1
 > Draw the recursion trace for ReverseArray(A, 0, len(A) − 1) where A={12, 5, 19, 6, 11, 3, 9, 34, 2, 1, 15};
 
+<img width="3462" height="2528" alt="IMG_2121" src="https://github.com/user-attachments/assets/b3d85f23-b09b-4d71-b423-78bc0f0491fb" />
+
 ## Question 2
 > Using the binary recursive version of Fibonacci, write out the recursive trace of the function for the 5th fibonacci number: Fibonacci(5).
+
+<img width="2732" height="1710" alt="IMG_2120" src="https://github.com/user-attachments/assets/aa580e75-3be4-46b4-8af8-71f57651f918" />
 
 > Implement this function in Java.
 
@@ -251,6 +255,8 @@ See [project20280.exercises.recursion](/src/project20280/exercises/recursion/Tri
 `T(9) = 44`
 > Draw the recursion trace for Tribonnaci(9).
 
+<img width="14485" height="1600" alt="IMG_2117" src="https://github.com/user-attachments/assets/bbfc6d6b-0829-44ab-bb58-752137fab477" />
+
 ## Question 4
 > John McCarthy and others studied the 91 function in the 1970s. What kind of recursive function is this?
 
@@ -259,6 +265,8 @@ This is an example of a nested recursion function, as a recursive call is a para
 
 See [project20280.exercises.recursion](/src/project20280/exercises/recursion/Function91.java)
 > Write the recursion trace for M(87).
+
+<img width="4225" height="6658" alt="IMG_2119" src="https://github.com/user-attachments/assets/bd921ff7-5e72-4902-bbe1-3035c2b68849" />
 
 ## Question 5
 > What does the function `Foo` do?
@@ -296,6 +304,9 @@ define copy( linked list 'll' ) :
 ```
 ## Question 8
 > Draw the recursive trace for `mystery(2,4,4)`.
+
+<img width="1815" height="1802" alt="IMG_2118" src="https://github.com/user-attachments/assets/f401c3e5-6e7c-4569-a181-83337c30990c" />
+
 
 ## Question 10
 > What do you expect the complexity `T(n)` of the `inorder` method of the `LinkedBinaryTree` to be?
