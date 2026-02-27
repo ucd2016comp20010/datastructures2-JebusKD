@@ -52,23 +52,18 @@ public class LinkedBinaryTreeStatistics {
 		double result;
 		double total;
 		
-		
-		ArrayList<LinkedBinaryTree<Integer>> trees = new ArrayList<LinkedBinaryTree<Integer>>(ITERATIONS_PER_STEP);
-		
 		System.out.println("n,t");
 		
 		for (int n = N_START; n <= N_END; n += N_STEP) {
-		
-			for (int i = 0; i < ITERATIONS_PER_STEP; i++) {
-				trees.addFirst(LinkedBinaryTree.makeRandom(n));
-			}
+
 			
 			total = 0;
 			
 			for (int i = 0; i < ITERATIONS_PER_STEP; i++) {
-				int j = i;
+
+				LinkedBinaryTree<Integer> rTree = LinkedBinaryTree.makeRandom(n);
 				Runnable worker = () -> {
-					Iterable<Position<Integer>> holder = trees.get(j).inorder();
+					System.out.println(rTree.inorder());
 				};
 				
 				result = Timer.measure(worker);
@@ -76,8 +71,6 @@ public class LinkedBinaryTreeStatistics {
 			}
 			
 			System.out.println(n + "," + total);
-
-			trees.clear();
 		}
 		
 	}
