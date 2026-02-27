@@ -302,3 +302,7 @@ define copy( linked list 'll' ) :
 
 `inorder` visits every node in the binary tree once, therefore I'd expect O(n) time complexity.
 > Do an experimental analysis, creating random binary trees from `10 ≤ n ≤ 10000`. Use the `Timer` from the lectures, or some method of your own, to measure the execution time `t` of your `inorder` method and plot the results of `t` against `n`, including a trendline (use Excel or Google Sheets). Does the trendline match your expectations?
+
+<img width="2528" height="1346" alt="inordergraph" src="https://github.com/user-attachments/assets/e4ded3e1-4f2f-4172-9a38-80c008a6731d" />
+
+With a relatively linear plot outside of a few outliers, the data seems to prove the hypothesis that `inorder()` is indeed a function with O(n) time complexity.
