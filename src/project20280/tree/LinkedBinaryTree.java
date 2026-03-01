@@ -34,8 +34,9 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     // constructor
 
     public static LinkedBinaryTree<Integer> makeRandom(int n) {
-        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<>();
+        LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
         bt.root = randomTree(null, 1, n);
+        bt.size = n;
         return bt;
     }
 
@@ -62,27 +63,32 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         bt.createLevelOrder(arr);
         System.out.println(bt.toBinaryTreeString());
         System.out.println(bt.breadthfirst().toString());
-        
+        bt.printInorderLeaves();
         
        Integer[] inorder = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
     		   18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30},
     		   	preorder = {18, 2, 1, 14, 13, 12, 4, 3, 9, 6, 5, 8, 7, 10, 11, 15, 16,
     		   			17, 28, 23, 19, 22, 20, 21, 24, 27, 26, 25, 29, 30};
        	
-       LinkedBinaryTree<Integer> bt2 = new LinkedBinaryTree<>();
+       LinkedBinaryTree<Integer> bt2 = new LinkedBinaryTree<Integer>();
        bt2.construct(inorder, preorder);
        System.out.println(bt2.toBinaryTreeString());
        System.out.println(bt2.breadthfirst().toString());
        
        LinkedBinaryTree<Integer> btr = makeRandom(100);
        System.out.println(btr.toBinaryTreeString());
-       
+       System.out.println(btr.inorder());
+       /*
        LinkedBinaryTree<Integer> bt3 = new LinkedBinaryTree<>();
        Integer[] inorder3 = {0, 1, 2, 3, 4, 5, 6, 7, 8};
        Integer[] preorder3 = {5, 1, 0, 4, 2, 3, 7, 6, 8};
        bt3.construct(inorder3, preorder3);
        
        System.out.println(bt3.rootToLeafPaths().toString());
+       
+       LinkedBinaryTree<Integer> rtree = makeRandom(10);
+       System.out.println(rtree.toBinaryTreeString());
+       System.out.println(rtree.inorder().toString());*/
     }
 
 
@@ -427,6 +433,42 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     	
     	this.attach(root, construct_helper(inorder, preorder, 0, i, 1), construct_helper(inorder, preorder, i + 1, inorder.length, i + 1));
     	
+    }
+    
+    private String printInorderLeavesHelper(Node<E> n) {
+    	String message = "";
+    	
+    	if (isExternal(n))
+    		message = message.concat(n.getElement().toString() + ", ");
+    	else {
+    		if (left(n) != null)
+    			message = message.concat(printInorderLeavesHelper(n.getLeft()));
+    		if (right(n) != null)
+    			message = message.concat(printInorderLeavesHelper(n.getRight()));
+    	}
+    	
+    	return message;
+    }
+    
+    public void printInorderLeaves() {
+    	String message = "[";
+    	
+    	if (this.root != null) {
+    		
+    		if (isExternal(this.root))
+    			message = message.concat(this.root.getElement().toString() + ", ");
+    		else {
+    			if (left(this.root) != null)
+    				message = message.concat(printInorderLeavesHelper(this.root.getLeft()));
+    			if (right(this.root) != null)
+    				message = message.concat(printInorderLeavesHelper(this.root.getRight()));
+    		}
+    		
+    		message = message.substring(0, message.length()-2);
+    	}
+    	
+    	message = message.concat("]");
+    	System.out.println(message);
     }
     
     /**

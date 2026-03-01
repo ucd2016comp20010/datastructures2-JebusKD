@@ -211,9 +211,109 @@ It appears that there exists a logarithmic correlation between the number of nod
 
 ## Question 6
 > Write a function which creates random binary trees for size n = \[50, 5000\] in steps of 50. For each size n, generate 100 different random binary trees of size n and compute the average of their height. Plot the average height as a function n. Use Google Sheets or Excel, and try fitting a trendline to check if the scaling is O(log n)
-
 <img width="1961" height="1103" alt="heightPlot" src="https://github.com/user-attachments/assets/68a524e7-e706-4598-ba21-9b49a21d0e56" />
 
 The plotted trendline follows a logarithmic path across the data - demonstrating the logarithmic scaling O(log n).
 
 The class used to calculate the values for both Question 5 and Question 6 is `LinkedBinaryTreeStatistics`, located in the `.exercises` package.
+
+# Wk 6, Recursion
+
+## Question 1
+> Draw the recursion trace for ReverseArray(A, 0, len(A) − 1) where A={12, 5, 19, 6, 11, 3, 9, 34, 2, 1, 15};
+
+<img width="3462" height="2528" alt="IMG_2121" src="https://github.com/user-attachments/assets/b3d85f23-b09b-4d71-b423-78bc0f0491fb" />
+
+## Question 2
+> Using the binary recursive version of Fibonacci, write out the recursive trace of the function for the 5th fibonacci number: Fibonacci(5).
+
+<img width="2732" height="1710" alt="IMG_2120" src="https://github.com/user-attachments/assets/aa580e75-3be4-46b4-8af8-71f57651f918" />
+
+> Implement this function in Java.
+
+See [project20280.exercises.recursion](/src/project20280/exercises/recursion/Fibonacci.java)
+
+> What is the largest fibonacci number you can compute in under 1 minute?
+
+`n = 45`, `F(n) = 1134903170`
+
+> For this number, how many recursive calls are made?
+
+`3672623804` recursive calls.
+
+> If you use memoisation, what is the largest fibonacci number you can compute in under 1 minute?
+
+It's possible for my machine to compute up to around `n = 17700` before causing a `StackOverflowError`, taking about 4 milliseconds to compute.
+
+## Question 3
+> Implement a Java function to compute the Tribonnaci sequence.
+
+
+See [project20280.exercises.recursion](/src/project20280/exercises/recursion/Tribonacci.java)
+> What is the ninth term in the sequence?
+
+`T(9) = 44`
+> Draw the recursion trace for Tribonnaci(9).
+
+<img width="14485" height="1600" alt="IMG_2117" src="https://github.com/user-attachments/assets/bbfc6d6b-0829-44ab-bb58-752137fab477" />
+
+## Question 4
+> John McCarthy and others studied the 91 function in the 1970s. What kind of recursive function is this?
+
+This is an example of a nested recursion function, as a recursive call is a parameter inside another recursive call
+> Implement the process in Java.
+
+See [project20280.exercises.recursion](/src/project20280/exercises/recursion/Function91.java)
+> Write the recursion trace for M(87).
+
+<img width="4225" height="6658" alt="IMG_2119" src="https://github.com/user-attachments/assets/bd921ff7-5e72-4902-bbe1-3035c2b68849" />
+
+## Question 5
+> What does the function `Foo` do?
+
+It appears to accept an integer `x` and will print out the binary string of `x` to console, e.g. `8 = 1000`, `9 = 1001`.
+> What is the output of `Foo(2468)`?
+
+`100110100100`
+## Question 6
+> Write the psuedocode for a recursive function which prints the elements of a linked list in reverse.
+
+```
+let 'n' be a node in the linked list that has an element and a reference to the next node
+define reverse(node 'n') :
+  if n has a next node :
+    reverse(n's next node)
+  print(n's element)
+
+reverse(root node of binary tree)
+```
+## Question 7
+> Write the pseudo-code for a fully recursive function which copies a linked list.
+
+```
+define copyHelper( node 'n' in linked list ) :
+  let c = a new node with a copy of n's element
+  if (n has a next element) :
+    setNextElement(c, copyHelper(n's next child))
+  return c
+
+define copy( linked list 'll' ) :
+  if ll is an empty list :
+    return an empty list
+  else return new linked list whose head node is copyHelper( head node of ll )
+```
+## Question 8
+> Draw the recursive trace for `mystery(2,4,4)`.
+
+<img width="1815" height="1802" alt="IMG_2118" src="https://github.com/user-attachments/assets/f401c3e5-6e7c-4569-a181-83337c30990c" />
+
+
+## Question 10
+> What do you expect the complexity `T(n)` of the `inorder` method of the `LinkedBinaryTree` to be?
+
+`inorder` visits every node in the binary tree once, therefore I'd expect O(n) time complexity.
+> Do an experimental analysis, creating random binary trees from `10 ≤ n ≤ 10000`. Use the `Timer` from the lectures, or some method of your own, to measure the execution time `t` of your `inorder` method and plot the results of `t` against `n`, including a trendline (use Excel or Google Sheets). Does the trendline match your expectations?
+
+<img width="2528" height="1346" alt="inordergraph" src="https://github.com/user-attachments/assets/e4ded3e1-4f2f-4172-9a38-80c008a6731d" />
+
+With a relatively linear plot outside of a few outliers, the data seems to prove the hypothesis that `inorder()` is indeed a function with O(n) time complexity.
