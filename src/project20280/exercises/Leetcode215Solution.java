@@ -2,159 +2,187 @@ package project20280.exercises;
 
 class Leetcode215Solution {
 	class Solution {
-	    private static void sortedInsert(int num, MyQueue elements, int desiredSize) {
-	        if (elements.isEmpty()) elements.addFirst(num);
-	        else if (elements.size < desiredSize) {
-	            if (elements.getLast() <= num) {
-	                elements.addLast(num);
-	            }
-	            else if (elements.getFirst() <= num) {
-	                for (int i = elements.size()-2; i >= 0; i--) {
-	                    if (elements.get(i) <= num && elements.get(i+1) >= num) {
-	                        elements.insertAfter(i, num);
-	                        break;
-	                    }
-	                }
-	            }
-	            else {
-	                elements.addFirst(num);
-	            }
-	        }
-	        else {
-	            if (elements.getLast() <= num) {
-	                elements.removeFirst();
-	                elements.addLast(num);
-	            }
-	            else if (elements.getFirst() <= num) {
-	                for (int i = elements.size()-2; i >= 0; i--) {
-	                    if (elements.get(i) < num && elements.get(i+1) > num) {
-	                        elements.insertAfter(i, num);
-	                        break;
-	                    }
-	                }
-	                elements.removeFirst();
-	            }
-	        }
-	    }
-
 	    public int findKthLargest(int[] nums, int k) {
-	        MyQueue topElements = new MyQueue(k);
-
-	        for (int i = 0; i < nums.length; i++) {
-	            sortedInsert(nums[i], topElements, k);
+	        HighLoQueue q = new HighLoQueue(k, nums.length * 3);
+	        for (int n : nums) {
+	            q.add(n);
 	        }
-	        return topElements.getFirst();
+	        return q.getLow();
 	    }
 
-	    private static class MyQueue {
-	        private static final int MULT_FACTOR = 2;
-	        private Integer[] members;
-	        private int capacity;
-
+	    private static class HighLoQueue {
 	        private int size;
+	        private int[] members;
 	        private int start;
-	        private int end;
+	        private final int maxSize;
 
-	        public MyQueue(int capacity) {
-	            this.capacity = MULT_FACTOR * capacity;
-	            members = new Integer[this.capacity];
-	            start = capacity / MULT_FACTOR;
-	            end = start;
-	            size = 0;
+	        private static final int MULT_FACTOR = 2;
+
+	        public HighLoQueue(int maxSize, int capacity) {
+	            this.members = new int[capacity];
+	            this.size = 0;
+	            this.start = capacity / 2;
+	            this.maxSize = maxSize;
 	        }
 
-	        public int size() {
-	            return this.size;
+	        public HighLoQueue(int maxSize) {
+	            this(maxSize, 8 * MULT_FACTOR);
 	        }
 
-	        public void addFirst(Integer e) {
-	            if (start <= 0) rebuild();
-
-	            members[--start] = e;
-	            size++;
+	        public boolean endReached() {
+	            return (start + size) >= members.length;
 	        }
 
-	        public void addLast(Integer e) {
-	            if (end >= capacity) rebuild();
-
-	            members[end++] = e;
-	            size++;
+	        public boolean startReached() {
+	            return start <= 0;
 	        }
 
 	        public boolean isEmpty() {
 	            return size == 0;
 	        }
 
-	        public void insertAfter(int i, Integer e) {
-	            splitShift(i);
-	            members[start + i + 1] = e;
+	        public void addLow(int e) {
+	            if (maxSize == size) return;
+	            if (startReached()) rebuild();
+
+	            members[--start] = e;
+	            size++;
 	        }
 
-	        public Integer removeFirst() {
+	        public void addHigh(int e) {
+	            if (maxSize == size) removeLow();
+	            if (endReached()) rebuild();
+
+	            members[start + (size++)] = e;
+	        }
+
+	        public int removeLow() {
 	            size--;
 	            return members[start++];
 	        }
 
-	        public Integer removeLast() {
-	            size--;
-	            return members[--end];
+	        public int removeHigh() {
+	            return members[start+(--size)];
 	        }
 
-	        public Integer get(int i) {
-	            if (i < 0 || size <= i) throw new IllegalArgumentException("Accessing out of bounds entity " + i);
+	        public int get(int i) {
+	            if (i >= size || i < 0) throw new IllegalArgumentException("Accessing out of bounds " + i);
 	            return members[start + i];
 	        }
 
-	        public Integer getLast() {
-	            return members[end - 1];
-	        }
-
-	        public Integer getFirst() {
+	        public int getLow() {
+	            if (size == 0) throw new IllegalArgumentException("Empty array");
 	            return members[start];
 	        }
 
-	        private void splitShift(int index) {
-	            if (start <= 0) rebuild();
+	        public int getHigh() {
+	            if (size == 0) throw new IllegalArgumentException("Empty array");
+	            return members[start + size - 1];
+	        }
 
-	            for (int i = 0; i <= index; i++) {
-	                members[start + (i-1)] = members[start + i];
-	            }
-	            members[start + index] = null;
+	        public void set(int i, int e) {
+	            if (i >= size || i < 0) throw new IllegalArgumentException("Accessing out of bounds " + i);
+	            members[start + i] = e;
+	        }
+
+	        private void shoveLeft(int i) {
+	            if (startReached()) rebuild();
+
+	            /*for (int j = 0; j <= i; j++) {
+	                members[start+j-1] = members[start+j];
+	            }*/
+	            // Had to use arraycopy because leetcode time limit kept exceeding
+	            System.arraycopy(members, start,
+	                             members, start-1,
+	                             i+1);
 	            start--;
 	            size++;
 	        }
 
-	        public String toString() {
-	            String s = "[";
-	            if (!isEmpty()) {
-	                s = s.concat(getFirst().toString());
+	        public void insertAfter(int i, int e) {
+	            if (i + 1 == size) {
+	                addHigh(e);
+	                return;
 	            }
-	            for (int i = 1; i < size; i++) {
-	                if (get(i) == null)
-	                    s = s.concat(", null");
-	                else
-	                    s = s.concat(", " + get(i).toString());
-	                
+	            if (i < 0) {
+	                addLow(e);
+	                return;
 	            }
-	            return s.concat("]");
+	            shoveLeft(i);
+	            set(i+1, e);
+	            if (maxSize < size) removeLow();
+	        }
+
+	        public void add(int e) {
+	            if (isEmpty()) {
+	                //System.out.println("empty");
+	                addLow(e);
+	            }
+	            else if (e >= getHigh() ) {
+	                //System.out.println("addHigh, e = " + e + ", high = " + getHigh());
+	                addHigh(e);
+	            }
+	            else if (size < maxSize && e <= getLow()) {
+	                //System.out.println("addLow, e = " + e + ", low = " + getLow());
+	                addLow(e);
+	            }
+	            else if (e > getLow() ) binarySearchAdd(e);
+	        }
+
+	        private void linearSearchAdd(int e) {
+	            //System.out.println("searchadd...");
+	            for (int i = size-1; i >= 0; i--) {
+	                if (e >= get(i)) {
+	                    insertAfter(i, e);
+	                    return;
+	                }
+	            }
+	            throw new IllegalArgumentException("uh oh");
+	        }
+
+	        private void binarySearchAdd(int e) {
+	            //System.out.println(this);
+	            int searchStart = 0;
+	            int searchEnd = size;
+	            int i;
+	            do {
+	                i = (searchStart+searchEnd) / 2;
+	                if (get(i) <= e && e <= get(i+1)) {
+	                    insertAfter(i, e);
+	                    return;
+	                }
+	                else if (get(i) <= e) {
+	                    searchStart = i+1;
+	                }
+	                else {
+	                    searchEnd = i;
+	                }
+	            }
+	            while (searchStart != searchEnd);
+	            insertAfter(searchStart, e);
 	        }
 
 	        private void rebuild() {
-	            int newArrayCapacity = capacity * MULT_FACTOR;
-	            Integer[] newArray = new Integer[newArrayCapacity];
-	            int newArrayStart = capacity / MULT_FACTOR;
-	           
-	            for (int i = start, j = newArrayStart; i < end; i++, j++) {
-	                newArray[j] = members[i];
-	                
+	            System.out.println("Rebuild called");
+	            int newArrayCap = members.length * MULT_FACTOR;
+	            int[] newArray = new int[newArrayCap];
+	            int newStart = newArrayCap / 4;
+
+	            for (int i = 0; i < size; i++) {
+	                newArray[newStart + i] = get(i);
 	            }
 
-	            
-
 	            this.members = newArray;
-	            capacity = newArrayCapacity;
-	            start = newArrayStart;
-	            end = start+size;
+	            start = newStart;
+	        }
+
+	        public String toString() {
+	            String s = "[";
+	            if (!isEmpty()) s = s.concat("" + get(0));
+	            for (int i = 1; i < size; i++) {
+	                s = s.concat(", " + get(i));
+	            }
+	            return s.concat("]");
 	        }
 	    }
 	}
