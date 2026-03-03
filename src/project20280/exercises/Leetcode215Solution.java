@@ -3,7 +3,7 @@ package project20280.exercises;
 class Leetcode215Solution {
 	class Solution {
 	    public int findKthLargest(int[] nums, int k) {
-	        HighLoQueue q = new HighLoQueue(k, nums.length * 3);
+	        HighLoQueue q = new HighLoQueue(k, nums.length * 2);
 	        for (int n : nums) {
 	            q.add(n);
 	        }
