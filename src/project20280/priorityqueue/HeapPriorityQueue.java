@@ -64,8 +64,8 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
     }
 
     protected boolean hasLeft(int j) {
-        // TODO
-        return false;
+        int p = left(j);
+        return p < size() && heap.get(p) != null;
     }
 
     protected boolean hasRight(int j) {
