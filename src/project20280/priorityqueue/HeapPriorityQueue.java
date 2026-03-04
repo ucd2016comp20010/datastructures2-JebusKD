@@ -91,7 +91,20 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
      * property.
      */
     protected void upheap(int j) {
-        // TODO
+    	int parent = parent(j);
+    	
+    	/* If parent < 0, then j is root and has no parent.
+    	 	We compare the k_j and k_p, if k_j <= k_p these two
+    	 	elements are in correct heap ordering.
+    	 */
+    	if (parent >= 0 && compare(heap.get(j), heap.get(parent)) < 0) {
+    		/* Not in the correct order? Swap this item with the parent,
+    		 	and see does this item (now in the parent's position) still
+    		 	violates heap ordering recursively.
+    		 */
+    		swap(j, parent);
+    		upheap(parent);
+    	}
     }
 
     /**
