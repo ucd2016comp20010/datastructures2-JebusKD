@@ -48,8 +48,9 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
 
     // protected utilities
     protected int parent(int j) {
-        // TODO
-        return 0;
+    	if (j < 0 || j >= size()) throw new IllegalArgumentException("Accessing out of bounds index " + j);
+    	else if (j == 0) return -1; // If j is the root, has no parent.
+        else return (j - 1) / 2; // floor( (f(p) - 1) / 2 )
     }
 
     protected int left(int j) {
