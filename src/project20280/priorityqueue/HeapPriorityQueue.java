@@ -206,8 +206,19 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
      */
     @Override
     public Entry<K, V> insert(K key, V value) throws IllegalArgumentException {
-        // TODO
-        return null;
+    	// Check to see if the key is valid.
+    	if (!checkKey(key)) throw new IllegalArgumentException("Key is unacceptable for this queue.");
+        
+    	// Create a new entry with our key-value pair.
+    	PQEntry<K, V> newEntry = new PQEntry<K, V>(key, value);
+    	// Get the size, which would correspond to the initial position of our newly-added entry.
+        int pos = size();
+        // Append the entry to the heap.
+        heap.add(newEntry);
+        // Use uphead to move the new entry into place.
+        upheap(pos);
+        // Return the new entry storing the key-value pair.
+        return newEntry;
     }
 
     /**
