@@ -59,8 +59,8 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
     }
 
     protected int right(int j) {
-        // TODO
-        return 0;
+    	if (j < 0 || j >= size()) throw new IllegalArgumentException("Referring to out of bounds index " + j);
+        return (2 * j) + 2; // f(p) = 2f(q) + 2
     }
 
     protected boolean hasLeft(int j) {
