@@ -267,8 +267,9 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
     	// Remove the last entry in the heap, which was previously
     	// the smallest (root) before the swap.
     	Entry<K, V> removedEntry = heap.removeLast();
-    	// Restore the heap structure.
-    	downheap(0);
+    	
+    	// Restore the heap structure if there's anything left.
+    	if (size() > 0) downheap(0);
     	return removedEntry;
     }
 
@@ -297,6 +298,26 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
             }
         }
     }
+    
+    public static <V> V[] PQSort(V[] values, Comparator<V> comparator) {
+    	HeapPriorityQueue<V, V> queue = new HeapPriorityQueue<V, V>(values, values, comparator);
+    	@SuppressWarnings("unchecked")
+		V[] arr = (V[])(new Object[queue.size()]);
+    	for (int i = 0; queue.size() > 0; i++) {
+    		arr[i] = queue.removeMin().getValue();
+    	}
+    	return arr;
+    }
+    
+    public static <V> V[] PQSort(V[] values) {
+    	HeapPriorityQueue<V, V> queue = new HeapPriorityQueue<V, V>(values, values);
+    	@SuppressWarnings("unchecked")
+		V[] arr = (V[])(new Object[queue.size()]);
+    	for (int i = 0; queue.size() > 0; i++) {
+    		arr[i] = queue.removeMin().getValue();
+    	}
+    	return arr;
+    }
 
     public static void main(String[] args) {
         Integer[] rands = new Integer[]{35, 26, 15, 24, 33, 4, 12, 1, 23, 21, 2, 5};
@@ -313,26 +334,10 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
         //        2,            4,
         //   23,     21,      5, 12,
         // 24, 26, 35, 33, 15]
+        
+        
+        System.out.println("PQSort: " + Arrays.toString(PQSort(rands)));
     }
     
-    public static <V> V[] PQSort(V[] values, Comparator<V> comparator) {
-    	HeapPriorityQueue<V, V> queue = new HeapPriorityQueue<V, V>(values, values, comparator);
-    	@SuppressWarnings("unchecked")
-		V[] arr = (V[])(new Object[queue.size()]);
-    	while (queue.size() != 0) {
-    		queue.removeMin();
-    	}
-    	return arr;
-    }
-    
-    public static <V> V[] PQSort(V[] values) {
-    	HeapPriorityQueue<V, V> queue = new HeapPriorityQueue<V, V>(values, values);
-    	@SuppressWarnings("unchecked")
-		V[] arr = (V[])(new Object[queue.size()]);
-    	while (queue.size() != 0) {
-    		queue.removeMin();
-    	}
-    	return arr;
-    }
     
 }
