@@ -15,4 +15,12 @@ public class Job implements Runnable {
 		this.jobName = name;
 		this.jobPriority = priority;
 	}
+	
+	public JobPriority getJobPriority() {
+		return this.jobPriority;
+	}
+	
+	public getName() {
+		return this.jobName;
+	}
 }
