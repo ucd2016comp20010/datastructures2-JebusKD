@@ -8,7 +8,12 @@ public class Job implements Runnable {
 		System.out.println("Job:" + jobName +
 						" Priority:" + jobPriority);
 		// do some work
-		Thread.sleep(1000); // to simulate actual execution time
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} // to simulate actual execution time
 	}
 	// standard setters and getters
 	public Job(String name, JobPriority priority) {
@@ -20,7 +25,7 @@ public class Job implements Runnable {
 		return this.jobPriority;
 	}
 	
-	public getName() {
+	public String getName() {
 		return this.jobName;
 	}
 }
