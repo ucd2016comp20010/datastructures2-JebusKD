@@ -20,9 +20,9 @@ public class PQSortStatistics {
 	
 	public static void main(String[] args) {
 		
-		int N_START = 1000;
+		int N_START = 100000;
 		int N_END = 1000000;
-		int N_STEP = 1000;
+		int N_STEP = 100000;
 		int ITERATIONS_PER_STEP = 1;
 		
 		double result;
