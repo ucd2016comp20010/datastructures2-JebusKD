@@ -44,6 +44,27 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
      * @param values an array of the initial values for the priority queue
      */
     public HeapPriorityQueue(K[] keys, V[] values) {
+    	super();
+    	// Unconditionally add all key/value pairs to the new heap.
+    	for (int i = 0; i < keys.length && i < values.length; i++) {
+    		heap.add(new PQEntry<K, V>(keys[i], values[i]));
+    	}
+    	// Now everything is in, we use heapify to restore heap structure.
+    	heapify();
+    }
+    
+    /**
+     * Creates a priority queue initialized with the respective key-value pairs. The
+     * two arrays given will be paired element-by-element. They are presumed to have
+     * the same length. (If not, entries will be created only up to the length of
+     * the shorter of the arrays). The queue uses the given comparator to order keys.
+     *
+     * @param keys   an array of the initial keys for the priority queue
+     * @param values an array of the initial values for the priority queue
+     * @param comp comparator defining the order of keys in the priority queue
+     */
+    public HeapPriorityQueue(K[] keys, V[] values, Comparator<K> comp) {
+    	super(comp);
     	// Unconditionally add all key/value pairs to the new heap.
     	for (int i = 0; i < keys.length && i < values.length; i++) {
     		heap.add(new PQEntry<K, V>(keys[i], values[i]));
@@ -293,4 +314,25 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
         //   23,     21,      5, 12,
         // 24, 26, 35, 33, 15]
     }
+    
+    public static <V> V[] PQSort(V[] values, Comparator<V> comparator) {
+    	HeapPriorityQueue<V, V> queue = new HeapPriorityQueue<V, V>(values, values, comparator);
+    	@SuppressWarnings("unchecked")
+		V[] arr = (V[])(new Object[queue.size()]);
+    	while (queue.size() != 0) {
+    		queue.removeMin();
+    	}
+    	return arr;
+    }
+    
+    public static <V> V[] PQSort(V[] values) {
+    	HeapPriorityQueue<V, V> queue = new HeapPriorityQueue<V, V>(values, values);
+    	@SuppressWarnings("unchecked")
+		V[] arr = (V[])(new Object[queue.size()]);
+    	while (queue.size() != 0) {
+    		queue.removeMin();
+    	}
+    	return arr;
+    }
+    
 }
