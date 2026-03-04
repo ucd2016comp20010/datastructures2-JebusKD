@@ -178,7 +178,9 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
      * Performs a bottom-up construction of the heap in linear time.
      */
     protected void heapify() {
-        // TODO
+        for (int i = size()-1; i >= 0; i--) {
+        	downheap(i);
+        }
     }
 
     // public methods
