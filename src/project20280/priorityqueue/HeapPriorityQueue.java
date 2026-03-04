@@ -77,7 +77,13 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
      * Exchanges the entries at indices i and j of the array list.
      */
     protected void swap(int i, int j) {
-        // TODO
+    	int s = size();
+    	if (i < 0 || i >= s) throw new IllegalArgumentException("Referring to out of bounds index " + i);
+    	if (j < 0 || j >= s) throw new IllegalArgumentException("Referring to out of bounds index " + j);
+        
+    	Entry<K,V> held = heap.get(i);
+    	heap.set(i, heap.get(j));
+    	heap.set(j, held);
     }
 
     /**
