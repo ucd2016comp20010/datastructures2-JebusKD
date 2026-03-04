@@ -316,4 +316,14 @@ define copy( linked list 'll' ) :
 
 <img width="2528" height="1346" alt="inordergraph" src="https://github.com/user-attachments/assets/e4ded3e1-4f2f-4172-9a38-80c008a6731d" />
 
-With a relatively linear plot outside of a few outliers, the data seems to prove the hypothesis that `inorder()` is indeed a function with O(n) time complexity.
+With a relatively linear plot outside of a few outliers, the data seems to prove the hypothesis that `inorder()` is indeed a function with `O(n)` time complexity.
+
+# Wk 7, Priority Queues, Heaps
+> Measure the time complexity by performing timing measurements to sort an array of integers of size `n = \[1000, . . . , 1000000\]`. What complexity do you expect?
+
+My implementation of `PQSort` will first construct a `HeapPriorityQueue` using `heapify()`, which should be an `O(n)` operation (adding values to heap's internal array could very well possibly be `n amortised` due to needing to rebuild the array when contents get too big). Next, for each `n` items in the queue, `removeMin()` is called, which is an `O(log n)` time complexity function.
+
+So we'd have `O(n + n log n)` which gives us a `O(n log n)` complexity. We should expect a linearithmic trend.
+
+> What do you find?
+
