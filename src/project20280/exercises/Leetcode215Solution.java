@@ -1,5 +1,8 @@
 package project20280.exercises;
 
+/* This was done before knowing what a heap was.
+	Beats 5% on runtime, beats 95% on memory.
+ */
 class Leetcode215Solution {
 	class Solution {
 	    public int findKthLargest(int[] nums, int k) {

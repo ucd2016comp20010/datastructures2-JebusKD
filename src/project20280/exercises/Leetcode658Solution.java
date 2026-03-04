@@ -3,6 +3,11 @@ package project20280.exercises;
 import java.util.ArrayList;
 import java.util.List;
 
+/* This was done before knowing what
+ 	a heap is.
+ 	
+ 	Beats 30% on runtime and 80% on memory.
+ */
 class Leetcode658Solution {
 	class Solution {
 	    private static int binSearch(int[] arr, int x) {
