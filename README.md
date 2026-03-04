@@ -327,3 +327,6 @@ So we'd have `O(n + n log n)` which gives us a `O(n log n)` complexity. We shoul
 
 > What do you find?
 
+<img width="2195" height="1441" alt="pqsort_graph" src="https://github.com/user-attachments/assets/d11ed2dd-1e91-4efc-bc87-ee5a46276be7" />
+
+When using both a logarithmic X-axis and logarithmic Y-axis, we can see a linear trend of our data. This would corellate to a linear corellation between n and t over the logarithmic axes - which themselves demonstrate a `log n` correlation, so we have `O(n log n)` complexity.
