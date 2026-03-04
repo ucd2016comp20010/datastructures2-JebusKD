@@ -6,6 +6,7 @@ package project20280.priorityqueue;
 import project20280.interfaces.Entry;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 
 
@@ -81,6 +82,7 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
     	if (i < 0 || i >= s) throw new IllegalArgumentException("Referring to out of bounds index " + i);
     	if (j < 0 || j >= s) throw new IllegalArgumentException("Referring to out of bounds index " + j);
         
+    	if (i == j) return; // If we swap an element with itself, do nothing.
     	Entry<K,V> held = heap.get(i);
     	heap.set(i, heap.get(j));
     	heap.set(j, held);
@@ -193,7 +195,8 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
      */
     @Override
     public Entry<K, V> min() {
-        return heap.get(0);
+    	if (size() == 0) return null;
+    	else return heap.get(0);
     }
 
     /**
@@ -228,8 +231,17 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
      */
     @Override
     public Entry<K, V> removeMin() {
-        // TODO
-        return null;
+    	int s = size();
+    	// If the size is 0, we return null as the heap is empty.
+    	if (s == 0) return null;
+    	// Swap the last item into position
+    	swap(0, s-1);
+    	// Remove the last entry in the heap, which was previously
+    	// the smallest (root) before the swap.
+    	Entry<K, V> removedEntry = heap.removeLast();
+    	// Restore the heap structure.
+    	downheap(0);
+    	return removedEntry;
     }
 
     public String toString() {
@@ -262,7 +274,7 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
         Integer[] rands = new Integer[]{35, 26, 15, 24, 33, 4, 12, 1, 23, 21, 2, 5};
         HeapPriorityQueue<Integer, Integer> pq = new HeapPriorityQueue<>(rands, rands);
 
-        System.out.println("elements: " + rands);
+        System.out.println("elements: " + Arrays.toString(rands));
         System.out.println("after adding elements: " + pq);
 
         System.out.println("min element: " + pq.min());
