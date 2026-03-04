@@ -44,7 +44,12 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
      * @param values an array of the initial values for the priority queue
      */
     public HeapPriorityQueue(K[] keys, V[] values) {
-        // TODO
+    	// Unconditionally add all key/value pairs to the new heap.
+    	for (int i = 0; i < keys.length && i < values.length; i++) {
+    		heap.add(new PQEntry<K, V>(keys[i], values[i]));
+    	}
+    	// Now everything is in, we use heapify to restore heap structure.
+    	heapify();
     }
 
     // protected utilities
