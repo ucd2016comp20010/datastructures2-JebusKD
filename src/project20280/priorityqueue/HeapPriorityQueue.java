@@ -111,7 +111,60 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
      * Moves the entry at index j lower, if necessary, to restore the heap property.
      */
     protected void downheap(int j) {
-        // TODO
+    	
+        if (hasLeft(j)) {
+        	
+        	Entry<K,V> i = heap.get(j);
+        	
+        	int lPos = left(j);
+        	Entry<K,V> l = heap.get(lPos);
+        	
+        	if (hasRight(j)) {
+        		
+        		int rPos = right(j);
+        		Entry<K,V> r = heap.get(rPos);
+        		
+        		// We intentionally consider the smaller of the two first.
+        		if (compare(l, r) <= 0) {
+        			// consider left first
+        			if (compare(i, l) > 0) {
+        				swap(j, lPos);
+        				downheap(lPos);
+        			}
+        			else if (compare(i, r) > 0) {
+        				swap(j, rPos);
+        				downheap(rPos);
+        			}
+        			
+        		}
+        		else { // Consider right first
+        			if (compare(i, r) > 0) {
+        				swap(j, rPos);
+        				downheap(rPos);
+        			}
+        			else if (compare(i, l) > 0) {
+        				swap(j, lPos);
+        				downheap(lPos);
+        			}
+        		}
+        		
+        	}
+        	else {
+        		
+        		// If we just have a left node, see if a swap should be done.
+        		// A left node and no right node indicates we've reached the bottom
+        		// of the tree (presuming structure is not violated), so no need
+        		// to downheap further.
+        		if (compare(i, l) > 0) {
+    				swap(j, lPos);
+    			}
+        	}
+        	
+        }
+        else if (hasRight(j)) {
+        	// If j has right but no left, something's gone wrong.
+        	throw new IllegalStateException("Correct binary tree structure has been violated - something has gone seriously wrong.");
+        }
     }
 
     /**
