@@ -299,7 +299,7 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
         }
     }
     
-    public static <V> V[] PQSort(V[] values, Comparator<V> comparator) {
+    public static <V> V[] heapsort(V[] values, Comparator<V> comparator) {
     	HeapPriorityQueue<V, V> queue = new HeapPriorityQueue<V, V>(values, values, comparator);
     	@SuppressWarnings("unchecked")
 		V[] arr = (V[])(new Object[queue.size()]);
@@ -309,7 +309,7 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
     	return arr;
     }
     
-    public static <V> V[] PQSort(V[] values) {
+    public static <V> V[] heapsort(V[] values) {
     	HeapPriorityQueue<V, V> queue = new HeapPriorityQueue<V, V>(values, values);
     	@SuppressWarnings("unchecked")
 		V[] arr = (V[])(new Object[queue.size()]);
@@ -336,7 +336,7 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
         // 24, 26, 35, 33, 15]
         
         
-        System.out.println("PQSort: " + Arrays.toString(PQSort(rands)));
+        System.out.println("Heapsort: " + Arrays.toString(heapsort(rands)));
     }
     
     
