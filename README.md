@@ -319,6 +319,28 @@ define copy( linked list 'll' ) :
 With a relatively linear plot outside of a few outliers, the data seems to prove the hypothesis that `inorder()` is indeed a function with `O(n)` time complexity.
 
 # Wk 7, Priority Queues, Heaps
+## Question 1
+> Illustrate the execution of the heap.insert() method on `\[2, 5, 16, 4, 10, 23, 39, 18, 26, 15\]`
+
+## Question 2
+> List the nodes in the preorder traversal of the heap constructed from `\[2, 5, 16, 4, 10, 23, 39, 18, 26, 15\]`
+
+We can build the heap itself as such;
+
+and then follow preorder traversal, visiting the root, then the left subtree, then the right subtree recursively.
+
+Giving us the array `\[2, 4, 5, 18, 26, 10, 15, 16, 23, 39\]`.
+
+## Question 3
+> List the nodes in the postorder traversal of the heap constructed from `\[2, 5, 16, 4, 10, 23, 39, 18, 26, 15\]`
+
+As we did for question 2, we can build the heap itself as such;
+
+and then follow postorder traversal, visiting the left subtree, then the right subtree, and finally the root recursively;
+
+Giving us the array `\[18, 26, 5, 15, 10, 4, 23, 39, 16, 2\]`.
+
+## Question 6 (?)
 > Measure the time complexity by performing timing measurements to sort an array of integers of size `n = \[1000, . . . , 1000000\]`. What complexity do you expect?
 
 My implementation of `PQSort` will first construct a `HeapPriorityQueue` using `heapify()`, which should be an `O(n)` operation (adding values to heap's internal array could very well possibly be `n amortised` due to needing to rebuild the array when contents get too big). Next, for each `n` items in the queue, `removeMin()` is called, which is an `O(log n)` time complexity function.
