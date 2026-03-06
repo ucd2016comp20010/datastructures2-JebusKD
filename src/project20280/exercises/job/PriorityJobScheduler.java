@@ -5,6 +5,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.PriorityBlockingQueue;
 
+import project20280.exercises.job.Job.JobComparator;
+
 public class PriorityJobScheduler {
 	private ExecutorService priorityJobPoolExecutor;
 	private ExecutorService priorityJobScheduler
@@ -15,7 +17,7 @@ public class PriorityJobScheduler {
 		priorityJobPoolExecutor = Executors.newFixedThreadPool(poolSize);
 		priorityQueue = new PriorityBlockingQueue<Job>(
 						queueSize,
-						Comparator.comparing(Job::getJobPriority));
+						new JobComparator());
 		priorityJobScheduler.execute(() -> {
 			while (true) {
 				try {

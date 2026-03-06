@@ -1,8 +1,11 @@
 package project20280.exercises.job;
 
-public class Job implements Runnable {
+import java.util.Comparator;
+
+public class Job implements Runnable, Comparable<Job> {
 	private String jobName;
 	private JobPriority jobPriority;
+	private int expectedDuration;
 	@Override
 	public void run() {
 		System.out.println("Job:" + jobName +
@@ -19,13 +22,51 @@ public class Job implements Runnable {
 	public Job(String name, JobPriority priority) {
 		this.jobName = name;
 		this.jobPriority = priority;
+		this.expectedDuration = -1;
+	}
+	
+	public Job(String name, JobPriority priority, int expectedDuration) {
+		this.jobName = name;
+		this.jobPriority = priority;
+		this.expectedDuration = expectedDuration;
 	}
 	
 	public JobPriority getJobPriority() {
 		return this.jobPriority;
 	}
 	
+	public int getExpectedDuration() {
+		return this.expectedDuration;
+	}
+	
 	public String getName() {
 		return this.jobName;
+	}
+	
+	public int compareTo(Job o) {
+		if (o == null) throw new NullPointerException("Object is null");
+		if (o instanceof Job j) {
+			if (this.jobPriority != j.jobPriority) {
+				if (this.jobPriority == JobPriority.HIGH) {
+					return 1;
+				}
+				else if (this.jobPriority == JobPriority.MEDIUM && j.jobPriority == JobPriority.LOW) {
+					return 1;
+				}
+				else return -1;
+			}
+			else {
+				return this.expectedDuration - j.expectedDuration;
+			}
+		}
+		else {
+			throw new ClassCastException("Object not a job");
+		}
+	}
+	
+	public static class JobComparator implements Comparator<Job> {
+		public int compare(Job j1, Job j2) {
+			return j1.compareTo(j2);
+		}
 	}
 }
