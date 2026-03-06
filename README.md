@@ -340,6 +340,9 @@ and then follow postorder traversal, visiting the left subtree, then the right s
 
 Giving us the array `\[18, 26, 5, 15, 10, 4, 23, 39, 16, 2\]`.
 
+## Question 4
+Yes and yes, see questions 2 and 3.
+
 ## Question 6 (?)
 > Measure the time complexity by performing timing measurements to sort an array of integers of size `n = \[1000, . . . , 1000000\]`. What complexity do you expect?
 
