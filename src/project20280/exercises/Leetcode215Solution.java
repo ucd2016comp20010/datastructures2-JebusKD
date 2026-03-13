@@ -2,6 +2,9 @@ package project20280.exercises;
 
 /* This was done before knowing what a heap was.
 	Beats 5% on runtime, beats 95% on memory.
+	
+	See Leetcode215ImprovedSolution for the heap-based solution
+	with 56% beaten on runtime
  */
 class Leetcode215Solution {
 	class Solution {

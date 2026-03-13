@@ -2,7 +2,9 @@ package project20280.exercises;
 
 /* 
  	Improve solution for leetcode 215,
- 	beats 30% on runtime and 40% on memory
+ 	beats 56% on runtime and 86% on memory
+ 	
+ 	Actually uses a heap
  */
 
 class Solution {
@@ -12,28 +14,28 @@ class Solution {
         for (int n : nums) {
             q.add(n);
         }
-        return q.tree.root.val;
+        return q.root.val;
     }
 
     static class PQ {
-        BinTree tree;
+        BinTreeNode root;
+        int size;
         int maxSize;
         BinTreeNode cache;
         boolean[] stack;
         int stackPointer;
 
         public PQ(int k) {
-            this.tree = new BinTree();
             this.maxSize = k;
             this.stack = new boolean[(int)Math.round(Math.ceil(Math.log(k)/Math.log(2)))];
             this.stackPointer = 0;
         }
 
         public BinTreeNode append(int val) {
-            cache = getParent(tree.size++);
+            cache = getParent(size++);
             if (cache == null) {
-                tree.root = new BinTreeNode(val, null, null, null);
-                return tree.root;
+                root = new BinTreeNode(val, null, null, null);
+                return root;
             }
             else if (cache.left == null) {
                 cache.left = new BinTreeNode(val, cache, null, null);
@@ -65,7 +67,7 @@ class Solution {
                 }
                 i = i % 2 == 1 ? i/2: (i-1)/2;
             }
-            cache = tree.root;
+            cache = root;
             while (stackPointer > 0) {
                 if (stack[--stackPointer]) {
                     cache = cache.left;
@@ -103,43 +105,31 @@ class Solution {
         }
         
         public void add(int val) {
-        	if (tree.size < maxSize) {
+        	if (size < maxSize) {
         		upheap(append(val));
         	}
-        	else if (val > tree.root.val) {
+        	else if (val > root.val) {
         		removeMin();
         		upheap(append(val));
         	}
         }
 
         public void removeMin() {
-            if (tree.size == 1) {
-                tree.size = 0;
-                tree.root = null;
+            if (size == 1) {
+                size = 0;
+                root = null;
             }
             else {
-                cache = get(tree.size-1);
-                tree.root.swap(cache);
-                if (tree.size % 2 == 0)
+                cache = get(size-1);
+                root.swap(cache);
+                if (size % 2 == 0)
                     cache.parent.left = null;
                 else
                     cache.parent.right = null;
-                tree.size--;
-                downheap(tree.root);
+                size--;
+                downheap(root);
             }
         }
-    }
-
-    static class BinTree {
-
-        BinTreeNode root;
-        int size;
-
-        public BinTree() {
-            size = 0;
-        }
-
-        
     }
 
     static class BinTreeNode {
