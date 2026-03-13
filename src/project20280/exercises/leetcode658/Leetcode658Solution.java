@@ -1,4 +1,4 @@
-package project20280.exercises;
+package project20280.exercises.leetcode658;
 
 import java.util.ArrayList;
 import java.util.List;
