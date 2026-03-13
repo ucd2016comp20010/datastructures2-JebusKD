@@ -6,7 +6,7 @@ package project20280.exercises.leetcode215;
 	See Leetcode215ImprovedSolution for the heap-based solution
 	with 56% beaten on runtime
  */
-class Leetcode215Solution {
+class Solution1 {
 	class Solution {
 	    public int findKthLargest(int[] nums, int k) {
 	        HighLoQueue q = new HighLoQueue(k, nums.length * 2);
