@@ -8,7 +8,7 @@ import java.util.List;
  	
  	Beats 30% on runtime and 80% on memory.
  */
-class Leetcode658Solution {
+class Solution1 {
 	class Solution {
 	    private static int binSearch(int[] arr, int x) {
 	        int i = 0;
