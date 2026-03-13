@@ -1,4 +1,4 @@
-package project20280.exercises;
+package project20280.exercises.leetcode215;
 
 /* This was done before knowing what a heap was.
 	Beats 5% on runtime, beats 95% on memory.

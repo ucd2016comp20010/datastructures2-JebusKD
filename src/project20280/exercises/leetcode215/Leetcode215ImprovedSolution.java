@@ -1,4 +1,4 @@
-package project20280.exercises;
+package project20280.exercises.leetcode215;
 
 /* 
  	Improve solution for leetcode 215,
