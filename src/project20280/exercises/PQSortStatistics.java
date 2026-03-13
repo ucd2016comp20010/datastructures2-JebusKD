@@ -20,7 +20,7 @@ public class PQSortStatistics {
 	
 	public static void main(String[] args) {
 		
-		int N_START = 100000;
+		int N_START = 400000;
 		int N_END = 1000000;
 		int N_STEP = 100000;
 		int ITERATIONS_PER_STEP = 1;
@@ -28,7 +28,7 @@ public class PQSortStatistics {
 		double result;
 		double total;
 		
-		System.out.println("n,t");
+		//System.out.println("n,t");
 		
 		for (int n = N_START; n <= N_END; n += N_STEP) {
 
