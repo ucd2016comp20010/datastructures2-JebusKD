@@ -5,6 +5,12 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+/* Heap-based solution for leetcode 658,
+ * could definitely be optimised more.
+ * 
+ * Beats 28% on runtime and 29% on memory.
+ */
+
 class Solution3 {
 	class Solution {
 		
@@ -39,20 +45,6 @@ class Solution3 {
 
 	        }
 	        
-	        /*
-	        ArrayList<Integer> result = new ArrayList<Integer>(k);
-	        while (size > 0) {
-	        	if (result.isEmpty() || result.getFirst() >= members[0])
-	        		result.addFirst(members[0]);
-	        	else
-	        		result.addLast(members[0]);
-	        	
-	        	cacheInt = members[size-1];
-	        	members[--size] = members[0];
-	        	members[0] = cacheInt;
-	        	downheap(0);
-
-	        }*/
 	        List<Integer> result = Arrays.asList(members);
 	        result.sort(Comparator.naturalOrder());
 	        return result;
@@ -82,13 +74,6 @@ class Solution3 {
 	    			
 	    		
 	    			b = Math.abs(members[cachePos2] - x);
-	    			System.out.println();
-	    			System.out.println("downheap:\na = " + members[cachePos] +
-	    								", b = " + members[cachePos2] +
-	    								", c = " + members[pos] +
-	    								", |a - x| = " + a +
-	    								", |b - x| = " + b +
-	    								", |c - x| = " + c);
 	    			
 	    			if (a < b || (a == b && members[cachePos] < members[cachePos2])) {
 	    				if (c < b || (c == b && members[pos] < members[cachePos2])) {
