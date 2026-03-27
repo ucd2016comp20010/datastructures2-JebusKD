@@ -326,18 +326,18 @@ With a relatively linear plot outside of a few outliers, the data seems to prove
 > List the nodes in the preorder traversal of the heap constructed from `[2, 5, 16, 4, 10, 23, 39, 18, 26, 15]`
 
 We can build the heap itself as such;
-
+<img width="2241" height="1441" alt="IMG_2138" src="https://github.com/user-attachments/assets/0b406c28-cf50-4337-83bc-315043ed325a" />
 and then follow preorder traversal, visiting the root, then the left subtree, then the right subtree recursively.
-
+<img width="2241" height="1441" alt="IMG_2140" src="https://github.com/user-attachments/assets/2f19ac11-4532-45b4-be9f-0417a686f548" />
 Giving us the array `[2, 4, 5, 18, 26, 10, 15, 16, 23, 39]`.
 
 ## Question 3
 > List the nodes in the postorder traversal of the heap constructed from `[2, 5, 16, 4, 10, 23, 39, 18, 26, 15]`
 
 As we did for question 2, we can build the heap itself as such;
-
+<img width="2241" height="1441" alt="IMG_2138" src="https://github.com/user-attachments/assets/32e4b7d0-d326-4536-9578-dfcb32681858" />
 and then follow postorder traversal, visiting the left subtree, then the right subtree, and finally the root recursively;
-
+<img width="2241" height="1441" alt="IMG_2140" src="https://github.com/user-attachments/assets/b161b0ef-d636-477e-853e-6adf497b7021" />
 Giving us the array `[18, 26, 5, 15, 10, 4, 23, 39, 16, 2]`.
 
 ## Question 4
