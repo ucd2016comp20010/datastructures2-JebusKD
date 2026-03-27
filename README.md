@@ -321,6 +321,7 @@ With a relatively linear plot outside of a few outliers, the data seems to prove
 # Wk 7, Priority Queues, Heaps
 ## Question 1
 > Illustrate the execution of the heap.insert() method on `[2, 5, 16, 4, 10, 23, 39, 18, 26, 15]`
+<img width="2241" height="9891" alt="IMG_2141" src="https://github.com/user-attachments/assets/3823da5a-15b9-421e-b949-cd067b2c6e0b" />
 
 ## Question 2
 > List the nodes in the preorder traversal of the heap constructed from `[2, 5, 16, 4, 10, 23, 39, 18, 26, 15]`
