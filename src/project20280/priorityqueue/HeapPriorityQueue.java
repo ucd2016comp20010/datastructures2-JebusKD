@@ -327,24 +327,54 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
     	return arr;
     }
     
-    public static <V> V[] heapsort(V[] values, Comparator<V> comparator) {
-    	HeapPriorityQueue<V, V> queue = new HeapPriorityQueue<V, V>(values, values, comparator);
-    	@SuppressWarnings("unchecked")
-		V[] arr = (V[])(new Object[queue.size()]);
-    	for (int i = 0; queue.size() > 0; i++) {
-    		arr[i] = queue.removeMin().getValue();
+    public static <V> void heapsort(V[] values, Comparator<V> comparator) {
+    	
+    	for (int i = values.length-1; i >= 0; i--) {
+    		arrayDownheap(values, comparator, i);
     	}
-    	return arr;
+    	
+    	for (int i = values.length-1; i > 0; i--) {
+    		
+    		arraySwap(values, 0, i);
+    		arrayDownheap(values, comparator, 0, i);
+    	}
     }
     
-    public static <V> V[] heapsort(V[] values) {
-    	HeapPriorityQueue<V, V> queue = new HeapPriorityQueue<V, V>(values, values);
-    	@SuppressWarnings("unchecked")
-		V[] arr = (V[])(new Object[queue.size()]);
-    	for (int i = 0; queue.size() > 0; i++) {
-    		arr[i] = queue.removeMin().getValue();
+    public static <V> void heapsort(V[] values) {
+    	heapsort(values, new DefaultComparator<V>());
+    }
+    
+    private static <V> void arraySwap(V[] values, int i, int j) {
+    	V held = values[i];
+    	values[i] = values[j];
+    	values[j] = held;
+    }
+    
+    private static <V> void arrayDownheap(V[] values, Comparator<V> comparator, int index) {
+    	arrayDownheap(values, comparator, index, values.length);
+    }
+    
+    private static <V> void arrayDownheap(V[] values, Comparator<V> comparator, int index, int length) {
+    	int left;
+    	if ((left = (2 * index) + 1) < length) {
+    		int right;
+    		if ((right = left + 1) < length) {
+    			
+    			if (comparator.compare(values[left], values[right]) > 0) {
+    				if (comparator.compare(values[left], values[index]) > 0) {
+    	    			arraySwap(values, left, index);
+    	    			arrayDownheap(values, comparator, left, length);
+    	    		}
+    			} else if (comparator.compare(values[right], values[index]) > 0) {
+        			arraySwap(values, right, index);
+        			arrayDownheap(values, comparator, right, length);
+        		}
+    			
+    		} else if (comparator.compare(values[left], values[index]) > 0) {
+    			arraySwap(values, left, index);
+    			arrayDownheap(values, comparator, left, length);
+    		}
     	}
-    	return arr;
     }
 
     public static void main(String[] args) {
@@ -363,9 +393,11 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
         //   23,     21,      5, 12,
         // 24, 26, 35, 33, 15]
         
-        
-        System.out.println("Heapsort: " + Arrays.toString(heapsort(rands)));
         System.out.println("PQSort: " + Arrays.toString(PQSort(rands)));
+        
+        Integer[] heapRands = Arrays.copyOf(rands, rands.length);
+        heapsort(heapRands);
+        System.out.println("Heapsort: " + Arrays.toString(heapRands));
     }
     
     
