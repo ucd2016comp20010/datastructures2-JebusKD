@@ -1,4 +1,8 @@
 package project20280.exercises.leetcode658;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /* Non-heap solution that beats 56% on runtime and  29% memory */
 class Solution4 {
 	class Solution {
