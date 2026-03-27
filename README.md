@@ -343,7 +343,7 @@ Giving us the array `[18, 26, 5, 15, 10, 4, 23, 39, 16, 2]`.
 ## Question 4
 Yes and yes, see questions 2 and 3.
 
-## Question 6 (?)
+## Question 6
 > Measure the time complexity by performing timing measurements to sort an array of integers of size `n = [1000, . . . , 1000000]`. What complexity do you expect?
 
 My implementation of `PQSort` will first construct a `HeapPriorityQueue` using `heapify()`, which should be an `O(n)` operation (adding values to heap's internal array could very well possibly be `n amortised` due to needing to rebuild the array when contents get too big). Next, for each `n` items in the queue, `removeMin()` is called, which is an `O(log n)` time complexity function.
@@ -355,3 +355,27 @@ So we'd have `O(n + n log n)` which gives us a `O(n log n)` complexity. We shoul
 <img width="2195" height="1441" alt="pqsort_graph" src="https://github.com/user-attachments/assets/d11ed2dd-1e91-4efc-bc87-ee5a46276be7" />
 
 When using both a logarithmic X-axis and logarithmic Y-axis, we can see a linear trend of our data. This would corellate to a linear corellation between n and t over the logarithmic axes - which themselves demonstrate a `log n` correlation, so we have `O(n log n)` complexity.
+
+## Question 7
+> Implement an in-place heapsort, using the algorithm shown in the lectures:<br>Compare the time complexity of this in-place heapsort with the PQSort method you implemented earlier.
+
+<img width="2080" height="1238" alt="heapsort_graph" src="https://github.com/user-attachments/assets/d0b96781-5e8d-4606-9904-45bdaa45280e" />
+
+We see much of a similar shape as to the PQSort graph - which tells us that this also has `O(n log n)` complexity, however, directly comparing the two we can see that heapsort is always quicker than PQSort except for in the case of a few outliers.
+
+<img width="2626" height="1376" alt="double_graph" src="https://github.com/user-attachments/assets/d8c5c7f4-caf4-476a-b454-551d7f9930b5" />
+
+## Question 8
+> Solve Leetcode 215
+
+See [project20280.exercises.leetcode215](/src/project20280/exercises/leetcode215/Solution3.java) for a heap-based solution that beats 94% on runtime.
+
+## Question 9
+> Solve Leetcode 658
+
+See [project20280.exercises.leetcode658.Solution3](/src/project20280/exercises/leetcode658/Solution3.java) for a heap-based solution that beats 28% on runtime, or see [project20280.exercises.leetcode658/](/src/project20280/exercises/leetcode658/Solution4.java) for a sliding window solution that beats 56% on runtime.
+
+## Question 10
+> Experiment with adding some more priorities to the JobPriority enum. Modify the Job class to also accept an expected duration parameter. Adjust the Comparator so that high priority and short running jobs are chosen first.
+
+See [project20280.exercises.job](/src/project20280/exercises/job)
