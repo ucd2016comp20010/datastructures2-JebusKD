@@ -20,7 +20,7 @@ public class PQSortStatistics {
 	
 	public static void main(String[] args) {
 		
-		int N_START = 400000;
+		int N_START = 600000;
 		int N_END = 1000000;
 		int N_STEP = 100000;
 		int ITERATIONS_PER_STEP = 1;
@@ -39,7 +39,7 @@ public class PQSortStatistics {
 
 				Integer[] rArray = makeRandomArr(n);
 				Runnable worker = () -> {
-					HeapPriorityQueue.PQSort(rArray);
+					HeapPriorityQueue.heapsort(rArray);
 				};
 				
 				result = Timer.measure(worker);
