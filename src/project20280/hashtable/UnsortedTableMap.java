@@ -30,8 +30,11 @@ public class UnsortedTableMap<K, V> extends AbstractMap<K, V> {
      * Returns the index of an entry with equal key, or -1 if none found.
      */
     private int findIndex(K key) {
-        // TODO
-        return 0;
+        for (int i = 0; i < table.size(); i++) {
+        	if (key.equals(table.get(i)))
+        		return i;
+        }
+        return -1;
     }
 
     // public methods
