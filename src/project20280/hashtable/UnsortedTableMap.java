@@ -99,8 +99,11 @@ public class UnsortedTableMap<K, V> extends AbstractMap<K, V> {
      */
     @Override
     public V remove(K key) {
-        // TODO
-        return null;
+        int index;
+        if ((index = findIndex(key)) >= 0) {
+        	return table.remove(index).getValue();
+        }
+        else return null;
     }
 
     // ---------------- nested EntryIterator class ----------------
