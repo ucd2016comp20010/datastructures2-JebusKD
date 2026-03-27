@@ -46,7 +46,7 @@ public class Job implements Runnable, Comparable<Job> {
 	public int compareTo(Job o) {
 		if (o == null) throw new NullPointerException("Object is null");
 		if (o instanceof Job j) {
-			int prioComp = new JobPriorityComparator().compare(this.jobPriority, j.jobPriority);
+			int prioComp = this.jobPriority.comp(j.jobPriority);
 			if (prioComp == 0) {
 				return this.expectedDuration - j.expectedDuration;
 			}
@@ -65,27 +65,4 @@ public class Job implements Runnable, Comparable<Job> {
 		}
 	}
 	
-	public static class JobPriorityComparator implements Comparator<JobPriority> {
-		public int compare(JobPriority p1, JobPriority p2) {
-			if (p1 == p2) return 0;
-			else if (p1 == JobPriority.LOW) {
-				return -1;
-			}
-			else if (p2 == JobPriority.LOW) {
-				return 1;
-			}
-			else if (p1 == JobPriority.MEDIUM) {
-				return -1;
-			}
-			else if (p2 == JobPriority.MEDIUM) {
-				return 1;
-			}
-			else if (p1 == JobPriority.HIGH) {
-				return -1;
-			}
-			else {
-				return 1;
-			}
-		}
-	}
 }
