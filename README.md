@@ -329,7 +329,7 @@ With a relatively linear plot outside of a few outliers, the data seems to prove
 We can build the heap itself as such;
 <img width="2241" height="1441" alt="IMG_2138" src="https://github.com/user-attachments/assets/0b406c28-cf50-4337-83bc-315043ed325a" />
 and then follow preorder traversal, visiting the root, then the left subtree, then the right subtree recursively.
-<img width="2241" height="1441" alt="IMG_2140" src="https://github.com/user-attachments/assets/2f19ac11-4532-45b4-be9f-0417a686f548" />
+<img width="2241" height="1441" alt="IMG_2139" src="https://github.com/user-attachments/assets/a303a99d-2da5-4c01-a88e-0daf3ae4e10f" />
 Giving us the array `[2, 4, 5, 18, 26, 10, 15, 16, 23, 39]`.
 
 ## Question 3
