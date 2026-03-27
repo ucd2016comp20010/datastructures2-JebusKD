@@ -314,25 +314,17 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
     }
     
     public static <V> V[] PQSort(V[] values) {
-    	HeapPriorityQueue<V, V> queue = new HeapPriorityQueue<V, V>();
-    	for (int i = 0; i < values.length; i++) {
-    		queue.insert(values[i], values[i]);
-    	}
-    	
-    	@SuppressWarnings("unchecked")
-		V[] arr = (V[])(new Object[queue.size()]);
-    	for (int i = 0; queue.size() > 0; i++) {
-    		arr[i] = queue.removeMin().getValue();
-    	}
-    	return arr;
+    	return PQSort(values, new DefaultComparator<V>());
     }
     
     public static <V> void heapsort(V[] values, Comparator<V> comparator) {
     	
+    	// O(n) heap construction within array
     	for (int i = values.length-1; i >= 0; i--) {
     		arrayDownheap(values, comparator, i);
     	}
     	
+    	// removeMin() repeatedly, length of downheaps go down each time
     	for (int i = values.length-1; i > 0; i--) {
     		
     		arraySwap(values, 0, i);
