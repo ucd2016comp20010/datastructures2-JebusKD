@@ -3,8 +3,8 @@ package project20280.hashtable;
 import project20280.interfaces.AbstractMap;
 import project20280.interfaces.Entry;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 /**
@@ -15,12 +15,13 @@ public class UnsortedTableMap<K, V> extends AbstractMap<K, V> {
     /**
      * Underlying storage for the map of entries.
      */
-    private final ArrayList<MapEntry<K, V>> table = new ArrayList<>();
+    private final LinkedList<MapEntry<K, V>> table;
 
     /**
      * Constructs an initially empty map.
      */
     public UnsortedTableMap() {
+    	table = new LinkedList<MapEntry<K,V>>();
     }
 
     // private utility
@@ -29,8 +30,11 @@ public class UnsortedTableMap<K, V> extends AbstractMap<K, V> {
      * Returns the index of an entry with equal key, or -1 if none found.
      */
     private int findIndex(K key) {
-        // TODO
-        return 0;
+        for (int i = 0; i < table.size(); i++) {
+        	if (key.equals(table.get(i).getKey()))
+        		return i;
+        }
+        return -1;
     }
 
     // public methods
@@ -54,7 +58,10 @@ public class UnsortedTableMap<K, V> extends AbstractMap<K, V> {
      */
     @Override
     public V get(K key) {
-        // TODO
+    	for (int i = 0; i < table.size(); i++) {
+        	if (key.equals(table.get(i).getKey()))
+        		return table.get(i).getValue();
+        }
         return null;
     }
 
@@ -70,8 +77,16 @@ public class UnsortedTableMap<K, V> extends AbstractMap<K, V> {
      */
     @Override
     public V put(K key, V value) {
-        // TODO
-        return null;
+        int index;
+        if ((index = findIndex(key)) >= 0) {
+        	V held = table.get(index).getValue();
+        	table.get(index).setValue(value);
+        	return held;
+        }
+        else {
+        	table.addLast(new MapEntry<K,V>(key, value));
+        	return null;
+        }
     }
 
     /**
@@ -84,8 +99,11 @@ public class UnsortedTableMap<K, V> extends AbstractMap<K, V> {
      */
     @Override
     public V remove(K key) {
-        // TODO
-        return null;
+        int index;
+        if ((index = findIndex(key)) >= 0) {
+        	return table.remove(index).getValue();
+        }
+        else return null;
     }
 
     // ---------------- nested EntryIterator class ----------------
