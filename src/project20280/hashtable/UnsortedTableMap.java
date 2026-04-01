@@ -3,8 +3,8 @@ package project20280.hashtable;
 import project20280.interfaces.AbstractMap;
 import project20280.interfaces.Entry;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 /**
@@ -15,13 +15,13 @@ public class UnsortedTableMap<K, V> extends AbstractMap<K, V> {
     /**
      * Underlying storage for the map of entries.
      */
-    private final ArrayList<MapEntry<K, V>> table;
+    private final LinkedList<MapEntry<K, V>> table;
 
     /**
      * Constructs an initially empty map.
      */
     public UnsortedTableMap() {
-    	table = new ArrayList<MapEntry<K,V>>();
+    	table = new LinkedList<MapEntry<K,V>>();
     }
 
     // private utility

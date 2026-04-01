@@ -20,8 +20,8 @@ import java.util.Random;
  */
 public abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     private final int prime;                   // prime factor
-    private final long scale;
-    private final long shift;           // the shift and scaling factors
+    private final int scale;
+    private final int shift;           // the shift and scaling factors
     protected int n = 0;                 // number of entries in the dictionary
     protected int capacity;              // length of the table
 
@@ -83,7 +83,9 @@ public abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
      */
     @Override
     public V remove(K key) {
-        return bucketRemove(hashValue(key), key);
+    	V res;
+        if ((res = bucketRemove(hashValue(key), key)) != null) n--;
+        return res;
     }
 
     /**
@@ -98,8 +100,9 @@ public abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
      */
     @Override
     public V put(K key, V value) {
-        // TODO
-        return null;
+    	V res;
+    	if ((res = bucketPut(hashValue(key), key, value)) == null) n++;
+        return res;
     }
 
     // private utilities
@@ -108,10 +111,19 @@ public abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
      * Hash function applying MAD method to default hash code.
      */
     private int hashValue(K key) {
-        // TODO
-        return 0;
+        return (Math.abs(((scale * key.hashCode()) + shift) % prime) % capacity);
     }
-
+    
+    private static int power(int x, int y) {
+    	if (y < 0) throw new IllegalArgumentException("Negative not handled");
+    	if (y == 0) return 1;
+    	int res = x;
+    	for (int i = 1; i < y; i++) {
+    		res *= x;
+    	}
+    	return res;
+    }
+    
     /**
      * Updates the size of the hash table and rehashes all entries.
      */
