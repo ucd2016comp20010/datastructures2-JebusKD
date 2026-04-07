@@ -380,3 +380,12 @@ See [project20280.exercises.leetcode658.Solution3](/src/project20280/exercises/l
 > Experiment with adding some more priorities to the JobPriority enum. Modify the Job class to also accept an expected duration parameter. Adjust the Comparator so that high priority and short running jobs are chosen first.
 
 See [project20280.exercises.job](/src/project20280/exercises/job)
+
+# Wk 8, HashMaps
+
+## Question 6
+> Using the list of words from words.txt...
+
+### Subquestion (a)
+> Find the number of collisions using polynomial accumulation with a = 41
+
