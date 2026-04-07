@@ -11,7 +11,7 @@ import project20280.interfaces.Entry;
 class CollisionCount {
 	public static void main(String []args) throws FileNotFoundException {
 		 File f = new File(args[0]); // check the path to the file
-		 int s = Integer.parseInt(args[1]);
+		 //int s = Integer.parseInt(args[1]);
 		 
 		 ChainHashMap<Integer, Integer> counter = new ChainHashMap<Integer, Integer>();
 		
@@ -21,7 +21,7 @@ class CollisionCount {
 		 while(scanner.hasNext()) { // read the file word at a time
 			 String word = scanner.next();
 			 
-			 key = hash_cyclic(word, s);
+			 key = hashCode(word);
 			 
 			 System.out.println("word : " + word + ", key : " + key);
 			 
@@ -68,5 +68,13 @@ class CollisionCount {
 			h += (int) s.charAt(i);
 		}
 		return h;
+	}
+	
+	private static int hashCode(String s) {
+		int hash = 0;
+		int skip = Math.max(1, s.length() / 8);
+		for (int i = 0; i < s.length(); i += skip)
+			hash = (hash * 37) + s.charAt(i);
+		return hash;
 	}
 }
