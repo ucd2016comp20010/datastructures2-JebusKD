@@ -8,7 +8,7 @@ import java.util.Scanner;
 import project20280.hashtable.ChainHashMap;
 import project20280.interfaces.Entry;
 
-public class TopWords {
+class TopWords {
 	public static void main(String []args) throws FileNotFoundException {
 		 File f = new File("C:/Users/jamie/Documents/College Stuff/Stage 2/Spring/COMP20280 Data Structures/Labs/Week 8/sample_text.txt"); // check the path to the file
 		 ChainHashMap<String, Integer> counter = new ChainHashMap<String, Integer>();
