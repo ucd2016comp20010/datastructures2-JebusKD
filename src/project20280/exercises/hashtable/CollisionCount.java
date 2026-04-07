@@ -9,8 +9,12 @@ import project20280.hashtable.ChainHashMap;
 import project20280.interfaces.Entry;
 
 class CollisionCount {
+	private static int capacity;
+	
 	public static void main(String []args) {
 		 File f = new File(args[0]); // check the path to the file
+		 
+		 capacity = Integer.parseInt(args[1]);
 		 
 		 new Thread(new PolyThread(f, 41)).start();
 		 new Thread(new PolyThread(f, 17)).start();
@@ -32,7 +36,7 @@ class CollisionCount {
 		
 		@Override
 		public void run() {
-			 ChainHashMap<Integer, Integer> counter = new ChainHashMap<Integer, Integer>();
+			 ChainHashMap<Integer, Integer> counter = new ChainHashMap<Integer, Integer>(capacity);
 				
 			 // use a Scanner to read words from the file
 			 try (Scanner scanner = new Scanner(f)) {
@@ -82,7 +86,7 @@ class CollisionCount {
 		
 		@Override
 		public void run() {
-			 ChainHashMap<Integer, Integer> counter = new ChainHashMap<Integer, Integer>();
+			 ChainHashMap<Integer, Integer> counter = new ChainHashMap<Integer, Integer>(capacity);
 				
 			 // use a Scanner to read words from the file
 			 try (Scanner scanner = new Scanner(f)) {
@@ -128,7 +132,7 @@ class CollisionCount {
 		
 		@Override
 		public void run() {
-			 ChainHashMap<Integer, Integer> counter = new ChainHashMap<Integer, Integer>();
+			 ChainHashMap<Integer, Integer> counter = new ChainHashMap<Integer, Integer>(capacity);
 				
 			 // use a Scanner to read words from the file
 			 try (Scanner scanner = new Scanner(f)) {
