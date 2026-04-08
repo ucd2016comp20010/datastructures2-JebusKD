@@ -384,6 +384,9 @@ See [project20280.exercises.job](/src/project20280/exercises/job)
 # Wk 8, HashMaps
 
 ## Question 5
+> Write a Java program which uses your ChainHashMap to count the frequency of words in the `sample_text.txt` file. Report the top 10 most frequently used words.
+
+
 | Word | Frequency |
 | --- | --- |
 | to | 49 |
