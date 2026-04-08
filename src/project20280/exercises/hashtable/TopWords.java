@@ -17,7 +17,7 @@ class TopWords {
 		 Scanner scanner = new Scanner(f);
 		 Integer val;
 		 while(scanner.hasNext()) { // read the file word at a time
-			 String word = scanner.next();
+			 String word = scanner.next().toLowerCase();
 			 System.out.println("word:" + word);
 			
 			 // if word is not in the hashmap, add it with count=1
@@ -44,7 +44,7 @@ class TopWords {
 		 
 		 for (int i = 1; i <= 10; i++) {
 			 Entry<String, Integer> e = sorted.get(sorted.size() - i);
-			System.out.println(e.getKey() + " : " + e.getValue());
+			System.out.println("| " + e.getKey() + " | " + e.getValue() + " |");
 		 }
 	}
 	
