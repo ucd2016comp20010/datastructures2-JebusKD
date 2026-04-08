@@ -389,3 +389,59 @@ See [project20280.exercises.job](/src/project20280/exercises/job)
 ### Subquestion (a)
 > Find the number of collisions using polynomial accumulation with a = 41
 
+10
+
+### Subquestion (b)
+> Find the number of collisions using polynomial accumulation with a = 17
+
+12
+
+### Subquestion (c)
+> Find the number of collisions using a cyclic shift with a shift value of 7
+
+2
+
+### Subquestion (d)
+> Compute the number of collisions on the set of words in `words.txt` using the cyclic shift hash function for all values of the shift value from 0 to 31. Which shift value gives the smallest number of collisions?
+
+| Cyclic Shift | Collisions |
+| --- | --- |
+| 0 | 3731 |
+| 1 | 899 |
+| 2 | 243 |
+| 3 | 46 |
+| 4 | 31 |
+| 5 | 0 |
+| 6 | 1 |
+| 7 | 2 |
+| 8 | 8 |
+| 9 | 7 |
+| 10 | 4 |
+| 11 | 14 |
+| 12 | 7 |
+| 13 | 1 |
+| 14 | 5 |
+| 15 | 23 |
+| 16 | 404 |
+| 17 | 27 |
+| 18 | 16 |
+| 19 | 5 |
+| 20 | 6 |
+| 21 | 7 |
+| 22 | 9 |
+| 23 | 1 |
+| 24 | 8 |
+| 25 | 2 |
+| 26 | 1 |
+| 27 | 9 |
+| 28 | 13 |
+| 29 | 23 |
+| 30 | 121 |
+| 31 | 705 |
+
+It appears as if a cyclic shift value of 5 gives the lowest collisions.
+
+### Subquestion (e)
+> Find the number of collisions which occur using the old Java hash code function
+
+4
