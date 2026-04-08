@@ -8,6 +8,11 @@ import java.util.Scanner;
 import project20280.hashtable.ChainHashMap;
 import project20280.interfaces.Entry;
 
+/* Use arguments:
+ * args[0] filepath
+ * args[1] internal hashmap capacity (suggested 499957)
+ */
+	
 class CollisionCount {
 	private static int capacity;
 	
@@ -15,12 +20,18 @@ class CollisionCount {
 		 File f = new File(args[0]); // check the path to the file
 		 
 		 capacity = Integer.parseInt(args[1]);
-		 
+		 /*
 		 new Thread(new PolyThread(f, 41)).start();
 		 new Thread(new PolyThread(f, 17)).start();
 		 new Thread(new OldThread(f)).start();
 		 for (int i = 0; i <= 31; i++) {
 			 new Thread(new CycleThread(f, i)).start();
+		 }*/
+		 new PolyThread(f, 41).run();
+		 new PolyThread(f, 17).run();
+		 new OldThread(f).run();
+		 for (int i = 0; i <= 31; i++) {
+		 	 new CycleThread(f, i).run();
 		 }
 	}
 	
@@ -49,22 +60,16 @@ class CollisionCount {
 					 // if key is not in the hashmap, add it with count=1
 					 // otherwise, find the entry for this key and increment by 1
 					 if ((val = counter.get(key)) != null) {
-						counter.put(key, val+1); 
+						counter.put(key, val+1);
+						//System.out.println("Repeated key: " + key + ", new count : " + counter.get(key));
 					 } else {
 						counter.put(key, 1); 
+						//System.out.println("New key: " + key + ", new value " + counter.get(key));
 					 }
 				 }
 				
 				 // count collisions
-				 Iterable<Entry<Integer, Integer>> entries = counter.entrySet();
-				 int count = 0;
-				 
-				 for (Entry<Integer, Integer> e : entries) {
-					 if (e.getValue() > 1) {
-						 System.out.println("key : " + e.getKey() + ", copies = " + e.getValue());
-						count += (e.getValue() - 1);
-					 }
-				 }
+				 int count = countCollisions(counter);
 				 
 				 System.out.println("hash_poly thread with a = " + a + ", Collisions = " + count);
 			 } catch (FileNotFoundException e) {
@@ -106,14 +111,9 @@ class CollisionCount {
 				 }
 				
 				 // count collisions
-				 Iterable<Entry<Integer, Integer>> entries = counter.entrySet();
-				 int count = 0;
+				 int count = countCollisions(counter);
 				 
-				 for (Entry<Integer, Integer> e : entries) {
-					 if (e.getValue() > 1) {
-						count += (e.getValue() - 1);
-					 }
-				 }
+				 System.out.println("hash_cyclic thread with shift = " + s + ", Collisions = " + count);
 				 
 			 } catch (FileNotFoundException e) {
 				 e.printStackTrace();
@@ -152,14 +152,7 @@ class CollisionCount {
 				 }
 				
 				 // count collisions
-				 Iterable<Entry<Integer, Integer>> entries = counter.entrySet();
-				 int count = 0;
-				 
-				 for (Entry<Integer, Integer> e : entries) {
-					 if (e.getValue() > 1) {
-						count += (e.getValue() - 1);
-					 }
-				 }
+				 int count = countCollisions(counter);
 				 
 				 System.out.println("hashCode thread, Collisions = " + count);
 			 } catch (FileNotFoundException e) {
@@ -195,5 +188,17 @@ class CollisionCount {
 		for (int i = 0; i < s.length(); i += skip)
 			hash = (hash * 37) + s.charAt(i);
 		return hash;
+	}
+	
+	private static int countCollisions(ChainHashMap<Integer, Integer> counter) {
+		Iterable<Entry<Integer, Integer>> entries = counter.entrySet();
+		int count = 0;
+		for (Entry<Integer, Integer> e : entries) {
+			if (e.getValue() > 1) {
+				count += (e.getValue() - 1);
+				//System.out.println(e.getValue() + " new count " + count);
+			}
+		}
+		return count;
 	}
 }
