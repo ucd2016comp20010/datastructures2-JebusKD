@@ -383,6 +383,20 @@ See [project20280.exercises.job](/src/project20280/exercises/job)
 
 # Wk 8, HashMaps
 
+## Question 5
+| Word | Frequency |
+| --- | --- |
+| to | 49 |
+| of | 42 |
+| and | 42 |
+| the | 39 |
+| who | 21 |
+| is | 18 |
+| pain | 18 |
+| that | 18 |
+| a | 18 |
+| pleasure | 18 |
+
 ## Question 6
 > Using the list of words from words.txt...
 
