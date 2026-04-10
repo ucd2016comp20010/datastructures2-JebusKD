@@ -267,7 +267,7 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
     protected Position<Entry<K, V>> treeMin(Position<Entry<K, V>> p) {
         if (p == null)
         	return null;
-        else if (left(p).getElement() == null)
+        else if (isExternal(left(p)))
         	return p;
         else
         	return treeMin(left(p));
@@ -282,10 +282,27 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
     protected Position<Entry<K, V>> treeMax(Position<Entry<K, V>> p) {
     	if (p == null)
         	return null;
-        else if (right(p).getElement() == null)
+        else if (isExternal(right(p)))
         	return p;
         else
         	return treeMax(right(p));
+    }
+    
+    /**
+     * Attempts to promote a position by replacing its parent.
+     * 
+     * @param p a Position of the tree which will be promoted.
+     * @return Entry of the removed parent position
+     * @throws IllegalArgumentException if the parent of the promoted node has a child (p has a sibling)
+     * @throws IllegalArgumentException if p is the root of the tree.
+     */
+    protected Entry<K, V> promote(Position<Entry<K, V>> p) throws IllegalArgumentException {
+    	if (sibling(p) != null) throw new IllegalArgumentException("Position's parent cannot have two children.");
+    	if (isRoot(p)) throw new IllegalArgumentException("Position is already root.");
+    	
+    	Position<Entry<K, V>> parent = parent(p);
+    	remove(parent);
+    	return parent.getElement();
     }
 
     /**
@@ -339,9 +356,38 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
     @Override
     public V remove(K key) throws IllegalArgumentException {
         Position<Entry<K, V>> p = treeSearch(root(), key);
-        if (isInternal(p) && compare(p.getElement(), key) == 0) {
-        	// TODO
-        } else return null;
+        if (compare(p.getElement(), key) == 0)
+        	return recursiveRemove(p);
+        System.out.println("Early exit");
+        return null;
+    }
+    
+    private V recursiveRemove(Position<Entry<K, V>> p) {
+    	V result = null;
+    	if (isExternal(p)) {
+    		result = p.getElement().getValue();
+    		remove(p);
+    		System.out.println("Remove p");
+    	}
+    	else if (isInternal(left(p)) && isInternal(right(p))) {
+        	Position<Entry<K, V>> target = treeMax(left(p));
+        	Entry<K, V> held = target.getElement();
+        	set(target, p.getElement());
+        	set(p, held);
+        	result = recursiveRemove(target);
+        	System.out.println("Deeper");
+        }
+        else if (isExternal(left(p))) {
+        	remove(left(p));
+        	result = promote(right(p)).getValue();
+        	System.out.println("Promote right");
+        }
+        else if (isExternal(right(p))) {
+        	remove(right(p));
+        	result = promote(left(p)).getValue();
+           	System.out.println("Promote left");
+        }
+        return result;
     }
 
     // additional behaviors of the SortedMap interface
