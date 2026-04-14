@@ -89,7 +89,8 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
             				  y = x.getParent(),
             				  z = y.getParent();
             if (z == null) {
-            
+            	root = x;
+            	x.setParent(null);
             }
             else
             	relink(z, x, y == z.getLeft());
