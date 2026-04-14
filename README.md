@@ -386,6 +386,7 @@ See [project20280.exercises.job](/src/project20280/exercises/job)
 ## Question 5
 > Write a Java program which uses your ChainHashMap to count the frequency of words in the `sample_text.txt` file. Report the top 10 most frequently used words.
 
+See [project20280.exercises.hashtable.TopWords](/src/project20280/exercises/hashtable/TopWords.java) for the code used.
 
 | Word | Frequency |
 | --- | --- |
@@ -402,6 +403,8 @@ See [project20280.exercises.job](/src/project20280/exercises/job)
 
 ## Question 6
 > Using the list of words from words.txt...
+
+See [project20280.exercises.hashtable.CollisionCount](/src/project20280/exercises/hashtable/CollisionCount.java) for the code used for these questions.
 
 ### Subquestion (a)
 > Find the number of collisions using polynomial accumulation with a = 41
