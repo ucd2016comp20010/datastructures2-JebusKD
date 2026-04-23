@@ -380,3 +380,88 @@ See [project20280.exercises.leetcode658.Solution3](/src/project20280/exercises/l
 > Experiment with adding some more priorities to the JobPriority enum. Modify the Job class to also accept an expected duration parameter. Adjust the Comparator so that high priority and short running jobs are chosen first.
 
 See [project20280.exercises.job](/src/project20280/exercises/job)
+
+# Wk 8, HashMaps
+
+## Question 5
+> Write a Java program which uses your ChainHashMap to count the frequency of words in the `sample_text.txt` file. Report the top 10 most frequently used words.
+
+See [project20280.exercises.hashtable.TopWords](/src/project20280/exercises/hashtable/TopWords.java) for the code used.
+
+| Word | Frequency |
+| --- | --- |
+| to | 49 |
+| of | 42 |
+| and | 42 |
+| the | 39 |
+| who | 21 |
+| is | 18 |
+| pain | 18 |
+| that | 18 |
+| a | 18 |
+| pleasure | 18 |
+
+## Question 6
+> Using the list of words from words.txt...
+
+See [project20280.exercises.hashtable.CollisionCount](/src/project20280/exercises/hashtable/CollisionCount.java) for the code used for these questions.
+
+### Subquestion (a)
+> Find the number of collisions using polynomial accumulation with a = 41
+
+10
+
+### Subquestion (b)
+> Find the number of collisions using polynomial accumulation with a = 17
+
+12
+
+### Subquestion (c)
+> Find the number of collisions using a cyclic shift with a shift value of 7
+
+2
+
+### Subquestion (d)
+> Compute the number of collisions on the set of words in `words.txt` using the cyclic shift hash function for all values of the shift value from 0 to 31. Which shift value gives the smallest number of collisions?
+
+| Cyclic Shift | Collisions |
+| --- | --- |
+| 0 | 3731 |
+| 1 | 899 |
+| 2 | 243 |
+| 3 | 46 |
+| 4 | 31 |
+| 5 | 0 |
+| 6 | 1 |
+| 7 | 2 |
+| 8 | 8 |
+| 9 | 7 |
+| 10 | 4 |
+| 11 | 14 |
+| 12 | 7 |
+| 13 | 1 |
+| 14 | 5 |
+| 15 | 23 |
+| 16 | 404 |
+| 17 | 27 |
+| 18 | 16 |
+| 19 | 5 |
+| 20 | 6 |
+| 21 | 7 |
+| 22 | 9 |
+| 23 | 1 |
+| 24 | 8 |
+| 25 | 2 |
+| 26 | 1 |
+| 27 | 9 |
+| 28 | 13 |
+| 29 | 23 |
+| 30 | 121 |
+| 31 | 705 |
+
+It appears as if a cyclic shift value of 5 gives the lowest collisions.
+
+### Subquestion (e)
+> Find the number of collisions which occur using the old Java hash code function
+
+4
