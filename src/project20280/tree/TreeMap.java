@@ -60,7 +60,7 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
          * Relinks a parent node with its oriented child node.
          */
         private void relink(Node<Entry<K, V>> parent, Node<Entry<K, V>> child, boolean makeLeftChild) {
-            child.setParent(child);
+            child.setParent(parent);
             if (makeLeftChild)
             	parent.setLeft(child);
             else
